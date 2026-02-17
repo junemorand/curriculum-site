@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Curriculum — From Operations to Systems</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav-brand">ops → systems</a>
+  <div class="nav-links">
+    <a href="index.html">About</a>
+    <a href="curriculum.html" class="active">Curriculum</a>
+    <a href="books.html">Books</a>
+    <a href="projects.html">Projects</a>
+    <a href="posts.html">Writing</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</nav>
+
+<main class="page-wide">
+<div style="max-width:820px;margin:0 auto;padding:4rem 2rem 6rem;">
+
+<div class="">
+  <p class="kicker">WGU B.S. Software Engineering · C# Track · Expected 2028</p>
+  <h1>The Full Curriculum</h1>
+  <p>A 30-month sequence pairing WGU coursework with independent technical depth. Study load assumes 25–30 hrs/week split across active courses.</p>
+</div>
+
+<!-- Legend -->
+<h2 class="section-heading">How to Read This Plan</h2>
+<table class="data-table legend-table">
+  <thead><tr><th>Label</th><th>Meaning</th></tr></thead>
+  <tbody>
+    <tr><td><span class="tag tag-main">MAIN TRACK</span></td><td>Required for the WGU SWE C# degree</td></tr>
+    <tr><td><span class="tag tag-opt">OPTIONAL / CS DEPTH</span></td><td>BSCS supplements — not required, strongly recommended for long-term growth, ML/AI readiness, or research-adjacent work</td></tr>
+    <tr><td><span class="tag tag-hi">Priority: High</span></td><td>Foundational — everything downstream depends on it</td></tr>
+    <tr><td><span class="tag tag-med">Priority: Medium</span></td><td>Important for depth; sequencing matters</td></tr>
+    <tr><td><span class="tag tag-low">Priority: Low</span></td><td>Useful; can run during lighter weeks</td></tr>
+  </tbody>
+</table>
+
+<!-- Timeline -->
+<h2 class="section-heading">Phase Timeline</h2>
+<div class="timeline-bar">
+  <div class="timeline-segment"><div class="t-phase">Phase 1–2</div><div class="t-dates">Feb–Jul 2026</div><div class="t-label">Foundations complete</div></div>
+  <div class="timeline-segment"><div class="t-phase">Phase 3</div><div class="t-dates">Aug–Dec 2026</div><div class="t-label">Algorithms / DB done</div></div>
+  <div class="timeline-segment"><div class="t-phase">Phase 4</div><div class="t-dates">Jan–Jun 2027</div><div class="t-label">C# / Backend / Cloud</div></div>
+  <div class="timeline-segment"><div class="t-phase">Phase 5</div><div class="t-dates">Jul 2027–Mar 2028</div><div class="t-label">Signature projects</div></div>
+  <div class="timeline-segment"><div class="t-phase">Phase 6</div><div class="t-dates">Apr–Aug 2028</div><div class="t-label">Capstone → Graduate</div></div>
+</div>
+
+<!-- ═══ PHASE 1 ═══ -->
+<div class="phase-block">
+  <div class="phase-hd">
+    <h2>Phase 1 — Foundations &amp; Tooling</h2>
+    <span class="phase-meta">Months 1–2 · ~25–30 hrs/wk</span>
+  </div>
+  <div class="phase-note">Month 1: Orientation + Git setup + PAC/IPO exercises daily. Month 2: Python scripting practice + version control workflow.</div>
+
+  <div class="course">
+    <div class="course-hd">
+      <span class="course-code">D278</span>
+      <span class="course-title">Scripting &amp; Programming Foundations</span>
+      <span class="tag tag-main">MAIN TRACK</span>
+      <span class="tag tag-hi">High</span>
+    </div>
+    <table class="course-rows">
+      <tr><td>Covers</td><td>PAC/IPO/pseudocode discipline — the reasoning scaffold that underpins every course that follows</td></tr>
+      <tr><td>Pair with</td><td>D197 Version Control (same phase) + D335 Intro to Python (overlap first weeks)</td></tr>
+      <tr><td>Books</td><td>OpenStax Intro to CS · SICP ch.1–2 · The Pragmatic Programmer</td></tr>
+      <tr><td>Can start</td><td>Immediately alongside D197</td></tr>
+    </table>
+  </div>
+
+  <div class="course">
+    <div class="course-hd">
+      <span class="course-code">D197</span>
+      <span class="course-title">Version Control</span>
+      <span class="tag tag-main">MAIN TRACK</span>
+      <span class="tag tag-hi">High</span>
+    </div>
+    <table class="course-rows">
+      <tr><td>Covers</td><td>Git fundamentals — a job prerequisite; every project from Phase 1 onward lives in a repo</td></tr>
+      <tr><td>Pair with</td><td>D278 — every D278 exercise goes into a Git repo</td></tr>
+      <tr><td>Books</td><td>Learning Git (O'Reilly)</td></tr>
+      <tr><td>Can start</td><td>Month 1 — no prerequisites</td></tr>
+    </table>
+  </div>
+
+  <div class="course">
+    <div class="course-hd">
+      <span class="course-code">D335</span>
+      <span class="course-title">Intro to Programming in Python</span>
+      <span class="tag tag-main">MAIN TRACK</span>
+      <span class="tag tag-hi">High</span>
+    </div>
+    <table class="course-rows">
+      <tr><td>Covers</td><td>Python as prototyping language throughout the curriculum; scripting fluency here pays dividends in every BSCS supplement</td></tr>
+      <tr><td>Pair with</td><td>D278 — rewrite PAC/IPO exercises in Python</td></tr>
+      <tr><td>Books</td><td>SICP ch.1–2 · Grokking Algorithms (visual intuition)</td></tr>
+      <tr><td>Can start</td><td>Alongside D278</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ═══ PHASE 2 ═══ -->
+<div class="phase-block">
+  <div class="phase-hd">
+    <h2>Phase 2 — Web Foundations &amp; Front-End Depth</h2>
+    <span class="phase-meta">Months 3–5 · ~25–30 hrs/wk</span>
+  </div>
+  <div class="phase-note">Month 3: HTML/CSS/JS fundamentals. Month 4: JavaScript deepening + React patterns. Month 5: TypeScript + front-end polish. freeCodeCamp background accelerates this phase — use the saved time for TypeScript depth.</div>
+
+  <div class="course">
+    <div class="course-hd">
+      <span class="course-code">D276</span>
+      <span class="course-title">Web Development Foundations</span>
+      <span class="tag tag-main">MAIN TRACK</span>
+      <span class="tag tag-hi">High</span>
+    </div>
+    <table class="course-rows">
+      <tr><td>Covers</td><td>HTML/CSS/XML fluency and web architecture fundamentals</td></tr>
+      <tr><td>Pair with</td><td>D277 Front-End · D280 JavaScript (same phase)</td></tr>
+      <tr><td>Books</td><td>Eloquent JavaScript (2e) · Learning React (2e)</td></tr>
+      <tr><td>Note</td><td>freeCodeCamp background gives a head start — invest extra time in CSS architecture</td></tr>
+    </table>
+  </div>
+
+  <div class="course">
+    <div class="course-hd">
+      <span class="course-code">D280</span>
+      <span class="course-title">JavaScript Programming</span>
+      <span class="tag tag-main">MAIN TRACK</span>
+      <span class="tag tag-hi">High</span>
+    </div>
+    <table class="course-rows">
+      <tr><td>Covers</td><td>Closures, event loop, async/await, prototypes</td></tr>
+      <tr><td>Books</td><td>Eloquent JavaScript (2e) · Learning React</td></tr>
+    </table>
+  </div>
+
+  <div class="course">
+    <div class="course-hd">
+      <span class="course-code">D277</span>
+      <span class="course-title">Front-End Web Development</span>
+      <span class="tag tag-main">MAIN TRACK</span>
+      <span class="tag tag-med">Medium</span>
+    </div>
+    <table class="course-rows">
+      <tr><td>Covers</td><td>Responsive UX and component thinking</td></tr>
+      <tr><td>Books</td><td>Eloquent JS · Learning React (2e) · Effective TypeScript (O'Reilly)</td></tr>
+      <tr><td>Note</td><td>React background means this goes quickly — invest extra time in TypeScript practice</td></tr>
+    </table>
+  </div>
+
+  <div class="course">
+    <div class="course-hd">
+      <span class="course-code">D370</span>
+      <span class="course-title">IT Leadership Foundations</span>
+      <span class="tag tag-main">MAIN TRACK</span>
+      <span class="tag tag-low">Low</span>
+    </div>
+    <table class="course-rows">
+      <tr><td>Covers</td><td>Org dynamics, communication, stakeholder management</td></tr>
+      <tr><td>Books</td><td>OpenStax Information Systems · Code: The Hidden Language (Petzold, 2e)</td></tr>
+      <tr><td>Note</td><td>Low technical load — use freed hours for side reading</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ═══ PHASE 3 ═══ -->
+<div class="phase-block">
+  <div class="phase-hd">
+    <h2>Phase 3 — Algorithms &amp; Databases</h2>
+    <span class="phase-meta">Months 6–10 · ~25–30 hrs/wk</span>
+  </div>
+  <div class="phase-note">Interview-prep phase. Run 3 LeetCode problems/week alongside C949. Begin reading DDIA alongside data management courses — it answers the 'why' behind every design decision.</div>
+
+  <div class="course">
+    <div class="course-hd">
+      <span class="course-code">C949</span>
+      <span class="course-title">Data Structures &amp; Algorithms I</span>
+      <span class="tag tag-main">MAIN TRACK</span>
+      <span class="tag tag-hi">High</span>
+    </div>
+    <table class="course-rows">
+      <tr><td>Covers</td><td>Lists, trees, hashes, recursion, sorting — interview core</td></tr>
+      <tr><td>Pair with</td><td>D426 Data Management (same phase) · Discrete Math I (BSCS supplement, if running)</td></tr>
+      <tr><td>Books</td><td>CLRS (3e) · Skiena Algorithm Design Manual · TAOCP Vols I–IV · SICP · Programming Pearls · Grokking Algorithms (review)</td></tr>
+      <tr><td>Note</td><td>CS50 exposure means you are not starting cold — use that to go deeper into CLRS proofs</td></tr>
+    </table>
+  </div>
+
+  <div class="course">
+    <div class="course-hd">
+      <span class="course-code">D426</span>
+      <span class="course-title">Data Management Foundations</span>
+      <span class="tag tag-main">MAIN TRACK</span>
+      <span class="tag tag-hi">High</span>
+    </div>
+    <table class="course-rows">
+      <tr><td>Covers</td><td>ER modeling, normalization, schema design — every backend project from here depends on getting this right</td></tr>
+      <tr><td>Books</td><td>Database System Concepts (7e, Silberschatz) · Practical SQL · Head First SQL</td></tr>
+    </table>
+  </div>
+
+  <div class="course">
+    <div class="course-hd">
+      <span class="course-code">D427</span>
+      <span class="course-title">Data Management Applications</span>
+      <span class="tag tag-main">MAIN TRACK</span>
+      <span class="tag tag-hi">High</span>
+    </div>
+    <table class="course-rows">
+      <tr><td>Covers</td><td>SQL indexes, query optimization, transactions — the gap between "SQL works" and "SQL scales"</td></tr>
+      <tr><td>Books</td><td>Practical SQL · Head First SQL · Beginning Databases with PostgreSQL · MongoDB: The Definitive Guide</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ═══ PHASE 4 ═══ -->
+<div class="phase-block">
+  <div class="phase-hd">
+    <h2>Phase 4 — C#, Backend, Systems &amp; Cloud</h2>
+    <span class="phase-meta">Months 11–16 · ~25–30 hrs/wk</span>
+  </div>
+  <div class="phase-note">C# and systems are the heaviest technical phases. The memory model from CS:APP makes .NET runtime behavior make sense. Begin Shopify API sandbox work alongside D288.</div>
+
+  <div class="course">
+    <div class="course-hd">
+      <span class="course-code">D255</span>
+      <span class="course-title">C# Programming Fundamentals</span>
+      <span class="tag tag-main">MAIN TRACK</span>
+      <span class="tag tag-hi">High</span>
+    </div>
+    <table class="course-rows">
+      <tr><td>Covers</td><td>Syntax, types, control flow, methods, debugging in .NET</td></tr>
+      <tr><td>Books</td><td>C# in Depth (Skeet) · Head First C# · CLR via C# (Richter)</td></tr>
+    </table>
+  </div>
+
+  <div class="course">
+    <div class="course-hd">
+      <span class="course-code">D256</span>
+      <span class="course-title">C# Object-Oriented Programming</span>
+      <span class="tag tag-main">MAIN TRACK</span>
+      <span class="tag tag-hi">High</span>
+    </div>
+    <table class="course-rows">
+      <tr><td>Covers</td><td>Classes, inheritance, polymorphism, interfaces, SOLID principles</td></tr>
+      <tr><td>Books</td><td>C# in Depth · GoF Design Patterns · Head First Design Patterns</td></tr>
+    </table>
+  </div>
+
+  <div class="course">
+    <div class="course-hd">
+      <span class="course-code">D288</span>
+      <span class="course-title">Back-End Programming</span>
+      <span class="tag tag-main">MAIN TRACK</span>
+      <span class="tag tag-hi">High</span>
+    </div>
+    <table class="course-rows">
+      <tr><td>Covers</td><td>REST APIs, auth, services — where theory meets Shopify</td></tr>
+      <tr><td>Books</td><td>DDIA · REST API Design Rulebook (Masse) · Designing Web APIs (Jin/Sahni/Shevat)</td></tr>
+      <tr><td>Note</td><td>Use the Shopify Partner sandbox to build a real API integration alongside this course</td></tr>
+    </table>
+  </div>
+
+  <div class="course">
+    <div class="course-hd">
+      <span class="course-code">D387</span>
+      <span class="course-title">Advanced C#</span>
+      <span class="tag tag-main">MAIN TRACK</span>
+      <span class="tag tag-hi">High</span>
+    </div>
+    <table class="course-rows">
+      <tr><td>Covers</td><td>Concurrency, async/await, LINQ, .NET runtime internals, performance</td></tr>
+      <tr><td>Books</td><td>CLR via C# (Richter) · C# in Depth · Clean Code</td></tr>
+    </table>
+  </div>
+
+  <div class="course">
+    <div class="course-hd">
+      <span class="course-code">D282</span>
+      <span class="course-title">Cloud Foundations</span>
+      <span class="tag tag-main">MAIN TRACK</span>
+      <span class="tag tag-med">Medium</span>
+    </div>
+    <table class="course-rows">
+      <tr><td>Covers</td><td>IaaS, scaling, containers, cloud deployment models</td></tr>
+      <tr><td>Books</td><td>DDIA · How Linux Works · UNIX/Linux Admin Handbook · Site Reliability Engineering</td></tr>
+      <tr><td>Note</td><td>DDIA gives the mental model; this course gives AWS/GCP vocabulary</td></tr>
+    </table>
+  </div>
+
+  <div class="course">
+    <div class="course-hd">
+      <span class="course-code">D315</span>
+      <span class="course-title">Network &amp; Security Foundations</span>
+      <span class="tag tag-main">MAIN TRACK</span>
+      <span class="tag tag-hi">High</span>
+    </div>
+    <table class="course-rows">
+      <tr><td>Covers</td><td>TCP/IP, CIA triad, TLS, applied network security</td></tr>
+      <tr><td>Books</td><td>UNIX/Linux Admin Handbook (5e) · Networking for Systems Administrators (Lucas)</td></tr>
+      <tr><td>Note</td><td>Wireshark background from A+ means you can go deeper than most students here</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ═══ PHASE 5 ═══ -->
+<div class="phase-block">
+  <div class="phase-hd">
+    <h2>Phase 5 — Signature Projects</h2>
+    <span class="phase-meta">Months 17–25 · ~25–30 hrs/wk</span>
+  </div>
+  <div class="phase-note">Nine months to build all six portfolio projects with full SDLC documentation, testing at 80%+ coverage, blog writeups, and professional GitHub presentation. See the <a href="projects.html">Projects page</a> for individual writeups.</div>
+
+  <table class="data-table">
+    <thead><tr><th>Mo</th><th>Project</th><th>Stack / Focus</th></tr></thead>
+    <tbody>
+      <tr><td>17</td><td>Mechanical Calculator</td><td>C# / .NET, xUnit, full PAC/IPO/GOM/GWM artifacts</td></tr>
+      <tr><td>18</td><td>Ladybug of Szeged</td><td>Unity / C# — rebuilt from a broken Java applet on the Szeged Informatics Museum site; parallel C/C++ student implementations run concurrently</td></tr>
+      <tr><td>19–20</td><td>Math Visualizer</td><td>Python / Dash / Plotly / Ollama / PyTest</td></tr>
+      <tr><td>21</td><td>MERN Task Tracker V1</td><td>MongoDB + Express + React + Node, Jest</td></tr>
+      <tr><td>22</td><td>MERN V2</td><td>TypeScript + PostgreSQL migration, documented</td></tr>
+      <tr><td>23</td><td>MERN V3</td><td>C# desktop client, xUnit</td></tr>
+      <tr><td>24</td><td>MERN V4</td><td>React Native, Android + iOS</td></tr>
+      <tr><td>25</td><td>ESP32 vs Raspberry Pi E-Ink Terminal</td><td>C/C++ vs Python, power measurement</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ═══ PHASE 6 ═══ -->
+<div class="phase-block">
+  <div class="phase-hd">
+    <h2>Phase 6 — Quality, Security, UI/UX &amp; Capstone</h2>
+    <span class="phase-meta">Months 26–30 · ~25–30 hrs/wk</span>
+  </div>
+  <div class="phase-note">Final phase consolidates everything. Run Security/Testing with Software Design concurrently — they inform each other. Capstone draws on all six signature projects.</div>
+
+  <div class="course">
+    <div class="course-hd">
+      <span class="course-code">D385</span>
+      <span class="course-title">Software Security &amp; Testing</span>
+      <span class="tag tag-main">MAIN TRACK</span>
+      <span class="tag tag-hi">High</span>
+    </div>
+    <table class="course-rows">
+      <tr><td>Covers</td><td>Coverage metrics, fuzzing, secure coding patterns</td></tr>
+      <tr><td>Pair with</td><td>D480 Software Design &amp; QA (same phase)</td></tr>
+      <tr><td>Books</td><td>SICP · How to Prove It (Velleman) · Logic for Computer Scientists (Schöning)</td></tr>
+    </table>
+  </div>
+
+  <div class="course">
+    <div class="course-hd">
+      <span class="course-code">D480</span>
+      <span class="course-title">Software Design &amp; Quality Assurance</span>
+      <span class="tag tag-main">MAIN TRACK</span>
+      <span class="tag tag-hi">High</span>
+    </div>
+    <table class="course-rows">
+      <tr><td>Covers</td><td>Architecture patterns, metrics, technical debt quantification — capstone deliverable starts here</td></tr>
+      <tr><td>Books</td><td>Software Engineering: Theory &amp; Practice (Pfleeger/Atlee) · The Dawn of Software Engineering · Sommerville Software Engineering (10e)</td></tr>
+    </table>
+  </div>
+
+  <div class="course">
+    <div class="course-hd">
+      <span class="course-code">D326</span>
+      <span class="course-title">Advanced Data Management</span>
+      <span class="tag tag-main">MAIN TRACK</span>
+      <span class="tag tag-med">Medium</span>
+    </div>
+    <table class="course-rows">
+      <tr><td>Covers</td><td>NoSQL trade-offs, query optimization, sharding</td></tr>
+      <tr><td>Books</td><td>DDIA · Database System Concepts · MongoDB: The Definitive Guide</td></tr>
+      <tr><td>Note</td><td>DDIA is the companion text — read in parallel</td></tr>
+    </table>
+  </div>
+
+  <div class="course">
+    <div class="course-hd">
+      <span class="course-code">D279 / D479</span>
+      <span class="course-title">UI Design &amp; UX Design</span>
+      <span class="tag tag-main">MAIN TRACK</span>
+      <span class="tag tag-med">Medium</span>
+    </div>
+    <table class="course-rows">
+      <tr><td>Covers</td><td>Wireframes, typography, color theory, accessibility, user research, journey mapping</td></tr>
+      <tr><td>Books</td><td>Refactoring UI (Wathan/Schoger) · Learning React (design patterns)</td></tr>
+    </table>
+  </div>
+
+  <div class="course">
+    <div class="course-hd">
+      <span class="course-code">D308</span>
+      <span class="course-title">Mobile Application Development</span>
+      <span class="tag tag-main">MAIN TRACK</span>
+      <span class="tag tag-low">Low</span>
+    </div>
+    <table class="course-rows">
+      <tr><td>Covers</td><td>Mobile constraints, energy trade-offs, cross-platform patterns</td></tr>
+      <tr><td>Books</td><td>Eloquent JS (patterns reference)</td></tr>
+      <tr><td>Note</td><td>Energy and constraint thinking mirrors embedded systems — use ESP32/Pi project as mental reference</td></tr>
+    </table>
+  </div>
+
+  <div class="course">
+    <div class="course-hd">
+      <span class="course-code">—</span>
+      <span class="course-title">Software Engineering Capstone</span>
+      <span class="tag tag-main">MAIN TRACK</span>
+      <span class="tag tag-hi">High</span>
+    </div>
+    <table class="course-rows">
+      <tr><td>Covers</td><td>Integration of all six signature projects into a cohesive portfolio presentation</td></tr>
+      <tr><td>Books</td><td>All primary references above — return to foundations</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ═══ BSCS SUPPLEMENTS ═══ -->
+<h2 class="section-heading" style="margin-top:2rem;">Optional BSCS Depth Supplements</h2>
+<div class="callout" style="margin-bottom:2rem;">Not required for the WGU SWE degree. Strongly recommended for anyone who wants to grow into systems programming, ML/AI, or research-adjacent engineering — and for students who may one day mentor back into this curriculum from the other direction.</div>
+
+<div class="course">
+  <div class="course-hd">
+    <span class="course-code">—</span>
+    <span class="course-title">Discrete Mathematics I</span>
+    <span class="tag tag-opt">OPTIONAL</span>
+    <span class="tag tag-hi">High</span>
+  </div>
+  <table class="course-rows">
+    <tr><td>Covers</td><td>Logic, sets, proof techniques, graphs — the mathematical language of algorithms</td></tr>
+    <tr><td>Books</td><td>Rosen Discrete Math (8e) · Concrete Mathematics (Knuth) · How to Prove It (Velleman) · MIT Mathematics for CS</td></tr>
+    <tr><td>Best started</td><td>Phase 3, alongside C949 DSA I</td></tr>
+  </table>
+</div>
+
+<div class="course">
+  <div class="course-hd">
+    <span class="course-code">—</span>
+    <span class="course-title">Discrete Mathematics II</span>
+    <span class="tag tag-opt">OPTIONAL</span>
+    <span class="tag tag-hi">High</span>
+  </div>
+  <table class="course-rows">
+    <tr><td>Covers</td><td>Recurrences, NP-completeness, complexity theory — where CS becomes mathematics</td></tr>
+    <tr><td>Books</td><td>Rosen · Concrete Mathematics · TAOCP · CLRS · Sipser Theory of Computation</td></tr>
+  </table>
+</div>
+
+<div class="course">
+  <div class="course-hd">
+    <span class="course-code">—</span>
+    <span class="course-title">Computer Architecture</span>
+    <span class="tag tag-opt">OPTIONAL</span>
+    <span class="tag tag-hi">High</span>
+  </div>
+  <table class="course-rows">
+    <tr><td>Covers</td><td>ISA, pipelines, caches, memory hierarchy — the layer between software and silicon</td></tr>
+    <tr><td>Books</td><td>CS:APP (Bryant/O'Hallaron) · The Elements of Computing Systems (Nand to Tetris) · Tanenbaum Computer Networks</td></tr>
+  </table>
+</div>
+
+<div class="course">
+  <div class="course-hd">
+    <span class="course-code">—</span>
+    <span class="course-title">Linux Foundations</span>
+    <span class="tag tag-opt">OPTIONAL</span>
+    <span class="tag tag-hi">High</span>
+  </div>
+  <table class="course-rows">
+    <tr><td>Covers</td><td>Production Linux administration — directly applicable to every cloud deployment</td></tr>
+    <tr><td>Books</td><td>How Linux Works · UNIX/Linux Admin Handbook (5e) · The Linux Programming Interface (Kerrisk)</td></tr>
+  </table>
+</div>
+
+<div class="course">
+  <div class="course-hd">
+    <span class="course-code">—</span>
+    <span class="course-title">Operating Systems for CS</span>
+    <span class="tag tag-opt">OPTIONAL</span>
+    <span class="tag tag-hi">High</span>
+  </div>
+  <table class="course-rows">
+    <tr><td>Covers</td><td>Scheduling, virtual memory, file systems, concurrency — Tanenbaum's Minix approach builds OS from scratch</td></tr>
+    <tr><td>Books</td><td>CS:APP · Tanenbaum Modern OS / Minix · Dragon Book Compilers (Aho)</td></tr>
+  </table>
+</div>
+
+<div class="course">
+  <div class="course-hd">
+    <span class="course-code">—</span>
+    <span class="course-title">Calculus I</span>
+    <span class="tag tag-opt">OPTIONAL</span>
+    <span class="tag tag-med">Medium</span>
+  </div>
+  <table class="course-rows">
+    <tr><td>Covers</td><td>Limits, derivatives, optimization — essential for ML gradient descent</td></tr>
+    <tr><td>Books</td><td>Gilbert Strang Calculus (MIT OCW) · The Princeton Companion to Mathematics</td></tr>
+  </table>
+</div>
+
+<div class="course">
+  <div class="course-hd">
+    <span class="course-code">—</span>
+    <span class="course-title">Introduction to AI</span>
+    <span class="tag tag-opt">OPTIONAL</span>
+    <span class="tag tag-med">Medium</span>
+  </div>
+  <table class="course-rows">
+    <tr><td>Covers</td><td>Search, ML basics, probability in AI — entry point to everything LLM-related</td></tr>
+    <tr><td>Books</td><td>DDIA (pipelines) · Strang Linear Algebra · Blitzstein/Hwang Probability</td></tr>
+    <tr><td>Note</td><td>Discrete Math II recommended prerequisite</td></tr>
+  </table>
+</div>
+
+<div class="course">
+  <div class="course-hd">
+    <span class="course-code">—</span>
+    <span class="course-title">AI Optimization</span>
+    <span class="tag tag-opt">OPTIONAL</span>
+    <span class="tag tag-med">Medium</span>
+  </div>
+  <table class="course-rows">
+    <tr><td>Covers</td><td>Gradient descent, loss functions, backpropagation — where calculus meets machine learning</td></tr>
+    <tr><td>Books</td><td>Blitzstein/Hwang · Strang Linear Algebra</td></tr>
+    <tr><td>Note</td><td>Calculus I + Intro to AI are prerequisites</td></tr>
+  </table>
+</div>
+
+<div class="course">
+  <div class="course-hd">
+    <span class="course-code">—</span>
+    <span class="course-title">Advanced AI &amp; ML</span>
+    <span class="tag tag-opt">OPTIONAL</span>
+    <span class="tag tag-med">Medium</span>
+  </div>
+  <table class="course-rows">
+    <tr><td>Covers</td><td>Deep learning, neural architectures, specialization</td></tr>
+    <tr><td>Books</td><td>MIT Mathematics for CS</td></tr>
+    <tr><td>Note</td><td>AI Optimization is a prerequisite</td></tr>
+  </table>
+</div>
+
+<div class="course">
+  <div class="course-hd">
+    <span class="course-code">—</span>
+    <span class="course-title">Practical Prompt Engineering</span>
+    <span class="tag tag-opt">OPTIONAL</span>
+    <span class="tag tag-low">Low</span>
+  </div>
+  <table class="course-rows">
+    <tr><td>Covers</td><td>LLM usage patterns, Ollama/WSL2 local AI workflows, privacy-first AI integration</td></tr>
+    <tr><td>Books</td><td>Intro to Symbolic Computation (Verschelde)</td></tr>
+    <tr><td>Note</td><td>Low cognitive overhead — run alongside any phase</td></tr>
+  </table>
+</div>
+
+<!-- ═══ LEETCODE ═══ -->
+<h2 class="section-heading" style="margin-top:2rem;">LeetCode Calendar</h2>
+<table class="data-table">
+  <thead><tr><th>Phase</th><th>Problems</th><th>Rhythm</th><th>Focus</th></tr></thead>
+  <tbody>
+    <tr><td>1–2 (Mo 1–6)</td><td>30</td><td>5/wk — 3 Easy + 2 Medium</td><td>Arrays, Two Pointers, HashMaps, Stacks, Binary Search</td></tr>
+    <tr><td>3 (Mo 7–12)</td><td>80</td><td>6–8/wk + weekly contest</td><td>Trees, Graphs, Heap, DP intro, NeetCode 75, first Hard problems</td></tr>
+    <tr><td>4 (Mo 13–20)</td><td>60</td><td>4–5/wk + system design mock</td><td>Sliding Window, Backtracking, Advanced Graph, Top 50 Hard Tagged</td></tr>
+    <tr><td>5–6 (Mo 21–30)</td><td>80+</td><td>2–3/wk maintenance</td><td>Advanced DP, Bit Manipulation, company-specific, weekly contest</td></tr>
+  </tbody>
+</table>
+
+<div class="" style="margin-top:3rem;">
+  <a href="books.html" class="forward">
+    <span class="forward-label">Continue reading</span>
+    <span class="forward-title">Complete Book List →</span>
+  </a>
+</div>
+
+</div>
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <span>Full curriculum and project portfolio at this site.</span>
+    <nav class="footer-nav">
+      <a href="index.html">About</a>
+      <a href="projects.html">Projects</a>
+      <a href="posts.html">Writing</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>

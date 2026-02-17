@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects — From Operations to Systems</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav class="nav">
+  <a href="index.html" class="nav-brand">ops → systems</a>
+  <div class="nav-links">
+    <a href="index.html">About</a>
+    <a href="curriculum.html">Curriculum</a>
+    <a href="books.html">Books</a>
+    <a href="projects.html" class="active">Projects</a>
+    <a href="posts.html">Writing</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</nav>
+<main class="page">
+
+<div class="">
+  <p class="kicker">Portfolio</p>
+  <h1>Projects</h1>
+  <p>Each project is built around a real-world problem, a broken artifact, or a production scenario. Where Unity games are playable in the browser, they embed directly. Desktop and mobile builds link to GitHub releases.</p>
+</div>
+
+<!-- Shopify App -->
+<div class="project">
+  <div class="project-hd">
+    <h3>Shopify Operations &amp; Fulfillment Automation App</h3>
+    <span class="project-stack">TypeScript · Node.js · PostgreSQL · Shopify Admin API · Webhooks · Liquid</span>
+  </div>
+  <div class="project-body">
+    <p>Custom Shopify application authenticating via OAuth to fetch and normalize order, inventory, and fulfillment data through the Admin API, persisting operational metrics in a relational PostgreSQL database.</p>
+    <p>Implements webhook handlers for order creation, fulfillment updates, and inventory changes to trigger automated workflows, customer notifications, and internal alerts. Liquid snippets surface dynamic app-generated data on the storefront; SMS-only gated product releases support exclusive drops without reliance on social platforms.</p>
+    <span class="status status-wip">In development — OAuth + webhook flows complete</span>
+  </div>
+</div>
+
+<!-- Ladybug of Szeged -->
+<div class="project">
+  <div class="project-hd">
+    <h3>Ladybug of Szeged</h3>
+    <span class="project-stack">Unity · C# · C · C++</span>
+  </div>
+  <div class="project-body">
+    <p>Rebuilt from a broken Java applet on the <a href="https://www.inf.u-szeged.hu" target="_blank" rel="noopener">Szeged Informatics Museum</a> website. Students recreated the original applet's core interactive functions in Unity/C# while parallel implementations ran concurrently in C and C++. The project came out of a real gap — a museum resource that no longer worked — and became a study in tracing why things break and rebuilding them in a stack that lasts.</p>
+    <p>When the Unity WebGL build is complete it will be playable directly in this page.</p>
+    <!-- Unity WebGL embed placeholder -->
+    <div style="margin-top:1rem;background:var(--bg-3);border:1px solid var(--border);padding:2rem;text-align:center;font-family:var(--font-mono);font-size:0.75rem;color:var(--text-3);">
+      Unity WebGL build loads here on completion
+    </div>
+    <span class="status status-planned">Planned — Phase 5, Month 18</span>
+  </div>
+</div>
+
+<!-- Math Visualizer -->
+<div class="project">
+  <div class="project-hd">
+    <h3>Math Visualizer</h3>
+    <span class="project-stack">Python · Dash · Plotly · Ollama · PyTest</span>
+  </div>
+  <div class="project-body">
+    <p>Interactive visualization tool for mathematical concepts encountered in the curriculum — recursion trees, graph traversals, probability distributions, and linear algebra transformations. Ollama integration provides local AI-assisted explanations without sending data to external services.</p>
+    <span class="status status-planned">Planned — Phase 5, Months 19–20</span>
+  </div>
+</div>
+
+<!-- MERN Task Tracker -->
+<div class="project">
+  <div class="project-hd">
+    <h3>MERN Task Tracker — V1 through V4</h3>
+    <span class="project-stack">MongoDB · Express · React · Node · TypeScript · PostgreSQL · C# · React Native</span>
+  </div>
+  <div class="project-body">
+    <p>A single application iterated across four versions to document the decisions that happen when a real system grows and changes. V1 is the baseline MERN stack. V2 migrates to TypeScript and PostgreSQL with full documentation of the schema and type changes. V3 adds a C# desktop client consuming the same API. V4 extends to mobile via React Native for Android and iOS.</p>
+    <p>The point is not four separate projects — it is one project that shows how architectural decisions accumulate and how the same data model surfaces differently across platforms.</p>
+    <span class="status status-planned">Planned — Phase 5, Months 21–24</span>
+  </div>
+</div>
+
+<!-- Mechanical Calculator -->
+<div class="project">
+  <div class="project-hd">
+    <h3>Mechanical Calculator</h3>
+    <span class="project-stack">C# · .NET · xUnit</span>
+  </div>
+  <div class="project-body">
+    <p>Full PAC/IPO/GOM/GWM documentation artifacts alongside the working implementation. The goal is demonstrating that the engineering process — input validation, process modeling, output constraints — is not overhead but the thing that makes code legible six months later.</p>
+    <span class="status status-planned">Planned — Phase 5, Month 17</span>
+  </div>
+</div>
+
+<!-- ESP32 -->
+<div class="project">
+  <div class="project-hd">
+    <h3>ESP32 vs Raspberry Pi E-Ink Terminal</h3>
+    <span class="project-stack">C · C++ · Python · Hardware</span>
+  </div>
+  <div class="project-body">
+    <p>Two implementations of the same e-ink display terminal — one on ESP32 in C/C++, one on Raspberry Pi in Python — with actual power measurement and a written comparison of the trade-offs. Embedded constraints and energy budgets as a concrete reference point for the mobile development course that follows.</p>
+    <span class="status status-planned">Planned — Phase 5, Month 25</span>
+  </div>
+</div>
+
+<div class="" style="margin-top:2rem;">
+  <a href="posts.html" class="forward">
+    <span class="forward-label">Continue reading</span>
+    <span class="forward-title">Writing &amp; Build Logs →</span>
+  </a>
+</div>
+
+</main>
+<footer class="footer">
+  <div class="footer-inner">
+    <span>Full curriculum and project portfolio at this site.</span>
+    <nav class="footer-nav">
+      <a href="index.html">About</a>
+      <a href="curriculum.html">Curriculum</a>
+      <a href="books.html">Books</a>
+      <a href="posts.html">Writing</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>

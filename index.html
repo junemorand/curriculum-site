@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>From Operations to Systems — A Software Engineering Curriculum</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav-brand">ops → systems</a>
+  <div class="nav-links">
+    <a href="index.html" class="active">About</a>
+    <a href="curriculum.html">Curriculum</a>
+    <a href="books.html">Books</a>
+    <a href="projects.html">Projects</a>
+    <a href="posts.html">Writing</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</nav>
+
+<main class="page">
+
+  <header class="">
+    <p class="kicker">A living curriculum</p>
+    <h1 class="page-title">From Operations<br>to Systems Thinking</h1>
+    <p class="lead">For A.S. holders and IT professionals moving into systems-level software engineering — especially those who see the gap between WGU's SWE track and BSCS-level theory and want a structured way to close it.</p>
+    <div class="meta">
+      <span>Updated February 2026</span>
+      <span class="dot">·</span>
+      <span>WGU B.S. Software Engineering, expected 2028</span>
+    </div>
+  </header>
+
+  <div class="callout">
+    2026 Focus: Shopify developer certification + first production app — documented live so students can trace real requirements through architecture, endpoints, background jobs, and deployment.
+  </div>
+
+  <article>
+
+    <section class="essay-section">
+      <h2>My Path Into Computing</h2>
+      <p>My entry into technology began in operations. As a field sales and training specialist for Lelit across the New York metro area, I spent years inside the systems that software engineers build — POS environments, inventory workflows, vendor coordination, and the recurring experience of watching software either solve or fail real business problems at the operational level. I trained staff on new tools across locations. I understood, from the user side, where the abstractions leaked.</p>
+      <p>That exposure made backend systems, operating systems, and runtime behavior more interesting to me than frontend polish. It also gave me a reference point for abstraction that most curriculum paths skip entirely.</p>
+      <p>Those roles had clear ceilings, so I pursued CompTIA A+, taught myself multimeter diagnostics and motherboard trace fault-finding, and worked through OSI layers, DHCP/DNS, and networking fundamentals. From there the tooling philosophy followed naturally: production servers run Linux, so the development environment should too. WSL2 with Ubuntu, local Ollama for private AI workflows, Neovim inside VSCode for modal editing without leaving an industry-standard ecosystem. Remote development as a default, not an afterthought.</p>
+      <p>Vintage Computing Federation communities reinforced a hardware-longevity mindset that pushed me to trace how abstractions actually connect across layers — through web stacks, relational databases, typed languages, and cross-platform runtimes. What began as hands-on repair became systems intuition: electrons to bits to services to distributed coordination.</p>
+      <p>Early frameworks like PAC/IPO/GOM/GWM connected hardware realities to software design. Working through those frameworks with students — mapping I/O flow, memory behavior, and control structures alongside APIs, SDLC, and data modeling — produced a consistent mental model for how vague requirements become concrete architecture and running systems.</p>
+    </section>
+
+    <section class="essay-section">
+      <h2>Why Context Matters for Abstraction</h2>
+      <p>A pattern shows up consistently: students struggle with abstract thinking not because they are incapable, but because they lack concrete experience for abstractions to attach to. Distributed systems, concurrency, scalability — these remain theoretical without seeing how a single request moves through a real stack.</p>
+      <p>The approach that works moves deliberately from concrete to abstract: single machine to service, service to API surface, APIs to distributed systems. We start with hardware behavior, then layer processes, protocols, and patterns. Higher-level concepts become compressed summaries of familiar realities, not floating theory.</p>
+      <p>The 2026 Shopify app serves as a live case study in this direction. Business requirements become schemas, endpoints, background jobs, and front-end integrations — something traceable end-to-end rather than hypothetical.</p>
+    </section>
+
+    <section class="essay-section">
+      <h2>Learning from Students — What I Don't Know</h2>
+      <p>This section starts with a thank you. The students who worked through early versions of this material asked better questions than the material deserved. They pushed past generality and demanded CS/SWE-specific precision — graph theory for distributed routing, recurrence relations for runtime analysis, proofs calibrated for test coverage rather than generic theory. That pressure forced clarity: what tools actually map to production realities, what mathematical depth is genuinely load-bearing, and where recreational curiosity in the history of mathematics needed to be refocused toward computational applicability.</p>
+      <p>That refocusing also made space for work that was genuinely enjoyable. Rebuilding a broken Java applet from the Szeged Informatics Museum website in Unity and C# — while other students completed parallel implementations in C and C++ — is the kind of project that makes theory feel like leverage rather than overhead. Finding real-world broken things, tracing why they broke, and rebuilding them in a modern stack is a better learning frame than any exercise. Museums, galleries, and historical technical artifacts are a recurring reference point in this curriculum for exactly that reason.</p>
+      <p><strong>Mutual growth potential.</strong> This curriculum is not one-way. The operations-to-systems path here can offer CS students practical depth — APIs, deployment, stakeholder trade-offs, and the perspective that comes from having been on the user side of the software you are now building. In return, students who go deep into machine learning, advanced theory, or research-adjacent work are better positioned than I am to teach those areas. That is a feature, not a gap. The goal is that students who move through this material eventually surpass it — and come back to teach the parts that are not here yet.</p>
+      <p>Topics currently covered: CS and programming fundamentals, computational mathematics, data structures and algorithms, design patterns, Linux-first development environments, Python automation, TypeScript, remote project workflows, and responsible local AI use with privacy-first tooling.</p>
+    </section>
+
+    <section class="essay-section">
+      <h2>The Systems Advantage</h2>
+      <p>Students from CS, cybersecurity, and math backgrounds who understood computation models, memory, and architecture advanced quickly in applied contexts — even when they had written less code initially. That observation reshaped my own approach: start from the machine, not the framework.</p>
+      <p>CompTIA A+ and Google IT Support formalized that intuition. Once hardware, networking, and operating systems made sense at a mechanical level, cloud concepts like load balancing, virtualization, and distributed systems became natural extensions rather than abstract vocabulary.</p>
+      <p>The communities that reinforced this path are worth naming: Professor Messer's exam and networking content for its clarity and depth; Louis Rossman and the Salem Techsperts for demonstrating that understanding hardware at the schematic level changes how you think about every layer above it; the Vintage Computing Federation for keeping alive the principle that old systems are not obsolete — they are transparent, and transparency is how intuition gets built.</p>
+    </section>
+
+    <section class="essay-section">
+      <h2>Bridging Practice and Theory</h2>
+      <p>Bootcamp experience provided collaboration habits, version control discipline, and release-cycle thinking. Interacting with CS graduates added a second lesson: rigor is non-negotiable. Discrete math, algorithms, and probability are not academic detours — they are compression tools for understanding complex, distributed systems through a small number of concepts.</p>
+      <p>The curriculum here reflects that balance. Theory and practice are not separate tracks. Proofs explain real system behavior; real systems give theory solid grounding. The Shopify app and student code jams make that concrete: Git flow, pull requests, PAC/IPO process, and mini webhook handlers in a shared repository.</p>
+    </section>
+
+    <section class="essay-section">
+      <h2>2026 Priorities</h2>
+      <p>This site documents self-directed learning and packages it for reuse. Each post contributes to a structured curriculum pairing hands-on systems knowledge with CS depth. Courses and books are sequenced to build understanding, not accumulate credits.</p>
+      <ul>
+        <li>Shopify developer certification + first production app</li>
+        <li>4x Student Code Jams — remote project management, Git flow, real deliverables</li>
+        <li>Live documentation of architecture decisions from requirements through deployment</li>
+      </ul>
+      <p>The path here differs from a traditional internship track. The patterns of translating requirements into working, maintainable systems are the same.</p>
+      <div class="callout callout-inline">
+        To anyone working through this material: the goal is not passive consumption. Move through it efficiently, challenge it, refine it, and ultimately surpass it.
+      </div>
+    </section>
+
+    <section class="essay-section bridge">
+      <p>What follows is the plan that came out of all of that — a 30-month sequence that treats the WGU degree as scaffolding rather than ceiling. The courses are real. The books are the ones that actually matter for the work. The projects are built around things that broke in the real world and needed fixing. Read it as a curriculum if you are a student. Read it as a proof of work if you are evaluating someone who took an unconventional path into systems engineering.</p>
+    </section>
+
+    <div class="">
+      <a href="curriculum.html" class="forward">
+        <span class="forward-label">Continue reading</span>
+        <span class="forward-title">The Full Curriculum →</span>
+      </a>
+    </div>
+
+  </article>
+
+  <section class="foundation-section">
+    <h2 class="section-heading">My Foundation at a Glance</h2>
+    <table class="data-table">
+      <thead>
+        <tr><th>Credential / Course</th><th>What It Covered</th><th>Carried Forward</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>CompTIA A+</td><td>Hardware assembly, binary/hex, Wireshark, CLI repair tools</td><td>Low-level machine intuition; mental model of the stack</td></tr>
+        <tr><td>Google IT Support</td><td>OS troubleshooting, networking, ticketing systems</td><td>Systems orientation; support workflows</td></tr>
+        <tr><td>Google IT Automation / Python</td><td>Scripting fundamentals, automation patterns</td><td>Python as practical tool; automation mindset</td></tr>
+        <tr><td>freeCodeCamp</td><td>HTML, CSS, JavaScript, intro React</td><td>Web foundations; front-end confidence</td></tr>
+        <tr><td>Per Scholas SWE Bootcamp</td><td>Full-stack dev (MERN), Agile/Scrum, production code, team workflow</td><td>Professional habits; teamwork under deadline</td></tr>
+        <tr><td>The Odin Project</td><td>Full-stack curriculum HTML to Node</td><td>Structured project-based web skills</td></tr>
+        <tr><td>CS50 + CS50W</td><td>Algorithms, memory, C, Python, SQL, web architecture</td><td>CS conceptual framing; first real algorithms exposure</td></tr>
+        <tr><td>Eloquent JavaScript</td><td>Closures, prototypes, async, event loop</td><td>Language-level JS understanding</td></tr>
+        <tr><td>Learning React (O'Reilly)</td><td>Hooks, component patterns, state management</td><td>Modern React mental model</td></tr>
+        <tr><td>Effective TypeScript (O'Reilly)</td><td>Type system, generics, structural typing</td><td>Type-safe code; TS as a discipline</td></tr>
+        <tr><td>Grokking Algorithms</td><td>Visual intro: recursion, DP, graphs, Big-O</td><td>Accessible entry point before CLRS; algorithm intuition</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="transfer-section">
+    <h2 class="section-heading">WGU Transfer Credits — 79 / 120 CU Satisfied</h2>
+    <table class="data-table">
+      <thead>
+        <tr><th>Course</th><th>Satisfied By</th><th>CU</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="strike">Composition: Successful Self-Expression (D270)</td><td>A.S. degree</td><td>3</td></tr>
+        <tr><td class="strike">Technical Communication (D339)</td><td>A.S. degree</td><td>3</td></tr>
+        <tr><td class="strike">Ethics in Technology (D333)</td><td>A.S. degree</td><td>3</td></tr>
+        <tr><td class="strike">Intro to Systems Thinking (D372)</td><td>A.S. degree</td><td>3</td></tr>
+        <tr><td class="strike">American Politics & US Constitution (C963)</td><td>A.S. degree</td><td>3</td></tr>
+        <tr><td class="strike">Intro to Physical & Human Geography (D199)</td><td>A.S. degree</td><td>3</td></tr>
+        <tr><td class="strike">Applied Algebra (C957)</td><td>A.S. degree</td><td>3</td></tr>
+        <tr><td class="strike">Applied Probability & Statistics (C955)</td><td>A.S. degree</td><td>3</td></tr>
+        <tr><td class="strike">Health, Fitness & Wellness (C458)</td><td>A.S. degree</td><td>4</td></tr>
+        <tr><td class="strike">Natural Science Lab (C683)</td><td>A.S. degree</td><td>2</td></tr>
+        <tr><td class="strike">Hardware & OS Essentials (D386)</td><td>CompTIA A+</td><td>3</td></tr>
+        <tr><td class="strike">Introduction to IT (D322)</td><td>Google IT Support</td><td>4</td></tr>
+        <tr><td class="strike">Software Engineering (D284)</td><td>Per Scholas Bootcamp</td><td>4</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <span>Full curriculum and project portfolio at this site.</span>
+    <nav class="footer-nav">
+      <a href="curriculum.html">Curriculum</a>
+      <a href="books.html">Books</a>
+      <a href="projects.html">Projects</a>
+      <a href="posts.html">Writing</a>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>

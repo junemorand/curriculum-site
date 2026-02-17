@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Writing — From Operations to Systems</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav class="nav">
+  <a href="index.html" class="nav-brand">ops → systems</a>
+  <div class="nav-links">
+    <a href="index.html">About</a>
+    <a href="curriculum.html">Curriculum</a>
+    <a href="books.html">Books</a>
+    <a href="projects.html">Projects</a>
+    <a href="posts.html" class="active">Writing</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</nav>
+<main class="page">
+
+<div class="">
+  <p class="kicker">Build logs · Book notes · Teaching notes</p>
+  <h1>Writing</h1>
+  <p>Posts document decisions as they happen — not tutorials, not summaries. Each entry is a record of what was learned, what broke, and what changed as a result.</p>
+</div>
+
+<!-- Activity grid -->
+<div >
+  <p class="activity-label">2026 posting activity</p>
+  <div class="activity-grid" id="activity-grid"></div>
+</div>
+
+<!-- 2026 posts -->
+<div class="year-group">
+  <p class="year-label">2026</p>
+
+  <a href="posts/2026-02-welcome.html" class="post-row">
+    <span class="post-date">Feb 17</span>
+    <span class="post-title">From Operations to Systems Thinking — Welcome Post</span>
+    <span class="post-series">About</span>
+  </a>
+
+  <a href="posts/2026-02-curriculum.html" class="post-row">
+    <span class="post-date">Feb 17</span>
+    <span class="post-title">How to Read This Curriculum</span>
+    <span class="post-series">Curriculum</span>
+  </a>
+
+  <!-- Future posts — marked as planned -->
+  <div class="post-row dim">
+    <span class="post-date">— —</span>
+    <span class="post-title">Phase 1 — What D278 and D335 Cover (and What They Don't)</span>
+    <span class="post-series">Phase Log</span>
+  </div>
+
+  <div class="post-row dim">
+    <span class="post-date">— —</span>
+    <span class="post-title">Shopify Build Log: Requirements → Schema Design Decisions</span>
+    <span class="post-series">Build Log</span>
+  </div>
+
+  <div class="post-row dim">
+    <span class="post-date">— —</span>
+    <span class="post-title">Book Notes: Grokking Algorithms — What It Gets Right for Beginners</span>
+    <span class="post-series">Book Notes</span>
+  </div>
+
+  <div class="post-row dim">
+    <span class="post-date">— —</span>
+    <span class="post-title">Shopify Build Log: OAuth Flow — What the Docs Don't Tell You</span>
+    <span class="post-series">Build Log</span>
+  </div>
+
+  <div class="post-row dim">
+    <span class="post-date">— —</span>
+    <span class="post-title">Teaching Notes: PAC/IPO as a Debugging Frame, Not Just a Design Frame</span>
+    <span class="post-series">Teaching</span>
+  </div>
+
+  <div class="post-row dim">
+    <span class="post-date">— —</span>
+    <span class="post-title">Shopify Build Log: Webhook Handlers — Reliability and Failure Modes</span>
+    <span class="post-series">Build Log</span>
+  </div>
+
+  <div class="post-row dim">
+    <span class="post-date">— —</span>
+    <span class="post-title">Book Notes: SICP ch.1–2 — What Changes When You Read This First</span>
+    <span class="post-series">Book Notes</span>
+  </div>
+
+  <div class="post-row dim">
+    <span class="post-date">— —</span>
+    <span class="post-title">Shopify Build Log: PostgreSQL Data Model for Order/Inventory Normalization</span>
+    <span class="post-series">Build Log</span>
+  </div>
+
+  <div class="post-row dim">
+    <span class="post-date">— —</span>
+    <span class="post-title">Teaching Notes: Why the Event Loop Confuses People Who Learned Python First</span>
+    <span class="post-series">Teaching</span>
+  </div>
+
+  <div class="post-row dim">
+    <span class="post-date">— —</span>
+    <span class="post-title">Student Code Jam #1 — Git Flow, PRs, and What Actually Broke</span>
+    <span class="post-series">Code Jam</span>
+  </div>
+
+  <div class="post-row dim">
+    <span class="post-date">— —</span>
+    <span class="post-title">Shopify Build Log: Liquid Storefront Integration</span>
+    <span class="post-series">Build Log</span>
+  </div>
+
+  <div class="post-row dim">
+    <span class="post-date">— —</span>
+    <span class="post-title">Phase 2 — TypeScript as Discipline, Not Just Syntax</span>
+    <span class="post-series">Phase Log</span>
+  </div>
+
+  <div class="post-row dim">
+    <span class="post-date">— —</span>
+    <span class="post-title">Shopify Build Log: SMS-Gated Product Releases — The Business Logic</span>
+    <span class="post-series">Build Log</span>
+  </div>
+
+  <div class="post-row dim">
+    <span class="post-date">— —</span>
+    <span class="post-title">Shopify Build Log: Deployment and What the App Review Process Is Actually Like</span>
+    <span class="post-series">Build Log</span>
+  </div>
+
+  <div class="post-row dim">
+    <span class="post-date">— —</span>
+    <span class="post-title">Shopify Build Log: Retrospective — What the Curriculum Got Right and Wrong</span>
+    <span class="post-series">Build Log</span>
+  </div>
+</div>
+
+<!-- Series legend -->
+<div style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border);">
+  <p class="activity-label" style="margin-bottom:1rem;">Series</p>
+  <div style="display:flex;flex-wrap:wrap;gap:0.5rem;">
+    <span class="tag">About</span>
+    <span class="tag">Curriculum</span>
+    <span class="tag">Phase Log</span>
+    <span class="tag">Build Log</span>
+    <span class="tag">Book Notes</span>
+    <span class="tag">Teaching</span>
+    <span class="tag">Code Jam</span>
+  </div>
+</div>
+
+</main>
+<footer class="footer">
+  <div class="footer-inner">
+    <span>Full curriculum and project portfolio at this site.</span>
+    <nav class="footer-nav">
+      <a href="index.html">About</a>
+      <a href="curriculum.html">Curriculum</a>
+      <a href="projects.html">Projects</a>
+      <a href="books.html">Books</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+// Generate a simple activity grid for 2026
+// Weeks from Jan 1 2026 to Dec 31 2026 = 52 weeks
+const grid = document.getElementById('activity-grid');
+if (grid) {
+  const today = new Date();
+  const startDate = new Date('2026-01-01');
+  const endDate = new Date('2026-12-31');
+
+  // Seed known post dates with high activity
+  const postDates = {
+    '2026-02-17': 4,
+  };
+
+  let d = new Date(startDate);
+  // Align to start of week (Sunday)
+  while (d.getDay() !== 0) d.setDate(d.getDate() - 1);
+
+  while (d <= endDate) {
+    const week = document.createElement('div');
+    week.className = 'activity-week';
+    for (let i = 0; i < 7; i++) {
+      const day = document.createElement('div');
+      day.className = 'activity-day';
+      const key = d.toISOString().slice(0,10);
+      const isPast = d <= today;
+      if (isPast) {
+        const level = postDates[key] || 0;
+        if (level > 0) day.classList.add('level-' + level);
+      }
+      week.appendChild(day);
+      d.setDate(d.getDate() + 1);
+    }
+    grid.appendChild(week);
+  }
+}
+</script>
+</body>
+</html>
