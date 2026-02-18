@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>30-Week Calendar — From Operations to Systems</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  /* ── Calendar-specific styles ─────────────────────────── */
+
+  .cal-intro {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 1.1rem 1.25rem;
+    margin-bottom: 2rem;
+    font-size: 0.82rem;
+    color: var(--text-2);
+    line-height: 1.7;
+  }
+
+  .cal-intro strong { color: var(--hi); font-weight: 500; }
+
+  /* WGU explainer box */
+  .wgu-box {
+    border: 1px solid var(--border-2);
+    margin-bottom: 2.5rem;
+  }
+
+  .wgu-box-hd {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0.55rem 0.9rem;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-3);
+  }
+
+  .wgu-box-body {
+    padding: 0.9rem 1rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+
+  .wgu-box-col {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.82rem;
+    color: var(--text-2);
+    line-height: 1.65;
+    border-right: 1px solid var(--border);
+  }
+
+  .wgu-box-col:last-child { border-right: none; }
+  .wgu-box-col strong { color: var(--hi); display: block; margin-bottom: 0.3rem; font-weight: 500; font-size: 0.78rem; }
+
+  @media (max-width: 600px) {
+    .wgu-box-body { grid-template-columns: 1fr; }
+    .wgu-box-col { border-right: none; border-bottom: 1px solid var(--border); }
+    .wgu-box-col:last-child { border-bottom: none; }
+  }
+
+  /* Phase header */
+  .cal-phase-hd {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin: 2.5rem 0 0.75rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--border-2);
+  }
+
+  .cal-phase-hd h2 {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--hi);
+    letter-spacing: 0.02em;
+  }
+
+  .cal-phase-dates {
+    font-size: 0.68rem;
+    color: var(--text-3);
+  }
+
+  /* Week card */
+  .week-card {
+    border: 1px solid var(--border);
+    margin-bottom: 0.85rem;
+  }
+
+  .week-hd {
+    display: grid;
+    grid-template-columns: 90px 1fr auto;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.55rem 0.9rem;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .week-hd:hover { background: var(--surface-2); }
+
+  .week-num {
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    white-space: nowrap;
+  }
+
+  .week-title {
+    font-size: 0.82rem;
+    color: var(--hi);
+  }
+
+  .week-date {
+    font-size: 0.65rem;
+    color: var(--text-3);
+    white-space: nowrap;
+  }
+
+  .week-toggle {
+    font-size: 0.7rem;
+    color: var(--text-3);
+    transition: transform 0.15s;
+    flex-shrink: 0;
+  }
+
+  .week-toggle.open { transform: rotate(180deg); }
+
+  /* Week body — collapsible */
+  .week-body {
+    display: none;
+  }
+
+  .week-body.open {
+    display: block;
+  }
+
+  /* Domain grid inside week body */
+  .domain-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    border-bottom: 1px solid var(--border);
+  }
+
+  @media (max-width: 750px) {
+    .domain-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 450px) {
+    .domain-grid { grid-template-columns: 1fr; }
+  }
+
+  .domain-cell {
+    padding: 0.65rem 0.75rem;
+    border-right: 1px solid var(--border);
+    font-size: 0.78rem;
+    color: var(--text-2);
+    line-height: 1.55;
+  }
+
+  .domain-cell:last-child { border-right: none; }
+
+  .domain-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    margin-bottom: 0.3rem;
+  }
+
+  .domain-content { color: var(--text-2); }
+  .domain-content ul { padding-left: 0.9rem; margin: 0; }
+  .domain-content li { font-size: 0.78rem; margin-bottom: 0.2rem; line-height: 1.5; }
+
+  /* Notes row */
+  .notes-row {
+    padding: 0.6rem 0.9rem;
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 0.5rem;
+    align-items: start;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .notes-row:last-child { border-bottom: none; }
+
+  .notes-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    padding-top: 0.15rem;
+  }
+
+  .notes-field {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+    font-family: var(--font);
+    font-size: 0.8rem;
+    line-height: 1.6;
+    padding: 0.1rem 0;
+    resize: none;
+    min-height: 2.2rem;
+    outline: none;
+  }
+
+  .notes-field:focus { border-bottom-color: var(--gray-3); }
+  .notes-field::placeholder { color: var(--text-3); }
+
+  /* NeetCode callout */
+  .neetcode-strip {
+    background: var(--surface);
+    border-left: 2px solid var(--border-2);
+    padding: 0.55rem 0.9rem;
+    font-size: 0.78rem;
+    color: var(--text-3);
+    line-height: 1.6;
+  }
+
+  .neetcode-strip strong { color: var(--text-2); font-weight: 500; }
+
+  /* Legend */
+  .cal-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav-brand">ops → systems</a>
+  <div class="nav-links">
+    <a href="index.html">About</a>
+    <a href="curriculum.html">Curriculum</a>
+    <a href="books.html">Books</a>
+    <a href="projects.html">Projects</a>
+    <a href="posts.html">Writing</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</nav>
+
+<main class="page-wide">
+<div style="max-width:1000px;margin:0 auto;padding:4rem 2rem 6rem;">
+
+  <p class="kicker">Week-by-week · Feb 15, 2026 → Sep 6, 2026</p>
+  <h1>30-Week Study Calendar</h1>
+  <p style="color:var(--text-2);margin-bottom:0.5rem;">Phases 1–3 in detail. Each week maps WGU coursework, independent reading, LeetCode, NeetCode, and the Shopify build across five domains. Click any week to expand.</p>
+  <p style="font-size:0.75rem;color:var(--text-3);margin-bottom:2rem;">Notes fields are in-browser only — nothing is saved to a server. Copy anything worth keeping to your own notes.</p>
+
+  <!-- WGU explainer -->
+  <div class="wgu-box">
+    <div class="wgu-box-hd">WGU — How It Actually Works</div>
+    <div class="wgu-box-body">
+      <div class="wgu-box-col">
+        <strong>Competency Units (CU) vs. GPA</strong>
+        WGU does not use GPA. There are no letter grades. You either demonstrate competency and pass, or you continue working until you do. Each course is assigned a number of Competency Units — roughly analogous to credit hours at traditional schools. You need 120 CU total to graduate. 79 of those are already satisfied by prior credentials (A.S. degree, CompTIA A+, Per Scholas bootcamp). The remaining 41 CU are the active curriculum on this calendar.
+      </div>
+      <div class="wgu-box-col">
+        <strong>Minimum requirement per term</strong>
+        Each term is six months and has a flat tuition cost regardless of how many courses you complete. You must complete at least one course unit per term to remain enrolled. There is no maximum — students with prior background routinely complete a full term's worth of courses in 6–10 weeks and use the remaining time for depth work. Acceleration is financially rewarded: finishing fast means paying for fewer terms.
+      </div>
+      <div class="wgu-box-col">
+        <strong>Proctored exams — what students don't expect</strong>
+        Most WGU assessments are performance tasks (written projects graded by evaluators). Some courses have proctored objective assessments — timed multiple-choice exams taken through a browser-based proctoring system. These require: a quiet private room, a webcam pointed at your face and workspace, and a government ID. <em>A separate external webcam is strongly recommended</em> — built-in laptop cameras are often too narrow to show the required workspace view and can trigger flags. Test this setup before your first proctored exam, not on the day.
+      </div>
+      <div class="wgu-box-col">
+        <strong>Common misconceptions</strong>
+        Online does not mean open book for proctored exams. The proctoring software monitors your screen, webcam feed, and microphone for the duration of the exam. Performance tasks are open-resource but evaluated on demonstrated understanding — a submitted task that reads as AI-generated or copied will fail. The competency model means you can retake assessments, but there are cooldown periods. Passing on the first attempt is worth optimizing for.
+      </div>
+    </div>
+  </div>
+
+  <!-- NeetCode overview -->
+  <div class="wgu-box" style="margin-bottom:2rem;">
+    <div class="wgu-box-hd">NeetCode — Why It's in This Calendar</div>
+    <div class="wgu-box-body">
+      <div class="wgu-box-col">
+        <strong>What NeetCode is</strong>
+        NeetCode (neetcode.io) is a structured interview prep resource built around a curated problem set — the NeetCode 150 — organized by pattern rather than by difficulty. Where LeetCode is a database of 2500+ problems, NeetCode is an opinionated subset with video explanations focused on the 15 core patterns that cover the vast majority of SWE interview questions. For students earlier in their CS journey, the pattern framing is more useful than grinding random problems.
+      </div>
+      <div class="wgu-box-col">
+        <strong>The 15 core patterns</strong>
+        Arrays &amp; Hashing · Two Pointers · Sliding Window · Stack · Binary Search · Linked List · Trees · Tries · Heap / Priority Queue · Backtracking · Graphs · Advanced Graphs · 1D Dynamic Programming · 2D Dynamic Programming · Bit Manipulation. This calendar introduces patterns in the order they appear in the NeetCode roadmap, synchronized with the LeetCode problems for that week.
+      </div>
+      <div class="wgu-box-col">
+        <strong>How to use it alongside LeetCode</strong>
+        Watch the NeetCode video explanation for a problem <em>before</em> attempting it independently if you're stuck — not as a substitute for solving it yourself. The goal is pattern recognition, not memorization. When you can solve a new problem in a pattern you've seen before without looking up the approach, the pattern has landed. That's the signal to move on.
+      </div>
+      <div class="wgu-box-col">
+        <strong>NeetCode roadmap vs. NeetCode 150</strong>
+        The roadmap (free at neetcode.io/roadmap) shows all 150 problems organized by pattern with difficulty ratings. Start here. The NeetCode 150 is the full problem set filterable on LeetCode directly. For Phases 1–2 of this calendar, you're working through Arrays &amp; Hashing, Two Pointers, and Sliding Window — roughly the first 30 problems on the roadmap. Do not skip ahead. Pattern depth beats problem count at this stage.
+      </div>
+    </div>
+  </div>
+
+  <!-- Domain legend -->
+  <p class="activity-label" style="margin-bottom:0.5rem;">Five domains tracked each week</p>
+  <div class="cal-legend">
+    <span class="tag tag-main">CS Fundamentals</span>
+    <span class="tag tag-hi">Systems Depth</span>
+    <span class="tag tag-med">Language &amp; Tooling</span>
+    <span class="tag tag-opt">Commerce &amp; Backend</span>
+    <span class="tag">Teaching &amp; Communication</span>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       PHASE 1 — Foundations & Tooling
+       Weeks 1–8 · Feb 15 – Apr 11
+       ═══════════════════════════════════════════ -->
+
+  <div class="cal-phase-hd">
+    <h2>Phase 1 — Foundations &amp; Tooling</h2>
+    <span class="cal-phase-dates">Weeks 1–8 · Feb 15 – Apr 11, 2026</span>
+  </div>
+  <p style="font-size:0.8rem;color:var(--text-2);margin-bottom:1.25rem;line-height:1.6;">WGU: D278 Scripting Foundations · D197 Version Control · D335 Python. NeetCode: Arrays &amp; Hashing (weeks 1–4), Two Pointers (weeks 5–8). Shopify: requirements gathering and schema design.</p>
+
+  <!-- Week 1 -->
+  <div class="week-card">
+    <div class="week-hd" onclick="toggleWeek(this)">
+      <span class="week-num">Week 01</span>
+      <span class="week-title">Orientation — PAC/IPO, Git setup, Python basics</span>
+      <span class="week-date">Feb 15–21</span>
+      <span class="week-toggle">▼</span>
+    </div>
+    <div class="week-body">
+      <div class="domain-grid">
+        <div class="domain-cell">
+          <div class="domain-label">CS Fundamentals</div>
+          <div class="domain-content">
+            <ul>
+              <li>NeetCode: Arrays &amp; Hashing — Contains Duplicate (#1)</li>
+              <li>LeetCode #217 — Easy</li>
+              <li>Read: NeetCode roadmap overview</li>
+            </ul>
+          </div>
+        </div>
+        <div class="domain-cell">
+          <div class="domain-label">Systems Depth</div>
+          <div class="domain-content">
+            <ul>
+              <li>WSL2 dev environment audit — confirm Python 3, Git, Neovim working</li>
+              <li>Verify Ollama local LLM setup</li>
+            </ul>
+          </div>
+        </div>
+        <div class="domain-cell">
+          <div class="domain-label">Language &amp; Tooling</div>
+          <div class="domain-content">
+            <ul>
+              <li>D278: PAC/IPO/pseudocode exercises (days 1–3)</li>
+              <li>D197: Git init, first repo, .gitignore, first commit</li>
+              <li>D335: Python variables, types, control flow</li>
+            </ul>
+          </div>
+        </div>
+        <div class="domain-cell">
+          <div class="domain-label">Commerce &amp; Backend</div>
+          <div class="domain-content">
+            <ul>
+              <li>Shopify Partner account setup</li>
+              <li>Read: Shopify App types overview (public vs custom vs private)</li>
+            </ul>
+          </div>
+        </div>
+        <div class="domain-cell">
+          <div class="domain-label">Teaching &amp; Comms</div>
+          <div class="domain-content">
+            <ul>
+              <li>Site live on GitHub Pages — confirm all pages load</li>
+              <li>calendar.html drafted</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="neetcode-strip">
+        <strong>NeetCode focus — Arrays &amp; Hashing:</strong> The pattern here is trading time for space. A naive solution checks every pair (O(n²)). A hash set reduces lookup to O(1) and the whole problem to O(n). This is the first time that trade-off appears — it won't be the last. Get comfortable writing it before moving on.
+      </div>
+      <div class="notes-row">
+        <span class="notes-label">Notes</span>
+        <textarea class="notes-field" placeholder="What clicked this week. What didn't. What to revisit." rows="2"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- Week 2 -->
+  <div class="week-card">
+    <div class="week-hd" onclick="toggleWeek(this)">
+      <span class="week-num">Week 02</span>
+      <span class="week-title">PAC/IPO in Python · Git branching · Arrays continued</span>
+      <span class="week-date">Feb 22–28</span>
+      <span class="week-toggle">▼</span>
+    </div>
+    <div class="week-body">
+      <div class="domain-grid">
+        <div class="domain-cell">
+          <div class="domain-label">CS Fundamentals</div>
+          <div class="domain-content">
+            <ul>
+              <li>NeetCode: Valid Anagram (#2), Two Sum (#3)</li>
+              <li>LeetCode #242, #1 — Easy</li>
+              <li>Focus: HashMap construction and lookup</li>
+            </ul>
+          </div>
+        </div>
+        <div class="domain-cell">
+          <div class="domain-label">Systems Depth</div>
+          <div class="domain-content">
+            <ul>
+              <li>How Linux Works ch.1 — disks, kernel, user space</li>
+              <li>CLI navigation drills: find, grep, pipe, redirect</li>
+            </ul>
+          </div>
+        </div>
+        <div class="domain-cell">
+          <div class="domain-label">Language &amp; Tooling</div>
+          <div class="domain-content">
+            <ul>
+              <li>D278: rewrite PAC/IPO exercises as Python functions</li>
+              <li>D197: branching, merging, resolving first merge conflict</li>
+              <li>D335: functions, lists, dicts, comprehensions</li>
+            </ul>
+          </div>
+        </div>
+        <div class="domain-cell">
+          <div class="domain-label">Commerce &amp; Backend</div>
+          <div class="domain-content">
+            <ul>
+              <li>Read: Shopify Admin API intro — REST vs GraphQL</li>
+              <li>Draft requirements doc for the app (plain text)</li>
+            </ul>
+          </div>
+        </div>
+        <div class="domain-cell">
+          <div class="domain-label">Teaching &amp; Comms</div>
+          <div class="domain-content">
+            <ul>
+              <li>Teaching session prep: PAC/IPO as debugging frame</li>
+              <li>Draft teaching notes post outline</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="neetcode-strip">
+        <strong>NeetCode focus — Two Sum:</strong> Classic hash map problem. Key insight: instead of looking for a + b = target by checking all pairs, store each value as you go and check if (target - current) already exists. One pass, O(n). This same "store and check complement" pattern recurs in 3Sum, 4Sum, and subarray problems.
+      </div>
+      <div class="notes-row">
+        <span class="notes-label">Notes</span>
+        <textarea class="notes-field" placeholder="What clicked this week. What didn't. What to revisit." rows="2"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- Week 3 -->
+  <div class="week-card">
+    <div class="week-hd" onclick="toggleWeek(this)">
+      <span class="week-num">Week 03</span>
+      <span class="week-title">Python functions &amp; modules · Group Anagrams · SICP ch.1</span>
+      <span class="week-date">Mar 1–7</span>
+      <span class="week-toggle">▼</span>
+    </div>
+    <div class="week-body">
+      <div class="domain-grid">
+        <div class="domain-cell">
+          <div class="domain-label">CS Fundamentals</div>
+          <div class="domain-content">
+            <ul>
+              <li>NeetCode: Group Anagrams (#4), Top K Frequent (#5)</li>
+              <li>LeetCode #49, #347 — Medium</li>
+              <li>SICP ch.1: substitution model, recursion vs iteration</li>
+            </ul>
+          </div>
+        </div>
+        <div class="domain-cell">
+          <div class="domain-label">Systems Depth</div>
+          <div class="domain-content">
+            <ul>
+              <li>How Linux Works ch.2 — processes, /proc filesystem</li>
+              <li>ps, top, kill — understand what a process actually is</li>
+            </ul>
+          </div>
+        </div>
+        <div class="domain-cell">
+          <div class="domain-label">Language &amp; Tooling</div>
+          <div class="domain-content">
+            <ul>
+              <li>D335: modules, file I/O, error handling</li>
+              <li>D278: complete pseudocode for Shopify webhook handler in PAC format</li>
+              <li>Git: first pull request to your own repo (branch → PR → merge)</li>
+            </ul>
+          </div>
+        </div>
+        <div class="domain-cell">
+          <div class="domain-label">Commerce &amp; Backend</div>
+          <div class="domain-content">
+            <ul>
+              <li>Shopify: create development store in Partner dashboard</li>
+              <li>Explore Admin API in REST — GET /orders.json</li>
+            </ul>
+          </div>
+        </div>
+        <div class="domain-cell">
+          <div class="domain-label">Teaching &amp; Comms</div>
+          <div class="domain-content">
+            <ul>
+              <li>Publish Teaching Notes post if draft is ready</li>
+              <li>Student session: walk through Two Sum with a student</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="neetcode-strip">
+        <strong>NeetCode focus — Group Anagrams:</strong> Sorting each string gives a canonical key — anagrams share the same sorted form. This is a pattern called "canonical form hashing." Top K Frequent introduces the heap — a data structure that will reappear in Kth Largest, Merge K Lists, and scheduling problems. Don't rush past it.
+      </div>
+      <div class="notes-row">
+        <span class="notes-label">Notes</span>
+        <textarea class="notes-field" placeholder="What clicked this week. What didn't. What to revisit." rows="2"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- Week 4 -->
+  <div class="week-card">
+    <div class="week-hd" onclick="toggleWeek(this)">
+      <span class="week-num">Week 04</span>
+      <span class="week-title">D278 assessment target · Encode/Decode · Product of Array</span>
+      <span class="week-date">Mar 8–14</span>
+      <span class="week-toggle">▼</span>
+    </div>
+    <div class="week-body">
+      <div class="domain-grid">
+        <div class="domain-cell">
+          <div class="domain-label">CS Fundamentals</div>
+          <div class="domain-content">
+            <ul>
+              <li>NeetCode: Encode &amp; Decode Strings (#6), Product of Array Except Self (#7)</li>
+              <li>LeetCode #238 — Medium</li>
+              <li>Grokking Algorithms ch.1–2: binary search, Big-O</li>
+            </ul>
+          </div>
+        </div>
+        <div class="domain-cell">
+          <div class="domain-label">Systems Depth</div>
+          <div class="domain-content">
+            <ul>
+              <li>How Linux Works ch.3 — devices, udev</li>
+              <li>Understand stdin/stdout/stderr at the shell level</li>
+            </ul>
+          </div>
+        </div>
+        <div class="domain-cell">
+          <div class="domain-label">Language &amp; Tooling</div>
+          <div class="domain-content">
+            <ul>
+              <li><strong>D278 assessment this week</strong> — prepare PAC/IPO artifacts as study material</li>
+              <li>D335: OOP basics — classes, __init__, methods</li>
+              <li>Learning Git ch.1–3: commits, history, diff</li>
+            </ul>
+          </div>
+        </div>
+        <div class="domain-cell">
+          <div class="domain-label">Commerce &amp; Backend</div>
+          <div class="domain-content">
+            <ul>
+              <li>Shopify: OAuth 2.0 flow — read the docs, draw the sequence diagram</li>
+              <li>IPO the OAuth flow: what is the input, what is the process, what is the output</li>
+            </ul>
+          </div>
+        </div>
+        <div class="domain-cell">
+          <div class="domain-label">Teaching &amp; Comms</div>
+          <div class="domain-content">
+            <ul>
+              <li>Build Log: Requirements → Schema post draft</li>
+              <li>Update calendar.html activity levels</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="neetcode-strip">
+        <strong>NeetCode focus — Product of Array Except Self:</strong> The constraint (no division, O(n)) forces a prefix/suffix product approach. This is your first introduction to the "prefix array" pattern — computing running results left-to-right then right-to-left and combining them. It reappears in Trapping Rain Water, Subarray Sum, and range query problems.
+      </div>
+      <div class="notes-row">
+        <span class="notes-label">WGU CU check</span>
+        <textarea class="notes-field" placeholder="D278 passed? CU earned this term so far:" rows="1"></textarea>
+      </div>
+      <div class="notes-row">
+        <span class="notes-label">Notes</span>
+        <textarea class="notes-field" placeholder="What clicked this week. What didn't. What to revisit." rows="2"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- Week 5 -->
+  <div class="week-card">
+    <div class="week-hd" onclick="toggleWeek(this)">
+      <span class="week-num">Week 05</span>
+      <span class="week-title">Two Pointers begins · D197 assessment target · Python OOP</span>
+      <span class="week-date">Mar 15–21</span>
+      <span class="week-toggle">▼</span>
+    </div>
+    <div class="week-body">
+      <div class="domain-grid">
+        <div class="domain-cell">
+          <div class="domain-label">CS Fundamentals</div>
+          <div class="domain-content">
+            <ul>
+              <li>NeetCode: Valid Palindrome (#9), Two Sum II (#10)</li>
+              <li>LeetCode #125, #167 — Easy/Medium</li>
+              <li>Pattern: sorted array + two pointers moving inward</li>
+            </ul>
+          </div>
+        </div>
+        <div class="domain-cell">
+          <div class="domain-label">Systems Depth</div>
+          <div class="domain-content">
+            <ul>
+              <li>How Linux Works ch.4 — filesystems, inodes</li>
+              <li>Understand what a file descriptor actually is</li>
+            </ul>
+          </div>
+        </div>
+        <div class="domain-cell">
+          <div class="domain-label">Language &amp; Tooling</div>
+          <div class="domain-content">
+            <ul>
+              <li><strong>D197 assessment this week</strong></li>
+              <li>D335: inheritance, dunder methods, dataclasses</li>
+              <li>Learning Git ch.4–6: remotes, fetch, rebase intro</li>
+            </ul>
+          </div>
+        </div>
+        <div class="domain-cell">
+          <div class="domain-label">Commerce &amp; Backend</div>
+          <div class="domain-content">
+            <ul>
+              <li>Shopify: implement OAuth token exchange in Node/TS (skeleton)</li>
+              <li>Shopify Build Log: OAuth post — draft the "what the docs don't tell you" section</li>
+            </ul>
+          </div>
+        </div>
+        <div class="domain-cell">
+          <div class="domain-label">Teaching &amp; Comms</div>
+          <div class="domain-content">
+            <ul>
+              <li>Code Jam #1 prep: define the problem, set up shared repo</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="neetcode-strip">
+        <strong>NeetCode focus — Two Pointers:</strong> The pattern works when the data is sorted and you need to find a pair satisfying a condition. Left pointer moves right, right pointer moves left — you eliminate candidates in O(1) per step instead of O(n). The key question to ask before applying it: "Is the array sorted, or can I sort it without losing information?"
+      </div>
+      <div class="notes-row">
+        <span class="notes-label">WGU CU check</span>
+        <textarea class="notes-field" placeholder="D197 passed? CU earned this term so far:" rows="1"></textarea>
+      </div>
+      <div class="notes-row">
+        <span class="notes-label">Notes</span>
+        <textarea class="notes-field" placeholder="What clicked this week. What didn't. What to revisit." rows="2"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- Week 6 -->
+  <div class="week-card">
+    <div class="week-hd" onclick="toggleWeek(this)">
+      <span class="week-num">Week 06</span>
+      <span class="week-title">3Sum · Python scripting project · Shopify OAuth complete</span>
+      <span class="week-date">Mar 22–28</span>
+      <span class="week-toggle">▼</span>
+    </div>
+    <div class="week-body">
+      <div class="domain-grid">
+        <div class="domain-cell">
+          <div class="domain-label">CS Fundamentals</div>
+          <div class="domain-content">
+            <ul>
+              <li>NeetCode: 3Sum (#11), Container with Most Water (#12)</li>
+              <li>LeetCode #15, #11 — Medium</li>
+              <li>Grokking Algorithms ch.3: recursion</li>
+            </ul>
+          </div>
+        </div>
+        <div class="domain-cell">
+          <div class="domain-label">Systems Depth</div>
+          <div class="domain-content">
+            <ul>
+              <li>How Linux Works ch.5 — shell scripting basics</li>
+              <li>Write a shell script that does something useful for the dev workflow</li>
+            </ul>
+          </div>
+        </div>
+        <div class="domain-cell">
+          <div class="domain-label">Language &amp; Tooling</div>
+          <div class="domain-content">
+            <ul>
+              <li>D335: write a Python script that hits the Shopify Admin API (GET orders)</li>
+              <li>Google IT Automation Python material: regular expressions</li>
+            </ul>
+          </div>
+        </div>
+        <div class="domain-cell">
+          <div class="domain-label">Commerce &amp; Backend</div>
+          <div class="domain-content">
+            <ul>
+              <li>Shopify: OAuth flow working end-to-end in dev store</li>
+              <li>Store access token securely — environment variables, not hardcoded</li>
+            </ul>
+          </div>
+        </div>
+        <div class="domain-cell">
+          <div class="domain-label">Teaching &amp; Comms</div>
+          <div class="domain-content">
+            <ul>
+              <li>Code Jam #1: kickoff session — Git flow, branch naming, PR template</li>
+              <li>Publish: OAuth Build Log post</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="neetcode-strip">
+        <strong>NeetCode focus — 3Sum:</strong> Sort first, fix one element, then use two pointers on the remainder. The sorting step makes duplicates skippable in O(1). 3Sum is the canonical example of reducing an O(n³) brute-force to O(n²) by combining sorting with two pointers — and understanding why you can skip duplicates here is critical before you hit 4Sum.
+      </div>
+      <div class="notes-row">
+        <span class="notes-label">Notes</span>
+        <textarea class="notes-field" placeholder="What clicked this week. What didn't. What to revisit." rows="2"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- Week 7 -->
+  <div class="week-card">
+    <div class="week-hd" onclick="toggleWeek(this)">
+      <span class="week-num">Week 07</span>
+      <span class="week-title">Sliding Window begins · D335 assessment target · Webhooks</span>
+      <span class="week-date">Mar 29–Apr 4</span>
+      <span class="week-toggle">▼</span>
+    </div>
+    <div class="week-body">
+      <div class="domain-grid">
+        <div class="domain-cell">
+          <div class="domain-label">CS Fundamentals</div>
+          <div class="domain-content">
+            <ul>
+              <li>NeetCode: Best Time to Buy Stock (#13), Longest Substring No Repeat (#14)</li>
+              <li>LeetCode #121, #3 — Easy/Medium</li>
+              <li>Intro to Sliding Window pattern</li>
+            </ul>
+          </div>
+        </div>
+        <div class="domain-cell">
+          <div class="domain-label">Systems Depth</div>
+          <div class="domain-content">
+            <ul>
+              <li>Networking: OSI model review — which layer does HTTP live at?</li>
+              <li>Wireshark: capture a local HTTP request and identify the layers</li>
+            </ul>
+          </div>
+        </div>
+        <div class="domain-cell">
+          <div class="domain-label">Language &amp; Tooling</div>
+          <div class="domain-content">
+            <ul>
+              <li><strong>D335 assessment this week</strong></li>
+              <li>TypeScript intro: install, tsconfig basics, first typed function</li>
+            </ul>
+          </div>
+        </div>
+        <div class="domain-cell">
+          <div class="domain-label">Commerce &amp; Backend</div>
+          <div class="domain-content">
+            <ul>
+              <li>Shopify: register webhook subscription for order/create</li>
+              <li>ngrok to expose local server for webhook delivery testing</li>
+            </ul>
+          </div>
+        </div>
+        <div class="domain-cell">
+          <div class="domain-label">Teaching &amp; Comms</div>
+          <div class="domain-content">
+            <ul>
+              <li>Teaching Notes post: Event Loop confusion (Python vs JS)</li>
+              <li>Code Jam #1: mid-point check-in</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="neetcode-strip">
+        <strong>NeetCode focus — Sliding Window:</strong> The window expands to the right and contracts from the left. Best Time to Buy Stock is the degenerate case (window of one). Longest Substring is the first true sliding window — you expand until the constraint is violated, then shrink. The pattern is: <em>expand right, contract left, track the maximum valid window</em>. This exact structure appears in 20+ medium/hard problems.
+      </div>
+      <div class="notes-row">
+        <span class="notes-label">WGU CU check</span>
+        <textarea class="notes-field" placeholder="D335 passed? CU earned this term so far:" rows="1"></textarea>
+      </div>
+      <div class="notes-row">
+        <span class="notes-label">Notes</span>
+        <textarea class="notes-field" placeholder="What clicked this week. What didn't. What to revisit." rows="2"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- Week 8 -->
+  <div class="week-card">
+    <div class="week-hd" onclick="toggleWeek(this)">
+      <span class="week-num">Week 08</span>
+      <span class="week-title">Phase 1 close · Sliding Window continued · Webhook handlers</span>
+      <span class="week-date">Apr 5–11</span>
+      <span class="week-toggle">▼</span>
+    </div>
+    <div class="week-body">
+      <div class="domain-grid">
+        <div class="domain-cell">
+          <div class="domain-label">CS Fundamentals</div>
+          <div class="domain-content">
+            <ul>
+              <li>NeetCode: Longest Repeating Char Replacement (#15), Permutation in String (#16)</li>
+              <li>LeetCode #424, #567 — Medium</li>
+              <li>Phase 1 LeetCode review: revisit any Easy you needed hints on</li>
+            </ul>
+          </div>
+        </div>
+        <div class="domain-cell">
+          <div class="domain-label">Systems Depth</div>
+          <div class="domain-content">
+            <ul>
+              <li>How Linux Works ch.6 — user space, init, systemd</li>
+              <li>Write a simple systemd service unit for a local script</li>
+            </ul>
+          </div>
+        </div>
+        <div class="domain-cell">
+          <div class="domain-label">Language &amp; Tooling</div>
+          <div class="domain-content">
+            <ul>
+              <li>TypeScript: interfaces, type aliases, union types</li>
+              <li>Learning Git: stash, reflog, cherry-pick</li>
+              <li>Phase 1 retrospective: what WGU courses remain vs. what's complete</li>
+            </ul>
+          </div>
+        </div>
+        <div class="domain-cell">
+          <div class="domain-label">Commerce &amp; Backend</div>
+          <div class="domain-content">
+            <ul>
+              <li>Shopify: HMAC signature verification on incoming webhooks</li>
+              <li>Write a webhook handler that validates, parses, and logs order payload</li>
+            </ul>
+          </div>
+        </div>
+        <div class="domain-cell">
+          <div class="domain-label">Teaching &amp; Comms</div>
+          <div class="domain-content">
+            <ul>
+              <li>Code Jam #1 wrap-up post — what broke, what the PRs looked like</li>
+              <li>Phase 1 site update: publish Phase Log post</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="neetcode-strip">
+        <strong>Phase 1 pattern check:</strong> By end of week 8 you should be able to independently solve Easy sliding window and two-pointer problems without hints. If you still need the NeetCode video before attempting, that's fine — but try the problem first, fail specifically, then watch. Failing with a clear idea of why you're stuck is more useful than watching a solution you could have reached.
+      </div>
+      <div class="notes-row">
+        <span class="notes-label">Phase 1 CU total</span>
+        <textarea class="notes-field" placeholder="D278 ✓  D197 ✓  D335 ✓  — total CU earned:" rows="1"></textarea>
+      </div>
+      <div class="notes-row">
+        <span class="notes-label">Notes</span>
+        <textarea class="notes-field" placeholder="Phase 1 retrospective — what to carry into Phase 2." rows="3"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       PHASE 2 — Web Foundations & Front-End
+       Weeks 9–20 · Apr 12 – Jul 4
+       ═══════════════════════════════════════════ -->
+
+  <div class="cal-phase-hd">
+    <h2>Phase 2 — Web Foundations &amp; Front-End Depth</h2>
+    <span class="cal-phase-dates">Weeks 9–20 · Apr 12 – Jul 4, 2026</span>
+  </div>
+  <p style="font-size:0.8rem;color:var(--text-2);margin-bottom:1.25rem;line-height:1.6;">WGU: D276 Web Foundations · D280 JavaScript · D277 Front-End · D370 IT Leadership. NeetCode: Sliding Window (wrap-up), Stack, Binary Search. Shopify: PostgreSQL schema, fulfillment tracking.</p>
+
+  <!-- Weeks 9-12 condensed (pattern established) -->
+
+  <div class="week-card">
+    <div class="week-hd" onclick="toggleWeek(this)">
+      <span class="week-num">Week 09</span>
+      <span class="week-title">HTML/CSS foundations · Stack pattern · D276 begins</span>
+      <span class="week-date">Apr 12–18</span>
+      <span class="week-toggle">▼</span>
+    </div>
+    <div class="week-body">
+      <div class="domain-grid">
+        <div class="domain-cell">
+          <div class="domain-label">CS Fundamentals</div>
+          <div class="domain-content"><ul><li>NeetCode: Valid Parentheses (#20), Min Stack (#21)</li><li>LeetCode #20, #155 — Easy/Medium</li><li>Stack: LIFO — when does push/pop solve things that arrays don't?</li></ul></div>
+        </div>
+        <div class="domain-cell">
+          <div class="domain-label">Systems Depth</div>
+          <div class="domain-content"><ul><li>DNS resolution — what actually happens when you type a URL</li><li>How Linux Works ch.9 — networking fundamentals</li></ul></div>
+        </div>
+        <div class="domain-cell">
+          <div class="domain-label">Language &amp; Tooling</div>
+          <div class="domain-content"><ul><li>D276: HTML semantics, CSS box model, flexbox</li><li>D280: JS event loop, var/let/const, arrow functions</li><li>Eloquent JavaScript ch.1–3</li></ul></div>
+        </div>
+        <div class="domain-cell">
+          <div class="domain-label">Commerce &amp; Backend</div>
+          <div class="domain-content"><ul><li>Shopify: design PostgreSQL schema for orders and inventory</li><li>ER diagram — entities, relationships, normalization to 3NF</li></ul></div>
+        </div>
+        <div class="domain-cell">
+          <div class="domain-label">Teaching &amp; Comms</div>
+          <div class="domain-content"><ul><li>Build Log: Schema Design Decisions post</li></ul></div>
+        </div>
+      </div>
+      <div class="neetcode-strip">
+        <strong>NeetCode focus — Stack:</strong> Valid Parentheses is the canonical stack problem. Every opening bracket gets pushed; every closing bracket pops and checks for a match. If the stack is empty when you need to pop, or non-empty at the end, it's invalid. Min Stack introduces the idea of augmenting a data structure to track additional information — here, the current minimum — without changing its interface.
+      </div>
+      <div class="notes-row"><span class="notes-label">Notes</span><textarea class="notes-field" placeholder="What clicked this week. What didn't. What to revisit." rows="2"></textarea></div>
+    </div>
+  </div>
+
+  <div class="week-card">
+    <div class="week-hd" onclick="toggleWeek(this)">
+      <span class="week-num">Week 10</span>
+      <span class="week-title">JS closures &amp; async · Evaluate RPN · D276 assessment target</span>
+      <span class="week-date">Apr 19–25</span>
+      <span class="week-toggle">▼</span>
+    </div>
+    <div class="week-body">
+      <div class="domain-grid">
+        <div class="domain-cell"><div class="domain-label">CS Fundamentals</div><div class="domain-content"><ul><li>NeetCode: Evaluate Reverse Polish Notation (#22), Generate Parentheses (#23)</li><li>LeetCode #150, #22 — Medium</li></ul></div></div>
+        <div class="domain-cell"><div class="domain-label">Systems Depth</div><div class="domain-content"><ul><li>TCP handshake — draw the three-way handshake from memory</li><li>HTTP/1.1 vs HTTP/2: persistent connections, multiplexing</li></ul></div></div>
+        <div class="domain-cell"><div class="domain-label">Language &amp; Tooling</div><div class="domain-content"><ul><li><strong>D276 assessment target</strong></li><li>D280: closures, prototypes, async/await, Promises</li><li>Eloquent JS ch.4–6</li></ul></div></div>
+        <div class="domain-cell"><div class="domain-label">Commerce &amp; Backend</div><div class="domain-content"><ul><li>Shopify: create PostgreSQL tables, run first migration</li><li>Insert a test order record from a webhook payload</li></ul></div></div>
+        <div class="domain-cell"><div class="domain-label">Teaching &amp; Comms</div><div class="domain-content"><ul><li>Teaching Notes: Why the Event Loop Confuses Python-First Learners</li></ul></div></div>
+      </div>
+      <div class="neetcode-strip">
+        <strong>NeetCode focus — Generate Parentheses:</strong> First backtracking problem in the roadmap. You build strings recursively, adding '(' if open count &lt; n, adding ')' if close count &lt; open count. The key insight: valid states are a small subset of all possible strings — backtracking prunes invalid branches early. This exact structure (build, check constraint, recurse, undo) appears in Subsets, Permutations, and N-Queens.
+      </div>
+      <div class="notes-row"><span class="notes-label">WGU CU check</span><textarea class="notes-field" placeholder="D276 passed? CU total:" rows="1"></textarea></div>
+      <div class="notes-row"><span class="notes-label">Notes</span><textarea class="notes-field" placeholder="What clicked this week. What didn't. What to revisit." rows="2"></textarea></div>
+    </div>
+  </div>
+
+  <div class="week-card">
+    <div class="week-hd" onclick="toggleWeek(this)">
+      <span class="week-num">Week 11</span>
+      <span class="week-title">React intro · Binary Search begins · D280 assessment target</span>
+      <span class="week-date">Apr 26–May 2</span>
+      <span class="week-toggle">▼</span>
+    </div>
+    <div class="week-body">
+      <div class="domain-grid">
+        <div class="domain-cell"><div class="domain-label">CS Fundamentals</div><div class="domain-content"><ul><li>NeetCode: Binary Search (#33), Search a 2D Matrix (#34)</li><li>LeetCode #704, #74 — Easy/Medium</li><li>Binary Search: O(log n) by halving the search space each step</li></ul></div></div>
+        <div class="domain-cell"><div class="domain-label">Systems Depth</div><div class="domain-content"><ul><li>TLS handshake — how does HTTPS actually work?</li><li>Read: Shopify's webhook HMAC verification in context of TLS</li></ul></div></div>
+        <div class="domain-cell"><div class="domain-label">Language &amp; Tooling</div><div class="domain-content"><ul><li><strong>D280 assessment target</strong></li><li>Learning React: components, props, useState, useEffect</li><li>TypeScript: generics intro</li></ul></div></div>
+        <div class="domain-cell"><div class="domain-label">Commerce &amp; Backend</div><div class="domain-content"><ul><li>Shopify: inventory webhook handler — writes to PostgreSQL on inventory_levels/update</li><li>Test with real inventory change in dev store</li></ul></div></div>
+        <div class="domain-cell"><div class="domain-label">Teaching &amp; Comms</div><div class="domain-content"><ul><li>Build Log: Webhook Handlers — Reliability and Failure Modes</li></ul></div></div>
+      </div>
+      <div class="neetcode-strip">
+        <strong>NeetCode focus — Binary Search:</strong> The off-by-one errors here (lo &lt;= hi vs lo &lt; hi, mid+1 vs mid) are notorious. Write the template once, comment every line explaining why, and reuse it. Search a 2D Matrix extends binary search by treating a sorted matrix as a flattened array — row = mid // cols, col = mid % cols. This indexing trick reappears in matrix problems throughout the roadmap.
+      </div>
+      <div class="notes-row"><span class="notes-label">WGU CU check</span><textarea class="notes-field" placeholder="D280 passed? CU total:" rows="1"></textarea></div>
+      <div class="notes-row"><span class="notes-label">Notes</span><textarea class="notes-field" placeholder="What clicked this week. What didn't. What to revisit." rows="2"></textarea></div>
+    </div>
+  </div>
+
+  <div class="week-card">
+    <div class="week-hd" onclick="toggleWeek(this)">
+      <span class="week-num">Week 12</span>
+      <span class="week-title">TypeScript discipline · Koko Eating Bananas · D277 begins</span>
+      <span class="week-date">May 3–9</span>
+      <span class="week-toggle">▼</span>
+    </div>
+    <div class="week-body">
+      <div class="domain-grid">
+        <div class="domain-cell"><div class="domain-label">CS Fundamentals</div><div class="domain-content"><ul><li>NeetCode: Koko Eating Bananas (#35), Find Minimum in Rotated Sorted Array (#36)</li><li>LeetCode #875, #153 — Medium</li><li>Effective TypeScript ch.1–3</li></ul></div></div>
+        <div class="domain-cell"><div class="domain-label">Systems Depth</div><div class="domain-content"><ul><li>Processes vs threads — what's the difference at the OS level?</li><li>Node.js event loop: how does it relate to the OS I/O model?</li></ul></div></div>
+        <div class="domain-cell"><div class="domain-label">Language &amp; Tooling</div><div class="domain-content"><ul><li>D277: responsive design, accessibility, component thinking</li><li>TypeScript: strict mode, unknown vs any, type narrowing</li></ul></div></div>
+        <div class="domain-cell"><div class="domain-label">Commerce &amp; Backend</div><div class="domain-content"><ul><li>Shopify: fulfillment tracking webhook — map fulfillment status to DB state</li><li>Add idempotency key to webhook handler (prevent duplicate inserts)</li></ul></div></div>
+        <div class="domain-cell"><div class="domain-label">Teaching &amp; Comms</div><div class="domain-content"><ul><li>Code Jam #2 prep: TypeScript-first project, students set up tsconfig</li></ul></div></div>
+      </div>
+      <div class="neetcode-strip">
+        <strong>NeetCode focus — Binary Search on Answer:</strong> Koko Eating Bananas is not searching for a value in an array — it's searching for the minimum valid "speed" across a range. This is called binary search on the answer space. Any problem where you can frame it as "find the minimum X such that condition(X) is true" can use this pattern. It's one of the most powerful generalizations of binary search.
+      </div>
+      <div class="notes-row"><span class="notes-label">Notes</span><textarea class="notes-field" placeholder="What clicked this week. What didn't. What to revisit." rows="2"></textarea></div>
+    </div>
+  </div>
+
+  <div class="week-card">
+    <div class="week-hd" onclick="toggleWeek(this)">
+      <span class="week-num">Weeks 13–16</span>
+      <span class="week-title">Linked Lists · D277 &amp; D370 · Shopify Liquid integration</span>
+      <span class="week-date">May 10–Jun 6</span>
+      <span class="week-toggle">▼</span>
+    </div>
+    <div class="week-body">
+      <div class="domain-grid">
+        <div class="domain-cell"><div class="domain-label">CS Fundamentals</div><div class="domain-content"><ul><li>NeetCode: Linked List pattern — Reverse LL (#41), Merge Two Sorted (#42), Reorder List (#43), Remove Nth from End (#44), Copy List with Random Pointer (#45), Add Two Numbers (#46), LRU Cache (#47), Merge K Sorted (#48), Reverse Nodes in K-Group (#49)</li><li>CLRS ch.10: linked list as foundational data structure</li></ul></div></div>
+        <div class="domain-cell"><div class="domain-label">Systems Depth</div><div class="domain-content"><ul><li>Memory allocation: stack vs heap at the C level</li><li>What a pointer actually is — draw it</li><li>Why linked lists have poor cache locality vs arrays</li></ul></div></div>
+        <div class="domain-cell"><div class="domain-label">Language &amp; Tooling</div><div class="domain-content"><ul><li><strong>D277 assessment target (week 14)</strong></li><li><strong>D370 assessment target (week 15)</strong></li><li>Effective TypeScript ch.4–6: type system internals</li><li>React: custom hooks, context, useReducer</li></ul></div></div>
+        <div class="domain-cell"><div class="domain-label">Commerce &amp; Backend</div><div class="domain-content"><ul><li>Shopify: Liquid storefront integration — surface app-generated data on product page</li><li>Gated SMS product release: metafield-driven visibility logic</li></ul></div></div>
+        <div class="domain-cell"><div class="domain-label">Teaching &amp; Comms</div><div class="domain-content"><ul><li>Build Log: Liquid Storefront Integration</li><li>Code Jam #2: run and debrief</li><li>Book Notes: SICP ch.1–2 post</li></ul></div></div>
+      </div>
+      <div class="neetcode-strip">
+        <strong>NeetCode focus — Linked Lists:</strong> The fast/slow pointer technique (Floyd's cycle detection) appears in Reorder List and is used in cycle detection, finding the middle, and palindrome checking. LRU Cache is the first design problem — combines a doubly linked list with a hash map. This is a preview of the design problems that dominate senior interviews: the question is not "can you code" but "do you know which data structures to combine and why."
+      </div>
+      <div class="notes-row"><span class="notes-label">WGU CU check</span><textarea class="notes-field" placeholder="D277 ✓  D370 ✓  — CU total:" rows="1"></textarea></div>
+      <div class="notes-row"><span class="notes-label">Notes</span><textarea class="notes-field" placeholder="Weeks 13–16 notes." rows="3"></textarea></div>
+    </div>
+  </div>
+
+  <div class="week-card">
+    <div class="week-hd" onclick="toggleWeek(this)">
+      <span class="week-num">Weeks 17–20</span>
+      <span class="week-title">Trees begins · Shopify deployment · Phase 2 close</span>
+      <span class="week-date">Jun 7–Jul 4</span>
+      <span class="week-toggle">▼</span>
+    </div>
+    <div class="week-body">
+      <div class="domain-grid">
+        <div class="domain-cell"><div class="domain-label">CS Fundamentals</div><div class="domain-content"><ul><li>NeetCode: Binary Tree pattern — Invert (#50), Max Depth (#51), Diameter (#52), Balanced (#53), Same Tree (#54), Subtree (#55), LCA (#56), Level Order (#57), Right Side View (#58), Count Good Nodes (#59), Validate BST (#60)</li><li>Recursive tree thinking: every node is the root of its own subtree</li></ul></div></div>
+        <div class="domain-cell"><div class="domain-label">Systems Depth</div><div class="domain-content"><ul><li>How Linux Works: finish remaining chapters</li><li>Set up a cron job — understand how the OS schedules recurring tasks</li></ul></div></div>
+        <div class="domain-cell"><div class="domain-label">Language &amp; Tooling</div><div class="domain-content"><ul><li>TypeScript: mapped types, conditional types, utility types</li><li>Shopify app: TypeScript throughout — no implicit any</li></ul></div></div>
+        <div class="domain-cell"><div class="domain-label">Commerce &amp; Backend</div><div class="domain-content"><ul><li>Shopify app: deployment — Railway or Fly.io, environment variables, production DB</li><li>Submit for App Review or document why not yet</li></ul></div></div>
+        <div class="domain-cell"><div class="domain-label">Teaching &amp; Comms</div><div class="domain-content"><ul><li>Build Log: Deployment post + Retrospective post</li><li>Phase 2 site update</li><li>Phase 2 Log post</li></ul></div></div>
+      </div>
+      <div class="neetcode-strip">
+        <strong>NeetCode focus — Trees:</strong> Invert and Max Depth are solved in 4–6 lines each. If they take longer, the recursive model isn't solid yet — stop and rebuild it before continuing. Level Order BFS introduces the queue-based tree traversal that underpins graph BFS later. LCA (Lowest Common Ancestor) is the first problem where you need to reason about the return value of a recursive call carrying information upward through the tree — a pattern that appears in Path Sum, Serialize/Deserialize, and many hard problems.
+      </div>
+      <div class="notes-row"><span class="notes-label">Phase 2 CU total</span><textarea class="notes-field" placeholder="D276 ✓  D280 ✓  D277 ✓  D370 ✓  — total CU earned to date:" rows="1"></textarea></div>
+      <div class="notes-row"><span class="notes-label">Notes</span><textarea class="notes-field" placeholder="Phase 2 retrospective — what to carry into Phase 3." rows="3"></textarea></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       PHASE 3 — Algorithms & Databases
+       Weeks 21–30 · Jul 5 – Sep 6
+       ═══════════════════════════════════════════ -->
+
+  <div class="cal-phase-hd">
+    <h2>Phase 3 — Algorithms &amp; Databases</h2>
+    <span class="cal-phase-dates">Weeks 21–30 · Jul 5 – Sep 6, 2026</span>
+  </div>
+  <p style="font-size:0.8rem;color:var(--text-2);margin-bottom:1.25rem;line-height:1.6;">WGU: C949 DSA I · D426 Data Management · D427 Data Management Applications. NeetCode: Tries, Heap, Backtracking, Graphs. BSCS supplements: Discrete Math I alongside C949. Interview cadence increases to 6–8 problems/week.</p>
+
+  <div class="week-card">
+    <div class="week-hd" onclick="toggleWeek(this)">
+      <span class="week-num">Weeks 21–23</span>
+      <span class="week-title">C949 opens · Tries &amp; Heap · D426 ER modeling</span>
+      <span class="week-date">Jul 5–25</span>
+      <span class="week-toggle">▼</span>
+    </div>
+    <div class="week-body">
+      <div class="domain-grid">
+        <div class="domain-cell"><div class="domain-label">CS Fundamentals</div><div class="domain-content"><ul><li>NeetCode: Implement Trie (#61), Design Add/Search Words (#62), Word Search II (#63)</li><li>NeetCode: Kth Largest in Stream (#64), Last Stone Weight (#65), K Closest Points (#66), Kth Largest Element (#67), Task Scheduler (#68), Design Twitter (#69)</li><li>C949: formal study begins — review what you already know vs. what's new</li><li>Discrete Math I: logic, sets, proof by induction</li></ul></div></div>
+        <div class="domain-cell"><div class="domain-label">Systems Depth</div><div class="domain-content"><ul><li>CS:APP ch.1: tour of computer systems</li><li>CS:APP ch.2: representing and manipulating information</li></ul></div></div>
+        <div class="domain-cell"><div class="domain-label">Language &amp; Tooling</div><div class="domain-content"><ul><li>PostgreSQL: install locally, psql basics, CREATE TABLE, INSERT, SELECT</li><li>Practical SQL ch.1–4</li></ul></div></div>
+        <div class="domain-cell"><div class="domain-label">Commerce &amp; Backend</div><div class="domain-content"><ul><li>D426: ER modeling — apply to Shopify app schema (orders, line_items, inventory, webhooks)</li><li>Normalize existing schema to 3NF — document what changed and why</li></ul></div></div>
+        <div class="domain-cell"><div class="domain-label">Teaching &amp; Comms</div><div class="domain-content"><ul><li>Code Jam #3 prep: graph problem, Git flow review</li><li>Book Notes: Grokking Algorithms post</li></ul></div></div>
+      </div>
+      <div class="neetcode-strip">
+        <strong>NeetCode focus — Tries &amp; Heaps:</strong> A Trie is a tree where each path from root to leaf spells a word. Insert and search are both O(m) where m is word length — faster than a hash set for prefix queries. Design Twitter combines a heap (to merge k sorted streams) with hash maps (to store user feeds) — it's a system design problem dressed as a data structure problem. The same pattern appears in Merge K Sorted Lists and Find Median from Data Stream.
+      </div>
+      <div class="notes-row"><span class="notes-label">Notes</span><textarea class="notes-field" placeholder="Weeks 21–23 notes." rows="3"></textarea></div>
+    </div>
+  </div>
+
+  <div class="week-card">
+    <div class="week-hd" onclick="toggleWeek(this)">
+      <span class="week-num">Weeks 24–26</span>
+      <span class="week-title">Backtracking · SQL indexes &amp; transactions · D426 assessment target</span>
+      <span class="week-date">Jul 26–Aug 15</span>
+      <span class="week-toggle">▼</span>
+    </div>
+    <div class="week-body">
+      <div class="domain-grid">
+        <div class="domain-cell"><div class="domain-label">CS Fundamentals</div><div class="domain-content"><ul><li>NeetCode: Subsets (#70), Combination Sum (#71), Permutations (#72), Subsets II (#73), Combination Sum II (#74), Word Search (#75)</li><li>CLRS ch.22: graph representations — adjacency list vs matrix</li><li>Discrete Math I: graph theory, trees, spanning trees</li></ul></div></div>
+        <div class="domain-cell"><div class="domain-label">Systems Depth</div><div class="domain-content"><ul><li>CS:APP ch.6: memory hierarchy, cache locality</li><li>Why does cache locality matter for how you structure DB queries?</li></ul></div></div>
+        <div class="domain-cell"><div class="domain-label">Language &amp; Tooling</div><div class="domain-content"><ul><li>Practical SQL ch.5–9: GROUP BY, JOINs, subqueries, window functions</li><li>PostgreSQL: indexes — EXPLAIN ANALYZE on a slow query</li></ul></div></div>
+        <div class="domain-cell"><div class="domain-label">Commerce &amp; Backend</div><div class="domain-content"><ul><li><strong>D426 assessment target (week 25)</strong></li><li>D427: SQL transactions, ACID properties, isolation levels</li><li>Add a transaction wrapper to the webhook handler insert</li></ul></div></div>
+        <div class="domain-cell"><div class="domain-label">Teaching &amp; Comms</div><div class="domain-content"><ul><li>Code Jam #3: run and debrief</li><li>Phase 3 Log post draft</li></ul></div></div>
+      </div>
+      <div class="neetcode-strip">
+        <strong>NeetCode focus — Backtracking:</strong> The template is always: make a choice, recurse, undo the choice. Subsets and Permutations are the cleanest examples. Combination Sum introduces the "reuse" variant. Subsets II and Combination Sum II introduce duplicate handling — sort first, skip duplicate choices at the same recursion level. Word Search is the 2D grid variant — same template, just with visited tracking. Master the template on Subsets before touching Word Search.
+      </div>
+      <div class="notes-row"><span class="notes-label">WGU CU check</span><textarea class="notes-field" placeholder="D426 passed? CU total:" rows="1"></textarea></div>
+      <div class="notes-row"><span class="notes-label">Notes</span><textarea class="notes-field" placeholder="Weeks 24–26 notes." rows="3"></textarea></div>
+    </div>
+  </div>
+
+  <div class="week-card">
+    <div class="week-hd" onclick="toggleWeek(this)">
+      <span class="week-num">Weeks 27–30</span>
+      <span class="week-title">Graphs · C949 &amp; D427 assessment targets · 30-week close</span>
+      <span class="week-date">Aug 16–Sep 6</span>
+      <span class="week-toggle">▼</span>
+    </div>
+    <div class="week-body">
+      <div class="domain-grid">
+        <div class="domain-cell"><div class="domain-label">CS Fundamentals</div><div class="domain-content"><ul><li>NeetCode: Number of Islands (#76), Clone Graph (#77), Max Area of Island (#78), Pacific Atlantic (#79), Surrounded Regions (#80), Rotting Oranges (#81), Walls and Gates (#82), Course Schedule (#83), Course Schedule II (#84), Redundant Connection (#85)</li><li>BFS vs DFS — when does each apply?</li><li>Union-Find (Disjoint Set) — how Redundant Connection uses it</li></ul></div></div>
+        <div class="domain-cell"><div class="domain-label">Systems Depth</div><div class="domain-content"><ul><li>Networking for Sys Admins ch.1–4</li><li>Understand what happens at the network layer when your webhook fires</li></ul></div></div>
+        <div class="domain-cell"><div class="domain-label">Language &amp; Tooling</div><div class="domain-content"><ul><li>Practical SQL ch.10–15: performance tuning, full-text search, advanced patterns</li><li>MongoDB: The Definitive Guide ch.1–3 — document model vs relational</li></ul></div></div>
+        <div class="domain-cell"><div class="domain-label">Commerce &amp; Backend</div><div class="domain-content"><ul><li><strong>D427 assessment target (week 28)</strong></li><li><strong>C949 assessment target (week 29)</strong></li><li>Shopify app: internal reporting dashboard — SQL aggregation queries</li></ul></div></div>
+        <div class="domain-cell"><div class="domain-label">Teaching &amp; Comms</div><div class="domain-content"><ul><li>Code Jam #4: graph problem, full debrief post</li><li>30-week retrospective post</li><li>Phase 3 complete — plan Phase 4 C# curriculum</li></ul></div></div>
+      </div>
+      <div class="neetcode-strip">
+        <strong>NeetCode focus — Graphs:</strong> Number of Islands is the entry point — DFS or BFS from each unvisited '1', marking visited cells. Course Schedule introduces directed graphs and cycle detection (topological sort via Kahn's algorithm or DFS with state coloring). Course Schedule II returns the actual order. Union-Find (Redundant Connection) is a data structure worth understanding from scratch — path compression and union by rank are the two optimizations that make it nearly O(1) per operation.
+      </div>
+      <div class="notes-row"><span class="notes-label">Phase 3 &amp; 30-week CU total</span><textarea class="notes-field" placeholder="C949 ✓  D426 ✓  D427 ✓  — total CU earned across all 30 weeks:" rows="1"></textarea></div>
+      <div class="notes-row"><span class="notes-label">30-week retrospective</span><textarea class="notes-field" placeholder="What changed from week 1 to week 30. What Phase 4 needs to address." rows="4"></textarea></div>
+    </div>
+  </div>
+
+  <!-- Footer nav -->
+  <div style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;">
+    <span style="font-size:0.72rem;color:var(--text-3);">Phase 4 calendar (C# / Backend / Cloud) — coming as Phases 1–3 complete</span>
+    <a href="curriculum.html" class="forward" style="margin:0;">
+      <span class="forward-label">Full detail</span>
+      <span class="forward-title">Curriculum →</span>
+    </a>
+  </div>
+
+</div>
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <span>Full curriculum and project portfolio at this site.</span>
+    <nav class="footer-nav">
+      <a href="index.html">About</a>
+      <a href="curriculum.html">Curriculum</a>
+      <a href="projects.html">Projects</a>
+      <a href="posts.html">Writing</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+function toggleWeek(hd) {
+  const body = hd.nextElementSibling;
+  const toggle = hd.querySelector('.week-toggle');
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  toggle.classList.toggle('open', !isOpen);
+}
+</script>
+
+</body>
+</html>

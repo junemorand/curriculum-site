@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>4:08am — From Operations to Systems</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="nav">
+  <a href="../index.html" class="nav-brand">ops → systems</a>
+  <div class="nav-links">
+    <a href="../index.html">About</a>
+    <a href="../curriculum.html">Curriculum</a>
+    <a href="../books.html">Books</a>
+    <a href="../projects.html">Projects</a>
+    <a href="../posts.html" class="active">Writing</a>
+    <a href="../contact.html">Contact</a>
+  </div>
+</nav>
+<main class="page">
+  <div style="margin-bottom:1.5rem;">
+    <a href="../posts.html" style="font-size:0.72rem;color:var(--text-3);letter-spacing:0.06em;">← All posts</a>
+  </div>
+  <p class="kicker">About · Feb 17, 2026</p>
+  <h1 style="font-size:clamp(1.8rem,4vw,2.8rem);font-weight:500;color:var(--hi);margin-bottom:1.5rem;line-height:1.2;">4:08am</h1>
+
+  <div class="essay">
+
+    <p style="font-size:1rem;color:var(--text-2);margin-bottom:2rem;line-height:1.7;">Site went live tonight. This is the unedited version of how that happened.</p>
+
+    <p style="font-size:1rem;color:var(--text);line-height:1.75;margin-bottom:1rem;">Started around 10pm. The goal was to push something real before going to sleep — not a placeholder, not a "coming soon," but pages that actually said what I meant. The About page existed in a Google Doc. The curriculum existed in a spreadsheet and a long markdown file I'd been updating for a few months. The books list existed in three places none of which agreed with each other.</p>
+
+    <p style="font-size:1rem;color:var(--text);line-height:1.75;margin-bottom:1rem;">The first decision was the hardest: no framework. Not because frameworks are bad — React would have made the course card components cleaner, and a build step would have let me write the nav once. But a framework means a dev environment, which means a broken dependency eventually grounds the whole thing at the worst moment. The site needed to outlast my motivation to maintain tooling. Plain HTML files in a GitHub repo with Pages enabled is the most durable thing I know how to build.</p>
+
+    <p style="font-size:1rem;color:var(--text);line-height:1.75;margin-bottom:1rem;">The CSS took longer than the content. That's usually a bad sign but in this case I think it was the right trade — the structure of the CSS is the structure of the site, and getting the variable naming right early (semantic aliases over raw values, <code style="font-size:0.85rem;color:var(--hi);">--text</code> instead of <code style="font-size:0.85rem;color:var(--hi);">--gray-1</code> in the HTML) means the whole palette can shift without touching any of the page files. Spent probably two hours just on the course card layout. Tables feel unfashionable but they're the right tool for labeled key-value data, and fighting flexbox to do the same thing would have taken longer and been less readable.</p>
+
+    <p style="font-size:1rem;color:var(--text);line-height:1.75;margin-bottom:1rem;">The activity grid was the last thing and almost got cut. The original plan was to hardcode a few lit squares on Feb 17 and move on. Then I realized the GitHub contribution SVG endpoint exists, is public, and takes a username. Three lines of CSS to filter it grayscale and invert. Now it updates automatically with every commit and I never have to touch it again. That's the kind of solution that makes sense at 3am — not clever, just correct.</p>
+
+    <p style="font-size:1rem;color:var(--text);line-height:1.75;margin-bottom:1rem;">What didn't make it tonight: the second post template is only half-done, the contact page has placeholder links, and the projects page has six entries that are all "planned." None of that is embarrassing — a site that shows a real plan in progress is more honest than a site that waits until everything is finished. Finished never comes. The plan exists, the dates are real, the Shopify app is in progress. That's enough to push.</p>
+
+    <p style="font-size:1rem;color:var(--text);line-height:1.75;margin-bottom:1rem;">One thing I keep noticing when I look at the curriculum page: the framework explainer section (PAC/IPO/GOM/GWM) is the only part that reads like it was written for someone else. Everything else on the site is addressed to a reader who already knows what I mean. That section explains things from scratch because the frameworks are genuinely obscure outside of specific pedagogy contexts, and I use them enough in the teaching notes and project artifacts that a reader would hit the acronyms on the very first build log and have no frame of reference. It's the right call but it changes the register of the page. Something to think about as more posts go up.</p>
+
+    <p style="font-size:1rem;color:var(--text);line-height:1.75;">Going to sleep. Phase 1 starts tomorrow. The repo is public, GitHub Pages is enabled, and the first real commit after this one will be a LeetCode problem in Python. That's the plan.</p>
+
+  </div>
+</main>
+<footer class="footer">
+  <div class="footer-inner">
+    <span>Full curriculum and project portfolio at this site.</span>
+    <nav class="footer-nav">
+      <a href="../index.html">About</a>
+      <a href="../curriculum.html">Curriculum</a>
+      <a href="../projects.html">Projects</a>
+      <a href="../posts.html">Writing</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>

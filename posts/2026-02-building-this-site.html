@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Building This Site — From Operations to Systems</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="nav">
+  <a href="../index.html" class="nav-brand">ops → systems</a>
+  <div class="nav-links">
+    <a href="../index.html">About</a>
+    <a href="../curriculum.html">Curriculum</a>
+    <a href="../books.html">Books</a>
+    <a href="../projects.html">Projects</a>
+    <a href="../posts.html" class="active">Writing</a>
+    <a href="../contact.html">Contact</a>
+  </div>
+</nav>
+<main class="page">
+  <div style="margin-bottom:1.5rem;">
+    <a href="../posts.html" style="font-size:0.72rem;color:var(--text-3);letter-spacing:0.06em;">← All posts</a>
+  </div>
+  <p class="kicker">About · Feb 17, 2026</p>
+  <h1 style="font-size:clamp(1.8rem,4vw,2.8rem);font-weight:500;color:var(--hi);margin-bottom:1.5rem;line-height:1.2;">Building This Site — Design Decisions in Plain HTML and CSS</h1>
+
+  <div class="essay">
+
+    <p style="font-size:1rem;color:var(--text-2);margin-bottom:2rem;line-height:1.7;">This post documents how and why this site is built the way it is. No framework, no build step, no JavaScript beyond a small activity grid script. The constraint was deliberate.</p>
+
+    <p style="font-size:1rem;color:var(--text);line-height:1.75;margin-bottom:1rem;">The site needed to go live fast and stay maintainable without tooling overhead. A curriculum site that requires a Node environment to edit is a site you stop editing. Plain HTML files mean any text editor, any machine, any connection, immediate preview. The complexity budget went into the CSS, not the stack.</p>
+
+    <h2 style="font-size:1rem;font-weight:500;color:var(--hi);margin:2rem 0 0.75rem;padding-bottom:0.35rem;border-bottom:1px solid var(--border);">The palette: one constraint, carried everywhere</h2>
+
+    <p style="font-size:1rem;color:var(--text);line-height:1.75;margin-bottom:1rem;">Black background, white type, IBM Plex Mono throughout. No color. The constraint came from wanting the activity grid on the Writing page to do the visual work — a GitHub-style contribution calendar that grades from black to white as commit density increases. Color anywhere else would compete with it. Monochrome everywhere makes the grid legible.</p>
+
+    <p style="font-size:1rem;color:var(--text);line-height:1.75;margin-bottom:1rem;">The full palette lives in CSS custom properties at the top of <code style="font-size:0.85rem;color:var(--hi);">style.css</code>:</p>
+
+    <div class="callout" style="margin-bottom:1.5rem;font-size:0.8rem;line-height:1.8;">
+<pre style="margin:0;color:var(--text-2);overflow-x:auto;">:root {
+  --black:  #000000;
+  --white:  #ffffff;
+  --gray-0: #f8f8f8;
+  --gray-1: #e8e8e8;  /* --text: body copy */
+  --gray-2: #c0c0c0;  /* --text-2: secondary */
+  --gray-3: #888888;  /* --text-3: labels, meta */
+  --gray-4: #444444;  /* --border-2: active borders */
+  --gray-5: #222222;  /* --surface-2, --border */
+  --gray-6: #111111;  /* --surface: card backgrounds */
+
+  --bg:     var(--black);
+  --hi:     var(--white);  /* headings, links, emphasis */
+}</pre>
+    </div>
+
+    <p style="font-size:1rem;color:var(--text);line-height:1.75;margin-bottom:1rem;">Naming the semantic aliases (<code style="font-size:0.85rem;color:var(--hi);">--text</code>, <code style="font-size:0.85rem;color:var(--hi);">--border</code>, <code style="font-size:0.85rem;color:var(--hi);">--surface</code>) separately from the raw grays means a future light-mode toggle swaps eight values in one place and nothing else changes.</p>
+
+    <h2 style="font-size:1rem;font-weight:500;color:var(--hi);margin:2rem 0 0.75rem;padding-bottom:0.35rem;border-bottom:1px solid var(--border);">Typography: one font, three weights</h2>
+
+    <p style="font-size:1rem;color:var(--text);line-height:1.75;margin-bottom:1rem;">IBM Plex Mono in regular (400), medium (500), and italic. The monospace constraint reinforces the technical register without reading as a code dump — Plex Mono has enough optical spacing at small sizes to work as body text, which most monospace fonts don't. The base font size is 15px, slightly larger than most developer sites, because the line lengths here are long and the content is dense.</p>
+
+    <h2 style="font-size:1rem;font-weight:500;color:var(--hi);margin:2rem 0 0.75rem;padding-bottom:0.35rem;border-bottom:1px solid var(--border);">Layout: two max-widths, no grid framework</h2>
+
+    <p style="font-size:1rem;color:var(--text);line-height:1.75;margin-bottom:1rem;">Two layout classes handle everything. <code style="font-size:0.85rem;color:var(--hi);">.page</code> at 800px for reading-focused pages (About, Writing, posts). <code style="font-size:0.85rem;color:var(--hi);">.page-wide</code> at 1020px for the Curriculum page which needs room for the course card tables. Both center with <code style="font-size:0.85rem;color:var(--hi);">margin: 0 auto</code> and use a single <code style="font-size:0.85rem;color:var(--hi);">--pad</code> variable (1.5rem desktop, 1rem mobile) for all horizontal padding.</p>
+
+    <div class="callout" style="margin-bottom:1.5rem;font-size:0.8rem;line-height:1.8;">
+<pre style="margin:0;color:var(--text-2);overflow-x:auto;">.page      { max-width: 800px;  margin: 0 auto; padding: 3.5rem var(--pad) 6rem; }
+.page-wide { max-width: 1020px; margin: 0 auto; padding: 3.5rem var(--pad) 6rem; }</pre>
+    </div>
+
+    <h2 style="font-size:1rem;font-weight:500;color:var(--hi);margin:2rem 0 0.75rem;padding-bottom:0.35rem;border-bottom:1px solid var(--border);">Course cards: a table inside a bordered div</h2>
+
+    <p style="font-size:1rem;color:var(--text);line-height:1.75;margin-bottom:1rem;">Each course on the Curriculum page is a <code style="font-size:0.85rem;color:var(--hi);">.course</code> div containing a header row and a <code style="font-size:0.85rem;color:var(--hi);">.course-rows</code> table. The header carries the course code, title, and tag badges. The table rows hold the structured metadata (Covers, Books, Note, Pair with). Using an actual table for the rows — rather than flexbox or grid — means the label column is a fixed 80px and the content column fills the remainder, without any JavaScript measurement.</p>
+
+    <div class="callout" style="margin-bottom:1.5rem;font-size:0.8rem;line-height:1.8;">
+<pre style="margin:0;color:var(--text-2);overflow-x:auto;">.course-rows td:first-child {
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  width: 80px;
+  white-space: nowrap;
+}</pre>
+    </div>
+
+    <h2 style="font-size:1rem;font-weight:500;color:var(--hi);margin:2rem 0 0.75rem;padding-bottom:0.35rem;border-bottom:1px solid var(--border);">The framework explainer: CSS Grid with auto-fit</h2>
+
+    <p style="font-size:1rem;color:var(--text);line-height:1.75;margin-bottom:1rem;">The PAC/IPO/GOM/GWM reference block on the Curriculum page uses <code style="font-size:0.85rem;color:var(--hi);">grid-template-columns: repeat(auto-fit, minmax(220px, 1fr))</code>. This gives two columns on desktop and collapses to one on narrow viewports with no media query — the grid figures it out from the available space. Each cell has a right border and bottom border; the last cell in the last row has neither. Getting border removal right on the last items without JavaScript requires the <code style="font-size:0.85rem;color:var(--hi);">nth-last-child</code> selector:</p>
+
+    <div class="callout" style="margin-bottom:1.5rem;font-size:0.8rem;line-height:1.8;">
+<pre style="margin:0;color:var(--text-2);overflow-x:auto;">.framework-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+/* remove bottom border from last row (2 items) */
+.framework-grid .framework-item:nth-last-child(-n+2) {
+  border-bottom: none;
+}
+
+/* single-column fallback: remove all right borders */
+@media (max-width: 500px) {
+  .framework-grid { grid-template-columns: 1fr; }
+  .framework-item { border-right: none; }
+}</pre>
+    </div>
+
+    <h2 style="font-size:1rem;font-weight:500;color:var(--hi);margin:2rem 0 0.75rem;padding-bottom:0.35rem;border-bottom:1px solid var(--border);">The activity calendar: GitHub SVG, CSS filter</h2>
+
+    <p style="font-size:1rem;color:var(--text);line-height:1.75;margin-bottom:1rem;">The Writing page originally used a JavaScript-generated grid of div squares with hardcoded activity levels. That was replaced with a live GitHub contribution chart from <a href="https://ghchart.rshah.org" target="_blank" rel="noopener">ghchart.rshah.org</a>, which serves your contribution graph as an SVG image. The image is green by default. Three CSS filter operations convert it to the site palette:</p>
+
+    <div class="callout" style="margin-bottom:1.5rem;font-size:0.8rem;line-height:1.8;">
+<pre style="margin:0;color:var(--text-2);overflow-x:auto;">.gh-calendar-img {
+  filter: grayscale(1) invert(1) contrast(1.2);
+  /* grayscale(1)  — strips green entirely         */
+  /* invert(1)     — flips to white-on-black        */
+  /* contrast(1.2) — sharpens cell boundaries       */
+}</pre>
+    </div>
+
+    <p style="font-size:1rem;color:var(--text);line-height:1.75;margin-bottom:1rem;">The result is a live calendar that updates automatically with every commit, rendered entirely in CSS, with no JavaScript and no backend.</p>
+
+    <h2 style="font-size:1rem;font-weight:500;color:var(--hi);margin:2rem 0 0.75rem;padding-bottom:0.35rem;border-bottom:1px solid var(--border);">What comes next</h2>
+
+    <p style="font-size:1rem;color:var(--text);line-height:1.75;margin-bottom:1rem;">The site is static by choice for now, not by limitation. When the Shopify app reaches production it will make sense to revisit — a Vite build step would enable component reuse across the post template, and a small API call could replace the placeholder post dates with real commit timestamps. Neither is worth adding before there is real content to maintain.</p>
+
+    <p style="font-size:1rem;color:var(--text);line-height:1.75;">The constraint that actually mattered: every page loads instantly, works without JavaScript enabled, and can be edited in any environment including a WSL2 terminal with no GUI. For a site about systems thinking, that seemed like the right starting point.</p>
+
+  </div>
+</main>
+<footer class="footer">
+  <div class="footer-inner">
+    <span>Full curriculum and project portfolio at this site.</span>
+    <nav class="footer-nav">
+      <a href="../index.html">About</a>
+      <a href="../curriculum.html">Curriculum</a>
+      <a href="../projects.html">Projects</a>
+      <a href="../posts.html">Writing</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>

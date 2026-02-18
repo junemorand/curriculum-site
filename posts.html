@@ -29,10 +29,17 @@
   <p>Posts document decisions as they happen — not tutorials, not summaries. Each entry is a record of what was learned, what broke, and what changed as a result.</p>
 </div>
 
-<!-- Activity grid -->
-<div >
+<!-- GitHub contribution calendar embed -->
+<div style="margin-bottom:2.5rem;">
   <p class="activity-label">2026 posting activity</p>
-  <div class="activity-grid" id="activity-grid"></div>
+  <div class="gh-calendar-wrap">
+    <img
+      src="https://ghchart.rshah.org/junemedrano"
+      alt="junemedrano GitHub contribution chart"
+      class="gh-calendar-img"
+    />
+    <p class="gh-calendar-note">via <a href="https://github.com/junemedrano" target="_blank" rel="noopener">github.com/junemedrano</a></p>
+  </div>
 </div>
 
 <!-- 2026 posts -->
@@ -49,6 +56,18 @@
     <span class="post-date">Feb 17</span>
     <span class="post-title">How to Read This Curriculum</span>
     <span class="post-series">Curriculum</span>
+  </a>
+
+  <a href="posts/2026-02-building-this-site.html" class="post-row">
+    <span class="post-date">Feb 17</span>
+    <span class="post-title">Building This Site — Design Decisions in Plain HTML and CSS</span>
+    <span class="post-series">About</span>
+  </a>
+
+  <a href="posts/2026-02-4am.html" class="post-row">
+    <span class="post-date">Feb 17</span>
+    <span class="post-title">4:08am</span>
+    <span class="post-series">About</span>
   </a>
 
   <!-- Future posts — marked as planned -->
@@ -169,43 +188,5 @@
     </nav>
   </div>
 </footer>
-
-<script>
-// Generate a simple activity grid for 2026
-// Weeks from Jan 1 2026 to Dec 31 2026 = 52 weeks
-const grid = document.getElementById('activity-grid');
-if (grid) {
-  const today = new Date();
-  const startDate = new Date('2026-01-01');
-  const endDate = new Date('2026-12-31');
-
-  // Seed known post dates with high activity
-  const postDates = {
-    '2026-02-17': 4,
-  };
-
-  let d = new Date(startDate);
-  // Align to start of week (Sunday)
-  while (d.getDay() !== 0) d.setDate(d.getDate() - 1);
-
-  while (d <= endDate) {
-    const week = document.createElement('div');
-    week.className = 'activity-week';
-    for (let i = 0; i < 7; i++) {
-      const day = document.createElement('div');
-      day.className = 'activity-day';
-      const key = d.toISOString().slice(0,10);
-      const isPast = d <= today;
-      if (isPast) {
-        const level = postDates[key] || 0;
-        if (level > 0) day.classList.add('level-' + level);
-      }
-      week.appendChild(day);
-      d.setDate(d.getDate() + 1);
-    }
-    grid.appendChild(week);
-  }
-}
-</script>
 </body>
 </html>

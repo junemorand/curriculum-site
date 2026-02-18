@@ -249,6 +249,94 @@ td.done { color: var(--text-3); text-decoration: line-through; text-decoration-c
 
 
 /* ============================================================
+   #FRAMEWORK EXPLAINER
+   Used for PAC/IPO/GOM/GWM reference blocks on curriculum.html
+   ============================================================ */
+
+.framework-explainer {
+  border: 1px solid var(--border);
+  margin-bottom: 2rem;
+}
+
+.framework-explainer-hd {
+  padding: 0.55rem 0.9rem;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+
+.framework-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.framework-item {
+  padding: 0.85rem 0.9rem;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.framework-item:last-child {
+  border-right: none;
+}
+
+/* Remove bottom border from last row items */
+.framework-grid .framework-item:nth-last-child(-n+2) {
+  border-bottom: none;
+}
+
+/* Single-column fallback: remove all right borders */
+@media (max-width: 500px) {
+  .framework-grid { grid-template-columns: 1fr; }
+  .framework-item { border-right: none; }
+  .framework-grid .framework-item:nth-last-child(-n+2) { border-bottom: 1px solid var(--border); }
+  .framework-grid .framework-item:last-child { border-bottom: none; }
+}
+
+.framework-acronym {
+  font-size: 0.75rem;
+  color: var(--hi);
+  letter-spacing: 0.06em;
+  margin-bottom: 0.2rem;
+}
+
+.framework-full {
+  font-size: 0.65rem;
+  color: var(--text-3);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.framework-desc {
+  font-size: 0.8rem;
+  color: var(--text-2);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.framework-steps {
+  margin: 0.5rem 0 0 0;
+  padding-left: 1rem;
+}
+
+.framework-steps li {
+  font-size: 0.78rem;
+  color: var(--text-2);
+  line-height: 1.55;
+  margin-bottom: 0.2rem;
+}
+
+.framework-steps li strong {
+  color: var(--text);
+  font-weight: 500;
+}
+
+
+/* ============================================================
    #PROJECTS
    ============================================================ */
 
@@ -287,6 +375,29 @@ td.done { color: var(--text-3); text-decoration: line-through; text-decoration-c
 .activity-day.l2 { background: #555;    border-color: #666; }
 .activity-day.l3 { background: #999;    border-color: #aaa; }
 .activity-day.l4 { background: #fff;    border-color: #fff; }
+
+/* GitHub contribution calendar embed
+   ghchart.rshah.org returns an SVG served as an img.
+   grayscale(1) strips the green; invert(1) flips to white-on-black;
+   contrast(1.2) sharpens the cell boundaries to match the site palette. */
+.gh-calendar-wrap {
+  margin-bottom: 0.5rem;
+}
+
+.gh-calendar-img {
+  width: 100%;
+  max-width: 720px;
+  display: block;
+  filter: grayscale(1) invert(1) contrast(1.2);
+  border: 1px solid var(--border);
+}
+
+.gh-calendar-note {
+  font-size: 0.62rem;
+  color: var(--text-3);
+  margin-top: 0.4rem;
+  margin-bottom: 0;
+}
 
 
 /* ============================================================
