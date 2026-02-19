@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IT Resources — ops → systems</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .book-section { margin-bottom: 3rem; }
+    .book-section h2 {
+      font-size: 0.95rem; font-weight: 500; color: var(--hi);
+      margin-bottom: 1rem; padding-bottom: 0.4rem;
+      border-bottom: 1px solid var(--border); letter-spacing: 0.02em;
+    }
+    .section-note {
+      font-size: 0.8rem; color: var(--text-3);
+      margin-bottom: 0.9rem; font-style: italic; line-height: 1.6;
+    }
+    .resource { border: 1px solid var(--border); margin-bottom: 1.25rem; transition: border-color 0.1s; }
+    .resource:hover { border-color: var(--border-2); }
+    .resource-hd {
+      display: flex; align-items: baseline; justify-content: space-between;
+      padding: 0.9rem 1.1rem 0.4rem; gap: 1rem; flex-wrap: wrap;
+    }
+    .resource-hd h3 { font-size: 0.9rem; font-weight: 500; }
+    .resource-hd h3 a { color: var(--hi); }
+    .resource-type {
+      font-size: 0.6rem; letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 0.15rem 0.4rem; border: 1px solid var(--border-2); color: var(--text-3);
+      white-space: nowrap; flex-shrink: 0;
+    }
+    .resource-type.free { border-color: var(--gray-3); color: var(--gray-2); }
+    .resource-body { padding: 0 1.1rem 1.1rem; font-size: 0.82rem; color: var(--text-2); line-height: 1.65; }
+    .resource-body p { font-size: 0.82rem; color: var(--text-2); margin-bottom: 0; }
+    .resource-link { display: inline-block; margin-top: 0.5rem; font-size: 0.72rem; color: var(--text-3); letter-spacing: 0.04em; }
+    .resource-link:hover { color: var(--hi); text-decoration: underline; text-underline-offset: 3px; }
+    .resource-sep { color: var(--border-2); margin: 0 0.4rem; font-size: 0.72rem; }
+
+    .career-diagram {
+      background: var(--surface);
+      border: 1px solid var(--border-2);
+      padding: 1.5rem 1.25rem;
+      overflow-x: auto;
+      margin-bottom: 2rem;
+      -webkit-overflow-scrolling: touch;
+    }
+    .career-diagram pre {
+      font-family: var(--font);
+      font-size: 0.72rem;
+      color: var(--text-2);
+      line-height: 1.55;
+      margin: 0;
+      white-space: pre;
+    }
+
+    .section-block { margin-top: 3rem; padding-top: 2.5rem; border-top: 1px solid var(--border); }
+    .section-h { font-size: 0.95rem; font-weight: 500; color: var(--hi); margin-bottom: 1.25rem; padding-bottom: 0.4rem; border-bottom: 1px solid var(--border); letter-spacing: 0.02em; }
+
+    .callout {
+      background: var(--surface); border-left: 2px solid var(--gray-4);
+      padding: 0.85rem 1.1rem; font-size: 0.85rem; color: var(--text-2);
+      line-height: 1.65; margin-bottom: 2rem;
+    }
+    .essay-section { margin-bottom: 2.5rem; }
+    .essay-section h2 {
+      font-size: 1rem; font-weight: 500; color: var(--hi);
+      margin-bottom: 0.9rem; padding-bottom: 0.35rem;
+      border-bottom: 1px solid var(--border); letter-spacing: 0.02em;
+    }
+    .forward {
+      display: inline-flex; flex-direction: column; gap: 0.15rem;
+      padding: 1rem 1.25rem; background: var(--surface);
+      border: 1px solid var(--border-2); margin: 2.5rem 0; transition: border-color 0.1s;
+    }
+    .forward:hover { border-color: var(--gray-3); text-decoration: none; }
+    .forward-label { font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-3); }
+    .forward-title { font-size: 0.9rem; color: var(--hi); }
+
+    .sub-label {
+      font-size: 0.62rem; color: var(--text-3);
+      letter-spacing: 0.06em; text-transform: uppercase;
+      font-weight: 400; margin-left: 0.6rem;
+    }
+
+    @media (max-width: 600px) {
+      .career-diagram { padding: 1rem 0.6rem; }
+      .career-diagram pre { font-size: 0.58rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav-brand">ops → systems</a>
+  <div class="nav-links">
+    <a href="index.html">About</a>
+    <a href="curriculum.html">Curriculum</a>
+    <a href="calendar.html">Calendar</a>
+    <a href="projects.html">Projects</a>
+    <a href="books.html">Books</a>
+    <a href="posts.html">Writing</a>
+    <a href="it-resources.html" class="active">IT</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</nav>
+
+<main class="page">
+
+  <p class="kicker">learning material</p>
+  <h1>IT Resources</h1>
+  <p class="lead">Curated resources for IT and IS students — networking, hardware, certification prep, and the professional context that textbooks skip. Relevant titles from the main bibliography are carried over and annotated here for IT-specific use.</p>
+  <div class="meta" style="font-size:0.7rem;color:var(--text-3);letter-spacing:0.04em;display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap;margin-bottom:2rem;">
+    <span>last updated 2025</span>
+    <span style="color:var(--border-2);">·</span>
+    <span>network+ · comptia · systems · itsm</span>
+  </div>
+
+  <div class="callout">
+    ★ = carried over from the main bibliography — holy grail / career-long reference.<br>
+    † = optional — deeper theory than needed for cert or help-desk entry.<br>
+    Free resources are labeled. Links go to the primary author or publisher site.
+  </div>
+
+
+  <!-- CAREER PATHS -->
+  <div class="essay-section">
+    <h2>IT / IS Career Paths at a Glance</h2>
+    <p style="font-size:0.82rem;color:var(--text-3);margin-bottom:1.25rem;">IT and IS degrees share a common trunk before branching into distinct tracks. The diagram below maps where the branches go, what the day-to-day work looks like, and how paths relate to each other. Salary bands are approximate US market figures (2024–25).</p>
+
+    <div class="career-diagram">
+<pre>
+ IT / IS DEGREE
+ ─────────────────────────────────────────────────────────────────────────────
+
+  SHARED TRUNK
+  ┌────────────────────────────────────────────────────────────────────────┐
+  │  A+ · Network+ · OS fundamentals · Help Desk / Tier 1 Support          │
+  │  Active Directory · Ticketing systems (ServiceNow, Jira) · TCP/IP      │
+  └──────────────────────┬─────────────────────────────────────────────────┘
+                         │
+         ┌───────────────┼──────────────────┬────────────────┐
+         │               │                  │                │
+         ▼               ▼                  ▼                ▼
+
+ ┌──────────────┐  ┌─────────────────┐  ┌──────────────┐  ┌───────────────┐
+ │  NETWORK     │  │  SYSTEMS /      │  │  SECURITY    │  │  IT MGMT /    │
+ │  ENGINEER    │  │  SYSADMIN       │  │  ANALYST     │  │  ITSM         │
+ └──────┬───────┘  └────────┬────────┘  └──────┬───────┘  └──────┬────────┘
+        │                   │                   │                  │
+ Routing & switching   Linux / Windows     SOC / SIEM        ITIL processes
+ Firewall config       Virtualization      Vuln. mgmt        Change mgmt
+ VLANs, VPNs          Cloud (AWS/Azure)   Pen testing       Vendor / SLA
+ WAN / SD-WAN          Containers          Incident resp.    Project oversight
+ Network monitoring    Scripting           Compliance        Budget & staffing
+ Cisco / Juniper       (Bash, Python)      (SOC 2, HIPAA)    Helpdesk mgmt
+        │                   │                   │                  │
+ Certs: CCNA           RHCSA / MCSA        CEH / OSCP        ITIL 4 Foundation
+        Network+        Linux+              Security+         PMP / CAPM
+        JNCIA            AWS SysOps          CISSP (sr.)       CompTIA Project+
+        │                   │                   │                  │
+ ~$75–110k             ~$70–105k           ~$80–115k         ~$65–100k
+ (sr. $130k+)          (sr. $130k+)        (sr. $140k+)      (sr. $120k+)
+
+ ─────────────────────────────────────────────────────────────────────────────
+
+  COMMON LATERAL MOVES & GROWTH PATHS
+
+  Help Desk ──────────────────────────────► Sysadmin ──► Cloud Engineer
+      │                                          │
+      └──► Network Engineer ──► Network Arch.    └──► DevOps / SRE
+                │
+                └──► Security Analyst ──► Pen Tester ──► Security Architect
+
+  IT Manager ──► Director of IT ──► CIO / CISO / VP Infrastructure
+
+ ─────────────────────────────────────────────────────────────────────────────
+
+  RELATIONSHIP TO SWE
+
+  SWE writes the software. IT runs the infrastructure it lives on.
+  The overlap is largest in DevOps, SRE, and Cloud Engineering — roles
+  that require fluency in both systems operations and code.
+  An IT/IS grad who learns to script (Python, Bash, PowerShell) and
+  understands CI/CD pipelines competes directly for those bridge roles.
+
+ ─────────────────────────────────────────────────────────────────────────────
+</pre>
+    </div>
+  </div>
+
+
+  <!-- FREE VIDEO RESOURCES -->
+  <div class="section-block">
+    <div class="essay-section">
+      <h2>Free Video &amp; Channel Resources</h2>
+
+      <div class="resource">
+        <div class="resource-hd">
+          <h3><a href="https://rossmanngroup.com" target="_blank" rel="noopener">Louis Rossmann</a></h3>
+          <span class="resource-type free">free · youtube / odysee</span>
+        </div>
+        <div class="resource-body">
+          <p>Board-level repair technician and right-to-repair advocate. Rossmann's channel is an unfiltered look at real-world hardware diagnosis — logic board repair, component-level soldering, and the business of running an independent repair shop. Invaluable for understanding how hardware actually fails, not just how it's supposed to work. Also vocal on software freedom and consumer rights in ways directly relevant to IT policy discussions.</p>
+          <a class="resource-link" href="https://rossmanngroup.com" target="_blank" rel="noopener">rossmanngroup.com →</a>
+        </div>
+      </div>
+
+      <div class="resource">
+        <div class="resource-hd">
+          <h3><a href="https://www.youtube.com/@SalemTechsperts" target="_blank" rel="noopener">Salem Techsperts</a></h3>
+          <span class="resource-type free">free · youtube</span>
+        </div>
+        <div class="resource-body">
+          <p>Practical IT support content grounded in real repair and troubleshooting scenarios. Good for students who want to see hands-on problem solving rather than purely exam-driven instruction. Complements certification study by showing how theory maps to actual hardware and software issues you'll encounter in a help desk or field tech role.</p>
+          <a class="resource-link" href="https://www.youtube.com/@SalemTechsperts" target="_blank" rel="noopener">youtube.com/@SalemTechsperts →</a>
+        </div>
+      </div>
+
+      <div class="resource">
+        <div class="resource-hd">
+          <h3><a href="https://www.totalsem.com" target="_blank" rel="noopener">Mike Meyers — Total Seminars</a></h3>
+          <span class="resource-type">free + paid</span>
+        </div>
+        <div class="resource-body">
+          <p>Mike Meyers has been writing the CompTIA playbook since the A+ exam existed. His teaching style is conversational and unusually effective at making abstract networking concepts stick. Video courses through Total Seminars (also on Udemy) cover A+, Network+, and Security+. Pair with his book for best results — the two formats reinforce each other in a way that's hard to replicate with either alone.</p>
+          <a class="resource-link" href="https://www.totalsem.com" target="_blank" rel="noopener">totalsem.com →</a>
+        </div>
+      </div>
+
+      <div class="resource">
+        <div class="resource-hd">
+          <h3><a href="https://www.professormesser.com" target="_blank" rel="noopener">Professor Messer</a></h3>
+          <span class="resource-type free">free</span>
+        </div>
+        <div class="resource-body">
+          <p>The go-to free resource for CompTIA exam prep. Full video courses for A+, Network+, and Security+ at no cost on his site. His Network+ course follows exam objectives methodically — good for structured review or as a primary study path. Also available as a podcast for audio learners.</p>
+          <a class="resource-link" href="https://www.professormesser.com" target="_blank" rel="noopener">professormesser.com →</a>
+          <span class="resource-sep">·</span>
+          <a class="resource-link" href="https://open.spotify.com/show/1RMvJd9b0r9VDRfhGMWiXV" target="_blank" rel="noopener">podcast on spotify →</a>
+        </div>
+      </div>
+
+      <div class="resource">
+        <div class="resource-hd">
+          <h3><a href="https://jobskillshare.org" target="_blank" rel="noopener">JobSkillShare — Kevin Apolinario</a></h3>
+          <span class="resource-type free">free</span>
+        </div>
+        <div class="resource-body">
+          <p>Kevin Apolinario covers IT career pathways, help desk fundamentals, and the practical side of breaking into the field — including how to approach job applications and interviews with no prior experience. Useful for students who need both the technical and career-strategy dimensions. The content is honest about what entry-level work actually looks like, which is rarer than it should be.</p>
+          <a class="resource-link" href="https://jobskillshare.org" target="_blank" rel="noopener">jobskillshare.org →</a>
+        </div>
+      </div>
+
+      <div class="resource">
+        <div class="resource-hd">
+          <h3><a href="https://www.freecodecamp.org/learn/networking-and-computer-networks/" target="_blank" rel="noopener">freeCodeCamp — Computer Networking</a></h3>
+          <span class="resource-type free">free</span>
+        </div>
+        <div class="resource-body">
+          <p>freeCodeCamp's networking curriculum covers the conceptual foundations: OSI model, TCP/IP, subnetting, DNS, routing protocols. Text-based and structured — easier to reference specific topics than hunting through video timestamps. A solid complement to Professor Messer for students who retain written material better than video.</p>
+          <a class="resource-link" href="https://www.freecodecamp.org/learn/networking-and-computer-networks/" target="_blank" rel="noopener">freecodecamp.org/learn →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- CERTIFICATION BOOKS -->
+  <div class="section-block">
+    <div class="book-section">
+      <h2>Certification &amp; Exam Prep Books</h2>
+
+      <div class="resource">
+        <div class="resource-hd">
+          <h3>Mike Meyers' CompTIA Network+ Guide to Managing and Troubleshooting Networks</h3>
+          <span class="resource-type">paid · exam guide</span>
+        </div>
+        <div class="resource-body">
+          <p>The exam guide Meyers is most known for. Comprehensive, chapter-by-chapter coverage of every Network+ objective with real-world context throughout. Each chapter ends with review questions and key terms. Meyers writes like he teaches — with personality — which makes it easier to stay with than drier technical writing. Works well standalone or alongside his video course.</p>
+          <a class="resource-link" href="https://www.totalsem.com/store/" target="_blank" rel="noopener">totalsem.com/store →</a>
+        </div>
+      </div>
+
+      <div class="resource">
+        <div class="resource-hd">
+          <h3>CompTIA Network+ N10-009 Exam Cram</h3>
+          <span class="resource-type">paid · pearson</span>
+        </div>
+        <div class="resource-body">
+          <p>Pearson's Exam Cram series is optimized for people who learn through concise summaries and rapid review. Structured around exam objectives with cram sheets, practice questions, and a focus on what actually shows up on the test. The Pearson practice test software bundled with the book is genuinely useful — the test engine tracks your weak areas and lets you simulate exam conditions accurately. Worth using even if you supplement with a heavier reference like Meyers.</p>
+          <a class="resource-link" href="https://www.pearsonitcertification.com/store/comptia-network-plus-n10-009-exam-cram-9780138225025" target="_blank" rel="noopener">pearsonitcertification.com →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- SYSTEMS / OS / NETWORKING — from main bibliography -->
+  <div class="section-block">
+    <div class="book-section">
+      <h2>Systems, OS &amp; Networking <span class="sub-label">from main bibliography</span></h2>
+      <p class="section-note">These titles appear in the main book list under Systems, OS &amp; Networking. They're relevant enough to IT/IS students to warrant annotation here with IT-specific context. ★ = holy grail / career-long reference. † = optional deeper theory.</p>
+
+      <div class="callout" style="margin-bottom:1.5rem;">
+        If you're coming from an IT background rather than CS, CS:APP and the Tanenbaum OS text may feel heavy early on. Start with <em>How Linux Works</em> and the UNIX Admin Handbook, then return to the more theoretical texts once you have context for what they're describing.
+      </div>
+
+      <table class="data-table" style="margin-bottom:0;">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Title</th>
+            <th>IT Relevance</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>★</td>
+            <td><em>Computer Systems: A Programmer's Perspective</em> (Bryant &amp; O'Hallaron)</td>
+            <td>The best single text for understanding what actually happens between software and hardware. Covers memory, caching, OS interfaces, and networking at the system level. Not exam-focused, but builds the mental model that makes troubleshooting intuitive rather than procedural.</td>
+          </tr>
+          <tr>
+            <td>★</td>
+            <td><em>Operating System Concepts</em> (Silberschatz et al.)</td>
+            <td>Core OS abstractions: processes, threads, scheduling, memory management, file systems. Directly relevant to sysadmin and cloud roles where understanding what the OS is doing matters more than guessing at it.</td>
+          </tr>
+          <tr>
+            <td>†</td>
+            <td><em>Modern Operating Systems</em> (Tanenbaum)</td>
+            <td>Deeper theoretical OS treatment than Silberschatz. The Minix sections give a from-scratch construction view. Useful if you're heading toward systems programming or OS-adjacent infrastructure work.</td>
+          </tr>
+          <tr>
+            <td>★</td>
+            <td><em>UNIX &amp; Linux System Administration Handbook</em>, 5e (Nemeth et al.)</td>
+            <td>The production operations reference. Covers everything a working sysadmin actually does: user management, storage, networking, monitoring, security hardening. Read front-to-back once, then keep it on the shelf permanently.</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td><em>How Linux Works</em> (Ward)</td>
+            <td>Conceptual Linux internals overview without the density of the admin handbook. Best starting point for students who haven't lived in a terminal yet. Explains what's happening rather than just listing commands.</td>
+          </tr>
+          <tr>
+            <td>†</td>
+            <td><em>The Linux Programming Interface</em> (Kerrisk)</td>
+            <td>System-level programming reference for deep Linux work. More relevant to DevOps or SRE trajectories than standard IT support. Extremely thorough — closer to a reference manual than a course text.</td>
+          </tr>
+          <tr>
+            <td>★†</td>
+            <td><em>Computer Networks</em> (Tanenbaum &amp; Wetherall)</td>
+            <td>Theoretical networking foundation at the graduate level. Covers the full stack from physical layer to application with rigor. More depth than Network+ requires, but builds the understanding that makes troubleshooting intuitive rather than lookup-driven.</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td><em>Networking for Systems Administrators</em> (Lucas)</td>
+            <td>Applied operational networking for practitioners. Focused on what sysadmins and IT generalists actually need to understand about networking to do their jobs well — not exam prep, but real-world fluency.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+  <!-- ITSM & PROFESSIONAL DEVELOPMENT -->
+  <div class="section-block">
+    <div class="book-section">
+      <h2>ITSM &amp; IT Professional Development</h2>
+      <p class="section-note">The IT equivalent of the professional development section on the main books page. These texts explain how IT work is organized at scale — processes, culture, and operational context that no certification exam covers.</p>
+
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Title</th>
+            <th>Why It's Here</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>★</td>
+            <td><em>The Practice of System and Network Administration</em>, 3e (Limoncelli, Hogan, Chalup)</td>
+            <td>The operations equivalent of The Pragmatic Programmer. Covers how professional sysadmins actually think about their work: toil reduction, change management, documentation discipline, and dealing with organizational reality. Carries over directly to DevOps and SRE roles.</td>
+          </tr>
+          <tr>
+            <td>★</td>
+            <td><em>The Visible Ops Handbook</em> (Kim, Behr, Spafford)</td>
+            <td>Short, dense, and unusually honest about how high-performing IT organizations control change and reduce outages. Four practical phases for stabilizing a chaotic IT environment. Read before or alongside ITIL material — it's the narrative that makes the framework make sense.</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td><em>ITIL 4 Foundation</em> (Axelos)</td>
+            <td>The official ITIL 4 framework text. Required reading if you're pursuing the Foundation certification or going into IT service management. Dense and reference-oriented — read Visible Ops first for context, then use this as the reference it's intended to be.</td>
+          </tr>
+          <tr>
+            <td>★</td>
+            <td><em>The Phoenix Project</em> (Kim, Behr, Spafford)</td>
+            <td>Narrative case study of a dysfunctional IT organization that applies manufacturing theory (the Theory of Constraints) to IT operations. Widely read, directly relevant to anyone managing infrastructure or working in IT support at scale. Same authors as Visible Ops, but in novel form — accessible to people who don't read management texts.</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td><em>The Unicorn Project</em> (Kim)</td>
+            <td>Companion to The Phoenix Project told from the developer side — but directly relevant to IT practitioners at the interface of infrastructure and software delivery. Good for understanding the friction points between IT ops and development teams before you're sitting in the middle of them.</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td><em>Site Reliability Engineering</em> (Google / Beyer et al.)</td>
+            <td>How Google runs production at scale. SRE is where IT operations meets software engineering — on-call discipline, SLOs, postmortem culture, toil elimination. Relevant as a career target for IT students who want to grow toward cloud or infrastructure engineering. Free online at sre.google.</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td><em>Time Management for System Administrators</em> (Limoncelli)</td>
+            <td>Interruption management, on-call workflows, and the specific challenge of doing project work when your job is also reactive support. More practically useful for IT students entering help desk or sysadmin roles than any generic productivity book.</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td><em>Accelerate</em> (Forsgren, Humble, Kim)</td>
+            <td>Research-backed metrics linking engineering and operations practices to organizational performance. Relevant to anyone in IT who wants to understand why some organizations are faster and more stable than others — and what the data shows about what actually works. Bridges into ITSM, DevOps, and SRE frameworks cleanly.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+  <!-- STUDY NOTES -->
+  <div class="section-block">
+    <div class="essay-section">
+      <h2>Notes on Studying for Network+</h2>
+      <p>The exam covers five domains: networking concepts, network implementation, network operations, network security, and network troubleshooting. Most study failures aren't from lack of material — they're from using too many resources at once and not doing enough practice questions. Pick one primary video source (Messer or Meyers) and one book, finish them, then hammer practice tests.</p>
+      <p>Subnetting is the one topic where passive watching doesn't work. You have to do it by hand repeatedly until the math is automatic. There are no shortcuts worth taking here. Budget more time for it than you think you need.</p>
+      <p>Practical exposure matters beyond the test. If you can access real hardware — even a cheap managed switch and a basic home lab — the OSI model becomes intuitive in a way that no amount of flashcards can replicate. Rossmann's content, while not exam-focused, builds the mental model of what hardware actually does that makes theoretical content stick long-term.</p>
+    </div>
+  </div>
+
+
+  <!-- BIBLIOGRAPHY -->
+  <div class="section-block">
+    <h2 class="section-h">Bibliography</h2>
+    <p style="font-size:0.82rem;color:var(--text-3);margin-bottom:1.5rem;">Formatted consistent with the main books page. Authors listed surname-first where known. Linked to primary publisher or author site.</p>
+
+    <div style="overflow-x:auto;margin-bottom:2rem;">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>author / creator</th>
+            <th>title / resource</th>
+            <th>format</th>
+            <th>publisher / platform</th>
+            <th>link</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Rossmann, Louis</td>
+            <td>Rossmann Group — Board Repair &amp; Right to Repair</td>
+            <td>video / ongoing / free</td>
+            <td>Self-published / YouTube, Odysee</td>
+            <td><a href="https://rossmanngroup.com" target="_blank" rel="noopener">rossmanngroup.com</a></td>
+          </tr>
+          <tr>
+            <td>Salem Techsperts</td>
+            <td>IT Support &amp; Repair Tutorials</td>
+            <td>video / ongoing / free</td>
+            <td>YouTube</td>
+            <td><a href="https://www.youtube.com/@SalemTechsperts" target="_blank" rel="noopener">youtube.com/@SalemTechsperts</a></td>
+          </tr>
+          <tr>
+            <td>Messer, Jason</td>
+            <td><em>Professor Messer's CompTIA Network+ Course</em></td>
+            <td>video + podcast / free</td>
+            <td>Self-published</td>
+            <td><a href="https://www.professormesser.com" target="_blank" rel="noopener">professormesser.com</a></td>
+          </tr>
+          <tr>
+            <td>Messer, Jason</td>
+            <td>Professor Messer's CompTIA Podcast</td>
+            <td>podcast / free</td>
+            <td>Spotify</td>
+            <td><a href="https://open.spotify.com/show/1RMvJd9b0r9VDRfhGMWiXV" target="_blank" rel="noopener">open.spotify.com</a></td>
+          </tr>
+          <tr>
+            <td>Apolinario, Kevin</td>
+            <td>JobSkillShare — IT Career &amp; Help Desk Training</td>
+            <td>video / blog / free</td>
+            <td>Self-published</td>
+            <td><a href="https://jobskillshare.org" target="_blank" rel="noopener">jobskillshare.org</a></td>
+          </tr>
+          <tr>
+            <td>freeCodeCamp</td>
+            <td>Computer Networking Curriculum</td>
+            <td>interactive / text / free</td>
+            <td>freeCodeCamp.org (nonprofit)</td>
+            <td><a href="https://www.freecodecamp.org/learn/networking-and-computer-networks/" target="_blank" rel="noopener">freecodecamp.org/learn</a></td>
+          </tr>
+          <tr>
+            <td>Meyers, Mike</td>
+            <td><em>CompTIA Network+ Guide to Managing and Troubleshooting Networks</em></td>
+            <td>book</td>
+            <td>McGraw-Hill / Total Seminars</td>
+            <td><a href="https://www.totalsem.com/store/" target="_blank" rel="noopener">totalsem.com</a></td>
+          </tr>
+          <tr>
+            <td>Meyers, Mike</td>
+            <td>CompTIA Network+ Video Course</td>
+            <td>video course</td>
+            <td>Total Seminars</td>
+            <td><a href="https://www.totalsem.com" target="_blank" rel="noopener">totalsem.com</a></td>
+          </tr>
+          <tr>
+            <td>Dulaney, Emmett</td>
+            <td><em>CompTIA Network+ N10-009 Exam Cram</em></td>
+            <td>book + practice software</td>
+            <td>Pearson IT Certification</td>
+            <td><a href="https://www.pearsonitcertification.com/store/comptia-network-plus-n10-009-exam-cram-9780138225025" target="_blank" rel="noopener">pearsonitcertification.com</a></td>
+          </tr>
+          <tr>
+            <td>Bryant, R. &amp; O'Hallaron, D.</td>
+            <td><em>Computer Systems: A Programmer's Perspective</em> (CS:APP)</td>
+            <td>book</td>
+            <td>Pearson</td>
+            <td><a href="https://csapp.cs.cmu.edu" target="_blank" rel="noopener">csapp.cs.cmu.edu</a></td>
+          </tr>
+          <tr>
+            <td>Silberschatz, A. et al.</td>
+            <td><em>Operating System Concepts</em></td>
+            <td>book</td>
+            <td>Wiley</td>
+            <td><a href="https://os-book.com" target="_blank" rel="noopener">os-book.com</a></td>
+          </tr>
+          <tr>
+            <td>Tanenbaum, Andrew S.</td>
+            <td><em>Modern Operating Systems</em></td>
+            <td>book</td>
+            <td>Pearson</td>
+            <td><a href="https://www.pearson.com" target="_blank" rel="noopener">pearson.com</a></td>
+          </tr>
+          <tr>
+            <td>Nemeth, E. et al.</td>
+            <td><em>UNIX &amp; Linux System Administration Handbook</em>, 5e</td>
+            <td>book</td>
+            <td>Pearson / Addison-Wesley</td>
+            <td><a href="https://www.admin.com" target="_blank" rel="noopener">admin.com</a></td>
+          </tr>
+          <tr>
+            <td>Ward, Brian</td>
+            <td><em>How Linux Works</em>, 3e</td>
+            <td>book</td>
+            <td>No Starch Press</td>
+            <td><a href="https://nostarch.com/howlinuxworks3" target="_blank" rel="noopener">nostarch.com</a></td>
+          </tr>
+          <tr>
+            <td>Kerrisk, Michael</td>
+            <td><em>The Linux Programming Interface</em></td>
+            <td>book</td>
+            <td>No Starch Press</td>
+            <td><a href="https://man7.org/tlpi/" target="_blank" rel="noopener">man7.org/tlpi</a></td>
+          </tr>
+          <tr>
+            <td>Tanenbaum, A. &amp; Wetherall, D.</td>
+            <td><em>Computer Networks</em>, 5e</td>
+            <td>book</td>
+            <td>Pearson</td>
+            <td><a href="https://www.pearson.com" target="_blank" rel="noopener">pearson.com</a></td>
+          </tr>
+          <tr>
+            <td>Lucas, Michael W.</td>
+            <td><em>Networking for Systems Administrators</em></td>
+            <td>book</td>
+            <td>Tilted Windmill Press</td>
+            <td><a href="https://www.tiltedwindmillpress.com" target="_blank" rel="noopener">tiltedwindmillpress.com</a></td>
+          </tr>
+          <tr>
+            <td>Limoncelli, T., Hogan, C., Chalup, S.</td>
+            <td><em>The Practice of System and Network Administration</em>, 3e</td>
+            <td>book</td>
+            <td>Addison-Wesley</td>
+            <td><a href="https://the-sysadmin-book.com" target="_blank" rel="noopener">the-sysadmin-book.com</a></td>
+          </tr>
+          <tr>
+            <td>Kim, G., Behr, K., Spafford, G.</td>
+            <td><em>The Visible Ops Handbook</em></td>
+            <td>book</td>
+            <td>IT Process Institute</td>
+            <td><a href="https://itpi.org" target="_blank" rel="noopener">itpi.org</a></td>
+          </tr>
+          <tr>
+            <td>Axelos</td>
+            <td><em>ITIL 4 Foundation</em></td>
+            <td>book / framework</td>
+            <td>Axelos / PeopleCert</td>
+            <td><a href="https://www.axelos.com/certifications/itil-service-management" target="_blank" rel="noopener">axelos.com</a></td>
+          </tr>
+          <tr>
+            <td>Kim, G., Behr, K., Spafford, G.</td>
+            <td><em>The Phoenix Project</em></td>
+            <td>book</td>
+            <td>IT Revolution Press</td>
+            <td><a href="https://itrevolution.com/product/the-phoenix-project/" target="_blank" rel="noopener">itrevolution.com</a></td>
+          </tr>
+          <tr>
+            <td>Kim, Gene</td>
+            <td><em>The Unicorn Project</em></td>
+            <td>book</td>
+            <td>IT Revolution Press</td>
+            <td><a href="https://itrevolution.com/product/the-unicorn-project/" target="_blank" rel="noopener">itrevolution.com</a></td>
+          </tr>
+          <tr>
+            <td>Beyer, B. et al. (Google)</td>
+            <td><em>Site Reliability Engineering</em></td>
+            <td>book / free online</td>
+            <td>O'Reilly / Google</td>
+            <td><a href="https://sre.google/sre-book/table-of-contents/" target="_blank" rel="noopener">sre.google</a></td>
+          </tr>
+          <tr>
+            <td>Limoncelli, Thomas A.</td>
+            <td><em>Time Management for System Administrators</em></td>
+            <td>book</td>
+            <td>O'Reilly</td>
+            <td><a href="https://www.oreilly.com/library/view/time-management-for/0596007833/" target="_blank" rel="noopener">oreilly.com</a></td>
+          </tr>
+          <tr>
+            <td>Forsgren, N., Humble, J., Kim, G.</td>
+            <td><em>Accelerate: The Science of Lean Software and DevOps</em></td>
+            <td>book</td>
+            <td>IT Revolution Press</td>
+            <td><a href="https://itrevolution.com/product/accelerate/" target="_blank" rel="noopener">itrevolution.com</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout" style="margin-bottom:0;">
+      <strong style="color:var(--text);">On Pearson practice software:</strong> The Exam Cram series bundles Pearson's VUE test engine, which mirrors the real exam interface more closely than most third-party tools. It tracks weak domain areas over time and supports both practice and simulation modes. If you're using Exam Cram, use the software — it's the part most students skip and shouldn't.
+    </div>
+  </div>
+
+  <a href="books.html" class="forward">
+    <span class="forward-label">See also</span>
+    <span class="forward-title">Complete Book List →</span>
+  </a>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <span>Full curriculum and project portfolio at this site.</span>
+    <nav class="footer-nav">
+        <a href="about.html">About</a>
+      <a href="curriculum.html">Curriculum</a>
+      <a href="calendar.html">Calendar</a>
+      <a href="projects.html">Projects</a>
+      <a href="books.html">Books</a>
+      <a href="posts.html">Writing</a>
+      <a href="it-resources.html">IT</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
