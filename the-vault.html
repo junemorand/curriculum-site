@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project: Chiaroscuro | The Vault</title>
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+
+<!-- Main CSS -->
+<link rel="stylesheet" href="style.css">
+
+<style>
+  body {
+    font-family: 'IBM Plex Mono', monospace;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    background: var(--bg);
+    color: var(--text);
+  }
+
+  .vault-header {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .vault-header .kicker {
+    font-weight: 400;
+    font-size: 0.875rem;
+    letter-spacing: 0.05em;
+    color: var(--gray-3);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .golden-ratio-grid {
+    display: grid;
+    grid-template-columns: 1.618fr 1fr;
+    gap: 2rem;
+    min-height: 0;
+  }
+
+  .golden-ratio-grid > * {
+    min-height: 0;
+  }
+
+  @media (max-width: 900px) {
+    .golden-ratio-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+  }
+
+  .cipher-text {
+    color: var(--gray-3);
+    font-family: var(--font);
+  }
+
+  .highlight {
+    color: var(--hi);
+    font-weight: 500;
+  }
+
+  blockquote {
+    border-left: 2px solid var(--border-2);
+    padding-left: 1rem;
+    font-style: italic;
+  }
+
+  .nav-brand {
+    font-weight: 700;
+  }
+
+  input[type="password"] {
+    background: var(--surface-2);
+    color: var(--hi);
+    border: 1px solid var(--border);
+    padding: 0.5rem;
+    width: 100%;
+  }
+
+  pre {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    padding: 1rem;
+    font-size: 0.875em;
+    overflow-x: auto;
+    margin: 1rem 0;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+
+  .theory-column,
+  .influence-column {
+    display: flex;
+    flex-direction: column;
+  }
+</style>
+</head>
+
+<body>
+
+<!-- Navbar -->
+<nav class="nav">
+  <a href="index.html" class="nav-brand">chiaoscuro</a>
+  <div class="nav-links">
+    <a href="index.html">About</a>
+    <a href="curriculum.html">Curriculum</a>
+    <a href="calendar.html">Calendar</a>
+    <a href="projects.html">Projects</a>
+    <a href="books.html">Books</a>
+    <a href="posts.html">Writing</a>
+    <a href="it-resources.html">IT</a>
+    <a href="the-vault.html" class="active">The Vault</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</nav>
+
+<main class="page">
+
+  <!-- Vault Header -->
+  <header class="vault-header">
+    <p class="kicker">Archive · Internal Systems Material</p>
+    <h1 class="page-title">Project: Chiaroscuro</h1>
+    <p class="cipher-text">Status: Encrypted // AES-256 System Active</p>
+  </header>
+
+  <!-- Golden Ratio Columns -->
+  <section class="golden-ratio-grid">
+
+    <!-- Theory / Narrative Column -->
+    <div class="theory-column">
+      <h2>The Premise: Studying Light, Not Faking Art</h2>
+      <p>
+        A psychological horror/romance of ego and obsession where endings span symbiosis, codependency, redemption, or destruction. Choose to save or damn your stalker—but are you qualified to judge when their drive was simply companionship?
+      </p>
+
+      <p>
+        Built by math/systems training, not art school. Artists like <span class="highlight">Caravaggio</span>, <span class="highlight">Fra Angelico</span>, <span class="highlight">El Greco</span>, and <span class="highlight">Holbein</span> become dissected problems: light as weaponized attention, shadow as moral ambiguity.
+      </p>
+
+      <h2>Philosophy as Moral Trap</h2>
+      <p>
+        <span class="highlight">Eroticism, Death, and Sensuality</span> frames stalker/stalkee codependency: obsession becomes mutual imprisonment. <span class="highlight">Nietzsche</span>'s <em>amor fati</em> versus <span class="highlight">Baudrillard</span>'s simulation—can you accept fate when reality feels co-authored?
+      </p>
+
+      <p>
+        <span class="highlight">Jung</span>ian shadow work through tailoring reveals ego fractures. Visions decay from devotional serenity to grotesque corruption. <span class="highlight">Existentialism</span> asks: what is right when companionship and predation wear the same face?
+      </p>
+
+            <h2>Proof Sketch: Ego → Obsession → Verdict</h2>
+      <pre>
+Ego Fracture    Obsession Path     Verdict Vectors
+     |               |                 |
+     v               v                 v
+[Mirror]--->[See]-->[Save]?---->[Symbiosis]
+     |        (ego      (mercy      (codependence)
+     |         death)    meter)       positive/negative)
+     v               ^                 ^
+[Mask]---->[Hide]<--[Damn]---->[Destruction]
+     |        (narc     (cruelty     (isolation)
+     |         shadow)   meter)
+     
+Companionship imprisons as surely as revenge—whose sentence prevails?
+      </pre>
+
+      <p class="cipher-text">
+        <strong>Q.E.D.:</strong> Tenebrism reveals what morality conceals in shadow.
+      </p>
+      
+      <p>
+        <em><strong>[Tenebrism Note]</strong> Extreme Baroque lighting where darkness dominates and a single light source spotlights key elements. Here: shadows = unasked questions; light = moral choices forced into view.</em>
+      </p>
+    </div>
+
+    <!-- Influence / Visual Column -->
+    <div class="influence-column">
+      <h3>Reverse-Engineering Method</h3>
+      <p>
+        Math-trained dissection of classical light/shadow grammars and horror geometry constraints. Blender blockouts → Unity URP rigs where unlit surfaces = unasked moral questions about codependence versus freedom.
+      </p>
+
+      <h3>Visual Pathology</h3>
+      <p>
+        Tenebrist light carves ego masks from low-poly flesh. Devotional visions corrupt into Dorian Gray pathology as obsession metastasizes. Darkness conceals neither geometry nor the shared delusion binding captor and captive.
+      </p>
+
+      <p class="cipher-text">
+        Tailoring exposes what faces and light conceal: the wound demanding witness, regardless of consequence.
+      </p>
+
+      <div class="password-box" style="margin-top:2rem; padding:1rem; border:1px dashed var(--border);">
+        <p class="cipher-text">System encrypted. Enter passphrase to view technical logs, performance notes, and mood boards.</p>
+        <input type="password" placeholder="Passphrase">
+      </div>
+    </div>
+
+  </section>
+
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-inner">
+    <span>Full curriculum and project portfolio at this site.</span>
+    <nav class="footer-nav">
+      <a href="index.html">About</a>
+      <a href="curriculum.html">Curriculum</a>
+      <a href="calendar.html">Calendar</a>
+      <a href="projects.html">Projects</a>
+      <a href="books.html">Books</a>
+      <a href="posts.html">Writing</a>
+      <a href="it-resources.html">IT</a>
+      <a href="the-vault.html">The Vault</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -66,8 +66,10 @@ h1, h2, h3 { font-family: var(--font); font-weight: 500; color: var(--hi); line-
   flex-wrap: nowrap;
 }
 
-.nav-brand { font-size: 0.8rem; color: var(--hi); letter-spacing: 0.05em; white-space: nowrap; flex-shrink: 0; }
-.nav-brand:hover { text-decoration: none; }
+/* .nav-brand {
+  font-weight: 500;
+  letter-spacing: -0.01em;
+} */
 
 .nav-links { display: flex; flex-wrap: nowrap; gap: 0; overflow: hidden; }
 
@@ -89,6 +91,50 @@ h1, h2, h3 { font-family: var(--font); font-weight: 500; color: var(--hi); line-
 .page      { max-width: var(--max);      margin: 0 auto; padding: 3.5rem var(--pad) 6rem; }
 .page-wide { max-width: var(--max-wide); margin: 0 auto; padding: 3.5rem var(--pad) 6rem; }
 .inner     { max-width: var(--max); margin: 0 auto; }
+
+
+/* Allow pages to expand vertically */
+/* html, body {
+  height: auto;
+  min-height: 100%;
+}
+
+main, .page, .page-wide {
+  height: auto;
+  min-height: auto;
+  max-height: none;
+} */
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+}
+
+
+
+/* Allow grid children to expand */
+.golden-ratio-grid > * {
+  min-height: 0;
+}
+
+/* Allow grid children to expand */
+.golden-ratio-grid > * {
+  min-height: 0;
+}
+
+/* Golden ratio grid */
+
+@media (max-width: 800px) {
+  .golden-ratio-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 
 
 /* ============================================================
@@ -523,4 +569,53 @@ td.strike { color: var(--text-3); text-decoration: line-through; text-decoration
 @media (max-width: 380px) {
   .nav-brand { font-size: 0.68rem; }
   .nav-links a { font-size: 0.55rem; padding: 0.2rem 0.22rem; }
+}
+
+/* THE VAULT */
+.vault-header {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 2rem;
+    margin-bottom: 3rem;
+}
+
+.golden-ratio-grid {
+    display: grid;
+    grid-template-columns: 1.618fr 1fr;
+    gap: 2rem;
+}
+
+.cipher-text {
+    color: var(--gray-3);
+}
+
+.highlight {
+    color: var(--hi);
+    font-weight: 500;
+}
+
+.password-box {
+    margin-top: 2rem;
+    padding: 1rem;
+    border: 1px dashed var(--border);
+}
+
+.passphrase-input {
+    background: var(--surface-2);
+    color: var(--hi);
+    border: 1px solid var(--border);
+    padding: 0.5rem;
+    font-family: var(--font);
+}
+
+blockquote {
+    border-left: 2px solid var(--border-2);
+    padding-left: 1rem;
+    font-style: italic;
+}
+
+
+.container {
+  max-width: var(--max-wide);
+  margin: 0 auto;
+  padding: 3.5rem var(--pad) 6rem;
 }
