@@ -45,6 +45,10 @@ body {
   font-family: var(--font);
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
+  /* flex column so footer always sticks to bottom */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 a { color: var(--hi); text-decoration: none; }
@@ -53,7 +57,7 @@ h1, h2, h3 { font-family: var(--font); font-weight: 500; color: var(--hi); line-
 
 
 /* ============================================================
-   #NAV
+   #NAV — DESKTOP
    ============================================================ */
 
 .nav {
@@ -66,12 +70,21 @@ h1, h2, h3 { font-family: var(--font); font-weight: 500; color: var(--hi); line-
   flex-wrap: nowrap;
 }
 
-/* .nav-brand {
-  font-weight: 500;
-  letter-spacing: -0.01em;
-} */
+.nav-brand {
+  font-size: 0.8rem;
+  color: var(--hi);
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.nav-brand:hover { text-decoration: none; }
 
-.nav-links { display: flex; flex-wrap: nowrap; gap: 0; overflow: hidden; }
+/* Desktop link row — hidden on mobile */
+.nav-links {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0;
+}
 
 .nav-links a {
   font-size: 0.75rem; color: var(--text-3);
@@ -83,6 +96,49 @@ h1, h2, h3 { font-family: var(--font); font-weight: 500; color: var(--hi); line-
 .nav-links a:hover { color: var(--text); text-decoration: none; }
 .nav-links a.active { color: var(--hi); border-bottom-color: var(--gray-3); }
 
+/* Hamburger button — hidden on desktop */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: 1px solid var(--border-2);
+  color: var(--text-3);
+  font-family: var(--font);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.6rem;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: border-color 0.1s, color 0.1s;
+}
+.nav-toggle:hover { border-color: var(--gray-3); color: var(--text); }
+
+/* Mobile dropdown — the full link list that slides in below the nav bar */
+.nav-drawer {
+  display: none; /* toggled via JS → .nav-drawer.open */
+  position: fixed;
+  top: var(--nav-h);
+  left: 0; right: 0;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  z-index: 99;
+  flex-direction: column;
+  padding: 0.5rem 0;
+}
+.nav-drawer.open { display: flex; }
+
+.nav-drawer a {
+  font-size: 0.78rem;
+  color: var(--text-3);
+  padding: 0.65rem var(--pad);
+  border-bottom: 1px solid var(--border);
+  letter-spacing: 0.03em;
+  transition: background 0.1s, color 0.1s;
+}
+.nav-drawer a:last-child { border-bottom: none; }
+.nav-drawer a:hover { background: var(--surface); color: var(--text); text-decoration: none; }
+.nav-drawer a.active { color: var(--hi); }
+
 
 /* ============================================================
    #LAYOUT
@@ -92,66 +148,55 @@ h1, h2, h3 { font-family: var(--font); font-weight: 500; color: var(--hi); line-
 .page-wide { max-width: var(--max-wide); margin: 0 auto; padding: 3.5rem var(--pad) 6rem; }
 .inner     { max-width: var(--max); margin: 0 auto; }
 
+/* main fills remaining vertical space so footer is always pushed to bottom */
+main { flex: 1; }
 
-/* Allow pages to expand vertically */
-/* html, body {
-  height: auto;
-  min-height: 100%;
-}
-
-main, .page, .page-wide {
-  height: auto;
-  min-height: auto;
-  max-height: none;
-} */
-
-body {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-main {
-  flex: 1;
+.container {
+  max-width: var(--max-wide);
+  margin: 0 auto;
+  padding: 3.5rem var(--pad) 6rem;
 }
 
 
+/* ============================================================
+   #GOLDEN RATIO GRID
+   ============================================================ */
 
-/* Allow grid children to expand */
-.golden-ratio-grid > * {
-  min-height: 0;
+.golden-ratio-grid {
+  display: grid;
+  grid-template-columns: 1.618fr 1fr;
+  gap: 2rem;
 }
 
-/* Allow grid children to expand */
-.golden-ratio-grid > * {
-  min-height: 0;
-}
-
-/* Golden ratio grid */
+.golden-ratio-grid > * { min-height: 0; }
 
 @media (max-width: 800px) {
-  .golden-ratio-grid {
-    grid-template-columns: 1fr;
-  }
+  .golden-ratio-grid { grid-template-columns: 1fr; }
 }
-
 
 
 /* ============================================================
    #TYPOGRAPHY
    ============================================================ */
 
-.kicker { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-3); margin-bottom: 0.75rem; }
+.kicker {
+  font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--text-3); margin-bottom: 0.75rem;
+}
 
-/* Single h1 size used across every page — posts override inline but this is the baseline */
 h1 { font-size: clamp(1.7rem, 4vw, 2.6rem); letter-spacing: -0.01em; margin-bottom: 1rem; }
 
-.page-title { font-size: clamp(1.7rem, 4vw, 2.6rem); color: var(--hi); margin-bottom: 1rem; letter-spacing: -0.01em; }
+.page-title {
+  font-size: clamp(1.7rem, 4vw, 2.6rem); color: var(--hi);
+  margin-bottom: 1rem; letter-spacing: -0.01em;
+}
 
-/* lead: no artificial max-width — let the page container handle it */
 .lead { font-size: 0.9rem; color: var(--text-2); line-height: 1.75; margin-bottom: 0.5rem; }
 
-.meta { font-size: 0.7rem; color: var(--text-3); letter-spacing: 0.04em; display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+.meta {
+  font-size: 0.7rem; color: var(--text-3); letter-spacing: 0.04em;
+  display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;
+}
 .meta .dot { color: var(--border-2); }
 
 p { font-size: 0.9rem; color: var(--text); line-height: 1.8; margin-bottom: 1rem; }
@@ -166,10 +211,14 @@ li { font-size: 0.9rem; color: var(--text); margin-bottom: 0.35rem; line-height:
   border-bottom: 1px solid var(--border); letter-spacing: 0.02em;
 }
 
-/* Consistent section spacing — wrap any major block in this */
 .section-block { margin-top: 3rem; padding-top: 2.5rem; border-top: 1px solid var(--border); }
-
 .section-spacer { margin-top: 4rem; }
+
+.section-heading {
+  font-size: 0.85rem; font-weight: 500; color: var(--hi);
+  margin-bottom: 1rem; padding-bottom: 0.35rem;
+  border-bottom: 1px solid var(--border); letter-spacing: 0.02em;
+}
 
 
 /* ============================================================
@@ -210,12 +259,21 @@ li { font-size: 0.9rem; color: var(--text); margin-bottom: 0.35rem; line-height:
 .forward-label { font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-3); }
 .forward-title { font-size: 0.9rem; color: var(--hi); }
 
+blockquote {
+  border-left: 2px solid var(--border-2);
+  padding-left: 1rem;
+  font-style: italic;
+}
+
 
 /* ============================================================
    #TABLES
+   All tables scroll horizontally on overflow — no column hiding.
    ============================================================ */
 
-.table-wrap { overflow-x: auto; margin-bottom: 2rem; }
+/* Every table gets a scroll wrapper via the .table-wrap div,
+   OR the global rule below catches bare tables inside .page. */
+.table-wrap { overflow-x: auto; margin-bottom: 2rem; -webkit-overflow-scrolling: touch; }
 
 table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
 
@@ -233,23 +291,13 @@ td {
 tr:last-child td { border-bottom: none; }
 tr:nth-child(even) td { background: var(--gray-6); }
 
-/* Explicit outer border on data tables so it reads against black bg */
-.data-table {
-  border: 1px solid var(--border-2);
-  border-collapse: collapse;
-}
+.data-table { border: 1px solid var(--border-2); border-collapse: collapse; }
 .data-table th { border-bottom: 1px solid var(--border-2); }
 .data-table td { border-bottom: 1px solid var(--border); }
 .data-table tr:last-child td { border-bottom: none; }
 
-td.done { color: var(--text-3); text-decoration: line-through; text-decoration-color: var(--gray-4); }
+td.done  { color: var(--text-3); text-decoration: line-through; text-decoration-color: var(--gray-4); }
 td.strike { color: var(--text-3); text-decoration: line-through; text-decoration-color: var(--gray-4); }
-
-.section-heading {
-  font-size: 0.85rem; font-weight: 500; color: var(--hi);
-  margin-bottom: 1rem; padding-bottom: 0.35rem;
-  border-bottom: 1px solid var(--border); letter-spacing: 0.02em;
-}
 
 
 /* ============================================================
@@ -273,7 +321,7 @@ td.strike { color: var(--text-3); text-decoration: line-through; text-decoration
    #CURRICULUM — TIMELINE
    ============================================================ */
 
-.timeline { display: flex; border: 1px solid var(--border); overflow-x: auto; margin-bottom: 2.5rem; }
+.timeline { display: flex; border: 1px solid var(--border); overflow-x: auto; margin-bottom: 2.5rem; -webkit-overflow-scrolling: touch; }
 
 .tl-seg { flex: 1; min-width: 110px; padding: 0.75rem 0.9rem; border-right: 1px solid var(--border); font-size: 0.75rem; }
 .tl-seg:last-child { border-right: none; }
@@ -295,7 +343,8 @@ td.strike { color: var(--text-3); text-decoration: line-through; text-decoration
 
 .phase-note {
   background: var(--surface); border-left: 2px solid var(--border-2);
-  padding: 0.6rem 0.9rem; font-size: 0.8rem; color: var(--text-2); margin-bottom: 1.25rem; line-height: 1.6;
+  padding: 0.6rem 0.9rem; font-size: 0.8rem; color: var(--text-2);
+  margin-bottom: 1.25rem; line-height: 1.6;
 }
 
 .course { border: 1px solid var(--border); margin-bottom: 1.25rem; }
@@ -306,11 +355,14 @@ td.strike { color: var(--text-3); text-decoration: line-through; text-decoration
   border-bottom: 1px solid var(--border); flex-wrap: wrap;
 }
 
-.course-code { font-size: 0.75rem; color: var(--hi); white-space: nowrap; min-width: 40px; }
+.course-code  { font-size: 0.75rem; color: var(--hi); white-space: nowrap; min-width: 40px; }
 .course-title { font-size: 0.85rem; color: var(--hi); flex: 1; }
 
 .course-rows { width: 100%; border-collapse: collapse; }
-.course-rows td { padding: 0.45rem 0.9rem; font-size: 0.82rem; border-bottom: 1px solid var(--border); line-height: 1.55; }
+.course-rows td {
+  padding: 0.45rem 0.9rem; font-size: 0.82rem;
+  border-bottom: 1px solid var(--border); line-height: 1.55;
+}
 .course-rows tr:last-child td { border-bottom: none; }
 .course-rows tr:nth-child(even) td { background: var(--surface); }
 .course-rows td:first-child {
@@ -321,45 +373,26 @@ td.strike { color: var(--text-3); text-decoration: line-through; text-decoration
 
 /* ============================================================
    #FRAMEWORK EXPLAINER
-   Used for PAC/IPO/GOM/GWM reference blocks on curriculum.html
    ============================================================ */
 
-.framework-explainer {
-  border: 1px solid var(--border);
-  margin-bottom: 2rem;
-}
+.framework-explainer { border: 1px solid var(--border); margin-bottom: 2rem; }
 
 .framework-explainer-hd {
-  padding: 0.55rem 0.9rem;
-  background: var(--surface);
+  padding: 0.55rem 0.9rem; background: var(--surface);
   border-bottom: 1px solid var(--border);
-  font-size: 0.65rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--text-3);
+  font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-3);
 }
 
-.framework-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-}
+.framework-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
 
 .framework-item {
   padding: 0.85rem 0.9rem;
   border-right: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
 }
+.framework-item:last-child { border-right: none; }
+.framework-grid .framework-item:nth-last-child(-n+2) { border-bottom: none; }
 
-.framework-item:last-child {
-  border-right: none;
-}
-
-/* Remove bottom border from last row items */
-.framework-grid .framework-item:nth-last-child(-n+2) {
-  border-bottom: none;
-}
-
-/* Single-column fallback: remove all right borders */
 @media (max-width: 500px) {
   .framework-grid { grid-template-columns: 1fr; }
   .framework-item { border-right: none; }
@@ -367,44 +400,13 @@ td.strike { color: var(--text-3); text-decoration: line-through; text-decoration
   .framework-grid .framework-item:last-child { border-bottom: none; }
 }
 
-.framework-acronym {
-  font-size: 0.75rem;
-  color: var(--hi);
-  letter-spacing: 0.06em;
-  margin-bottom: 0.2rem;
-}
+.framework-acronym { font-size: 0.75rem; color: var(--hi); letter-spacing: 0.06em; margin-bottom: 0.2rem; }
+.framework-full { font-size: 0.65rem; color: var(--text-3); letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 0.5rem; }
+.framework-desc { font-size: 0.8rem; color: var(--text-2); line-height: 1.6; margin: 0; }
 
-.framework-full {
-  font-size: 0.65rem;
-  color: var(--text-3);
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  margin-bottom: 0.5rem;
-}
-
-.framework-desc {
-  font-size: 0.8rem;
-  color: var(--text-2);
-  line-height: 1.6;
-  margin: 0;
-}
-
-.framework-steps {
-  margin: 0.5rem 0 0 0;
-  padding-left: 1rem;
-}
-
-.framework-steps li {
-  font-size: 0.78rem;
-  color: var(--text-2);
-  line-height: 1.55;
-  margin-bottom: 0.2rem;
-}
-
-.framework-steps li strong {
-  color: var(--text);
-  font-weight: 500;
-}
+.framework-steps { margin: 0.5rem 0 0 0; padding-left: 1rem; }
+.framework-steps li { font-size: 0.78rem; color: var(--text-2); line-height: 1.55; margin-bottom: 0.2rem; }
+.framework-steps li strong { color: var(--text); font-weight: 500; }
 
 
 /* ============================================================
@@ -414,7 +416,10 @@ td.strike { color: var(--text-3); text-decoration: line-through; text-decoration
 .project { border: 1px solid var(--border); margin-bottom: 1.25rem; transition: border-color 0.1s; }
 .project:hover { border-color: var(--border-2); }
 
-.project-hd { display: flex; align-items: baseline; justify-content: space-between; padding: 0.9rem 1.1rem 0.4rem; gap: 1rem; flex-wrap: wrap; }
+.project-hd {
+  display: flex; align-items: baseline; justify-content: space-between;
+  padding: 0.9rem 1.1rem 0.4rem; gap: 1rem; flex-wrap: wrap;
+}
 .project-hd h3 { font-size: 0.9rem; font-weight: 500; }
 .project-stack { font-size: 0.65rem; color: var(--text-3); letter-spacing: 0.04em; }
 
@@ -436,39 +441,21 @@ td.strike { color: var(--text-3); text-decoration: line-through; text-decoration
 .activity-label { font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-3); margin-bottom: 0.65rem; }
 
 .activity-grid { display: flex; gap: 2px; flex-wrap: wrap; margin-bottom: 2.5rem; }
-
 .activity-week { display: flex; flex-direction: column; gap: 2px; }
+.activity-day  { width: 11px; height: 11px; background: var(--surface); border: 1px solid var(--border); }
 
-.activity-day { width: 11px; height: 11px; background: var(--surface); border: 1px solid var(--border); }
-
-/* Black-to-white gradient — the whole point */
 .activity-day.l1 { background: #2a2a2a; border-color: #3a3a3a; }
 .activity-day.l2 { background: #555;    border-color: #666; }
 .activity-day.l3 { background: #999;    border-color: #aaa; }
 .activity-day.l4 { background: #fff;    border-color: #fff; }
 
-/* GitHub contribution calendar embed
-   ghchart.rshah.org returns an SVG served as an img.
-   grayscale(1) strips the green; invert(1) flips to white-on-black;
-   contrast(1.2) sharpens the cell boundaries to match the site palette. */
-.gh-calendar-wrap {
-  margin-bottom: 0.5rem;
-}
-
+.gh-calendar-wrap { margin-bottom: 0.5rem; }
 .gh-calendar-img {
-  width: 100%;
-  max-width: 720px;
-  display: block;
+  width: 100%; max-width: 720px; display: block;
   filter: grayscale(1) invert(1) contrast(1.2);
   border: 1px solid var(--border);
 }
-
-.gh-calendar-note {
-  font-size: 0.62rem;
-  color: var(--text-3);
-  margin-top: 0.4rem;
-  margin-bottom: 0;
-}
+.gh-calendar-note { font-size: 0.62rem; color: var(--text-3); margin-top: 0.4rem; margin-bottom: 0; }
 
 
 /* ============================================================
@@ -476,15 +463,24 @@ td.strike { color: var(--text-3); text-decoration: line-through; text-decoration
    ============================================================ */
 
 .year-group { margin-bottom: 2.5rem; }
-.year-label { font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-3); margin-bottom: 0.5rem; padding-bottom: 0.35rem; border-bottom: 1px solid var(--border); }
+.year-label {
+  font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--text-3); margin-bottom: 0.5rem; padding-bottom: 0.35rem;
+  border-bottom: 1px solid var(--border);
+}
 
-.post-row { display: grid; grid-template-columns: 80px 1fr auto; align-items: baseline; gap: 1rem; padding: 0.5rem 0; border-bottom: 1px solid var(--border); text-decoration: none; transition: background 0.1s; }
+.post-row {
+  display: grid; grid-template-columns: 80px 1fr auto;
+  align-items: baseline; gap: 1rem;
+  padding: 0.5rem 0; border-bottom: 1px solid var(--border);
+  text-decoration: none; transition: background 0.1s;
+}
 .post-row:hover { background: var(--surface); text-decoration: none; }
 .post-row:hover .post-title { color: var(--hi); }
 .post-row.dim { opacity: 0.35; pointer-events: none; }
 
-.post-date { font-size: 0.7rem; color: var(--text-3); white-space: nowrap; }
-.post-title { font-size: 0.85rem; color: var(--text); transition: color 0.1s; }
+.post-date   { font-size: 0.7rem; color: var(--text-3); white-space: nowrap; }
+.post-title  { font-size: 0.85rem; color: var(--text); transition: color 0.1s; }
 .post-series { font-size: 0.62rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--text-3); white-space: nowrap; }
 
 .series-legend { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
@@ -496,12 +492,16 @@ td.strike { color: var(--text-3); text-decoration: line-through; text-decoration
 
 .contact-links { border: 1px solid var(--border); max-width: 420px; margin-bottom: 2.5rem; }
 
-.contact-row { display: flex; align-items: center; gap: 1rem; padding: 0.75rem 1rem; border-bottom: 1px solid var(--border); text-decoration: none; transition: background 0.1s; }
+.contact-row {
+  display: flex; align-items: center; gap: 1rem;
+  padding: 0.75rem 1rem; border-bottom: 1px solid var(--border);
+  text-decoration: none; transition: background 0.1s;
+}
 .contact-row:last-child { border-bottom: none; }
 .contact-row:hover { background: var(--surface); text-decoration: none; }
 
 .contact-type { font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3); width: 70px; flex-shrink: 0; }
-.contact-val { font-size: 0.85rem; color: var(--hi); }
+.contact-val  { font-size: 0.85rem; color: var(--hi); }
 
 
 /* ============================================================
@@ -510,112 +510,89 @@ td.strike { color: var(--text-3); text-decoration: line-through; text-decoration
 
 .footer { border-top: 1px solid var(--border); padding: 1.25rem var(--pad); }
 
-.footer-inner { max-width: var(--max-wide); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem; }
+.footer-inner {
+  max-width: var(--max-wide); margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 0.75rem;
+}
 
 .footer-inner span { font-size: 0.68rem; color: var(--text-3); letter-spacing: 0.03em; }
 
-.footer-nav { display: flex; gap: 1.25rem; }
+.footer-nav { display: flex; flex-wrap: wrap; gap: 0.75rem 1.25rem; }
 .footer-nav a { font-size: 0.68rem; color: var(--text-3); letter-spacing: 0.03em; }
 .footer-nav a:hover { color: var(--text-2); text-decoration: none; }
 
 
 /* ============================================================
-   #RESPONSIVE
+   #THE VAULT
    ============================================================ */
 
-@media (max-width: 600px) {
-  :root { --pad: 1rem; }
+.vault-header { border-bottom: 1px solid var(--border); padding-bottom: 2rem; margin-bottom: 3rem; }
+.cipher-text  { color: var(--gray-3); }
+.highlight    { color: var(--hi); font-weight: 500; }
+.password-box { margin-top: 2rem; padding: 1rem; border: 1px dashed var(--border); }
+.passphrase-input {
+  background: var(--surface-2); color: var(--hi);
+  border: 1px solid var(--border); padding: 0.5rem;
+  font-family: var(--font);
+}
 
-  /* Nav — shrink link size so all 6 items stay on one row */
-  .nav-links a { font-size: 0.62rem; padding: 0.25rem 0.28rem; letter-spacing: 0.01em; }
+
+/* ============================================================
+   #RESPONSIVE — TABLET (≤ 768px)
+   Nav collapses to hamburger. Tables scroll. Footer wraps.
+   ============================================================ */
+
+@media (max-width: 768px) {
+  /* Show hamburger, hide inline link row */
+  .nav-toggle { display: block; }
+  .nav-links  { display: none; }
 
   /* Page padding */
   .page, .page-wide { padding-top: 2rem; padding-bottom: 4rem; }
 
-  /* Tables: all tables get horizontal scroll on small screens */
-  table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-  td, th { padding: 0.45rem 0.5rem; }
+  /* All tables: horizontal scroll, no column hiding */
+  table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; white-space: nowrap; }
+  td, th { padding: 0.5rem 0.6rem; }
 
-  /* Index foundation/transfer tables: hide middle column on very small screens */
-  .foundation-section td:nth-child(2),
-  .foundation-section th:nth-child(2),
-  .transfer-section td:nth-child(2),
-  .transfer-section th:nth-child(2) { display: none; }
+  /* Post rows: drop series column, keep date + title */
+  .post-row { grid-template-columns: 72px 1fr; }
+  .post-series { display: none; }
 
-  /* Contact: allow long values to wrap */
+  /* Timeline already scrolls via overflow-x */
+  .timeline { flex-direction: row; }
+
+  /* Contact */
   .contact-links { max-width: 100%; }
+
+  /* Footer wraps naturally via flex-wrap on .footer-inner */
+}
+
+
+/* ============================================================
+   #RESPONSIVE — PHONE (≤ 480px)
+   ============================================================ */
+
+@media (max-width: 480px) {
+  :root { --pad: 1rem; }
+
+  .nav-brand { font-size: 0.75rem; }
+
+  /* Tighten page */
+  .page, .page-wide { padding-top: 1.75rem; padding-bottom: 3rem; }
+
+  /* Post rows */
+  .post-row { grid-template-columns: 58px 1fr; gap: 0.5rem; }
+  .post-date { font-size: 0.65rem; }
+
+  /* Contact values can wrap */
   .contact-row { flex-wrap: wrap; }
   .contact-val { font-size: 0.78rem; overflow-wrap: break-word; word-break: break-all; }
   .contact-type { width: 56px; }
 
-  /* Posts */
-  .post-row { grid-template-columns: 65px 1fr; }
-  .post-series { display: none; }
-
-  /* Timeline */
-  .timeline { flex-direction: column; }
-  .tl-seg { border-right: none; border-bottom: 1px solid var(--border); }
-
-  /* Course cards: label column narrows */
-  .course-rows td:first-child { width: 60px; }
-
-  /* Footer */
-  .footer-inner { flex-direction: column; align-items: flex-start; }
-
-  /* Activity grid */
+  /* Activity grid: shrink dots */
   .activity-day { width: 9px; height: 9px; }
-}
 
-@media (max-width: 380px) {
-  .nav-brand { font-size: 0.68rem; }
-  .nav-links a { font-size: 0.55rem; padding: 0.2rem 0.22rem; }
-}
-
-/* THE VAULT */
-.vault-header {
-    border-bottom: 1px solid var(--border);
-    padding-bottom: 2rem;
-    margin-bottom: 3rem;
-}
-
-.golden-ratio-grid {
-    display: grid;
-    grid-template-columns: 1.618fr 1fr;
-    gap: 2rem;
-}
-
-.cipher-text {
-    color: var(--gray-3);
-}
-
-.highlight {
-    color: var(--hi);
-    font-weight: 500;
-}
-
-.password-box {
-    margin-top: 2rem;
-    padding: 1rem;
-    border: 1px dashed var(--border);
-}
-
-.passphrase-input {
-    background: var(--surface-2);
-    color: var(--hi);
-    border: 1px solid var(--border);
-    padding: 0.5rem;
-    font-family: var(--font);
-}
-
-blockquote {
-    border-left: 2px solid var(--border-2);
-    padding-left: 1rem;
-    font-style: italic;
-}
-
-
-.container {
-  max-width: var(--max-wide);
-  margin: 0 auto;
-  padding: 3.5rem var(--pad) 6rem;
+  /* Footer: stack brand text above links */
+  .footer-inner { flex-direction: column; align-items: flex-start; }
 }
