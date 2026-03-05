@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>4:08am — From Operations to Systems</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <script src="../nav.js"></script>
+<nav class="nav">
+  <a href="../index.html" class="nav-brand">ops → systems</a>
+  <button class="nav-toggle" onclick="toggleDrawer()">menu</button>
+  <div class="nav-links">
+    <a href="../index.html">About</a>
+    <a href="../curriculum.html">Curriculum</a>
+    <a href="../calendar.html">Calendar</a>
+    <a href="../projects.html">Projects</a>
+    <a href="../books.html">Books</a>
+    <a href="../log.html" class="active">Log</a>
+    <a href="../it-resources.html">IT/IS</a>
+    <a href="../syllabus.html">Teaching</a>
+  </div>
+</nav>
+<div class="nav-drawer" id="drawer">
+  <a href="../index.html">About</a>
+  <a href="../curriculum.html">Curriculum</a>
+  <a href="../calendar.html">Calendar</a>
+  <a href="../projects.html">Projects</a>
+  <a href="../books.html">Books</a>
+  <a href="../log.html" class="active">Log</a>
+  <a href="../it-resources.html">IT/IS</a>
+  <a href="../syllabus.html">Teaching</a>
+</div>
+<main class="page">
+  <div>
+    <a href="../log.html">← All posts</a>
+  </div>
+  <p class="kicker">About · Mar 4, 2026</p>
+  <h1>AI-Native — With Systems Discipline</h1>
+
+<div class="essay-section">
+  <!-- <h2>AI-Native — With Systems Discipline</h2> -->
+
+  <p>My AI workflow evolved in stages. During Per Scholas, I deliberately avoided AI tools. All debugging, architectural decisions, and implementations were done through documentation, CS50 lectures, and direct experimentation. Harvard later introduced its AI assistant (CS50 Duck), but that occurred after my completion. The sequencing mattered: fundamentals first, augmentation second.</p>
+
+  <p>Post-program, I evaluated major hosted models — GPT, Claude, Gemini, and Perplexity — not as shortcuts, but as architectural components. GPT is particularly strong at synthesis and structured reasoning across domains. Claude produces clean, inspectable scaffolding and tends to behave predictably in structured code generation. Gemini performs well for retrieval-grounded general queries. Perplexity excels when citation traceability matters but requires tightly constrained prompts to avoid drift in stable code.</p>
+
+  <p>Autocomplete tools such as GitHub Copilot improve local refactors and reduce context-switching, but they do not determine system design. All macro-level decisions — deployment targets, runtime trade-offs, network exposure, background job orchestration, persistence strategy — remain manually reasoned.</p>
+
+  <p>I then extended experimentation into open-weight and locally executed models using Ollama. I tested DeepSeek (code-oriented reasoning), Mistral/Mixtral (efficient mixture-of-experts inference), and LLaMA 3 (general-purpose open-weight baseline). Running these models locally introduced a different evaluation axis: memory footprint, latency, determinism under constrained context windows, and offline reproducibility.</p>
+
+  <p>The shift from browser-based AI to CLI-integrated inference was significant. Instead of distributing cognition across tabs, model interaction occurs in the same Linux environment where the code executes. This reduces resource overhead, keeps sensitive context local, and aligns AI assistance with inspectable processes, visible ports, explicit environment variables, and reproducible logs. The model becomes another composable Unix tool rather than an external dependency.</p>
+
+  <p>Being AI-native, in this curriculum, does not mean delegating cognition. It means understanding context windows, hallucination vectors, token cost trade-offs, deterministic prompting constraints, and the operational differences between hosted APIs and local inference. The objective is leverage — not replacement of systems intuition.</p>
+</div>
+
+  <div class="essay-section">
+    <a href="../log.html" class="forward">
+      <span class="forward-label">Back to</span>
+      <span class="forward-title">← Writing</span>
+    </a>
+  </div>
+</main>
+<footer class="footer">
+  <div class="footer-inner">
+    <span>Full curriculum and project portfolio at this site.</span>
+    <nav class="footer-nav">
+      <a href="../index.html">About</a>
+      <a href="../curriculum.html">Curriculum</a>
+      <a href="../projects.html">Projects</a>
+      <a href="../log.html">Log</a>
+      <a href="../it-resources.html">IT/IS</a>
+      <a href="../syllabus.html">Teaching</a>
+      <a href="../the-vault.html">Vault</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>

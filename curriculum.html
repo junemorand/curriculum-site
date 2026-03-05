@@ -10,9 +10,10 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
+<script src="nav.js"></script>
 <nav class="nav">
   <a href="index.html" class="nav-brand">ops → systems</a>
+  <button class="nav-toggle" onclick="toggleDrawer()">menu</button>
   <div class="nav-links">
     <a href="index.html">About</a>
     <a href="curriculum.html" class="active">Curriculum</a>
@@ -24,6 +25,16 @@
     <a href="syllabus.html">Teaching</a>
   </div>
 </nav>
+<div class="nav-drawer" id="drawer">
+  <a href="index.html">About</a>
+  <a href="curriculum.html" class="active">Curriculum</a>
+  <a href="calendar.html">Calendar</a>
+  <a href="projects.html">Projects</a>
+  <a href="books.html">Books</a>
+  <a href="log.html">Log</a>
+  <a href="it-resources.html">IT/IS</a>
+  <a href="syllabus.html">Teaching</a>
+</div>
 
 <main class="page">
 <div class = "inner">
@@ -686,5 +697,10 @@
     </nav>
   </div>
 </footer>
+<script>
+function toggleDrawer() {
+  document.getElementById('drawer').classList.toggle('open');
+}
+</script>
 </body>
 </html>

@@ -10,10 +10,10 @@
 <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-
+<script src="../nav.js"></script>
 <nav class="nav">
   <a href="../index.html" class="nav-brand">ops → systems</a>
-  <button class="nav-toggle" onclick="document.getElementById('drawer').classList.toggle('open')">menu</button>
+  <button class="nav-toggle" onclick="toggleDrawer()">menu</button>
   <div class="nav-links">
     <a href="../index.html">About</a>
     <a href="../curriculum.html">Curriculum</a>
@@ -25,6 +25,16 @@
     <a href="../syllabus.html">Teaching</a>
   </div>
 </nav>
+<div class="nav-drawer" id="drawer">
+  <a href="../index.html">About</a>
+  <a href="../curriculum.html">Curriculum</a>
+  <a href="../calendar.html">Calendar</a>
+  <a href="../projects.html">Projects</a>
+  <a href="../books.html">Books</a>
+  <a href="../log.html" class="active">Log</a>
+  <a href="../it-resources.html">IT/IS</a>
+  <a href="../syllabus.html">Teaching</a>
+</div>
 
 <div class="nav-drawer" id="drawer">
   <a href="../index.html">About</a>
@@ -49,7 +59,8 @@
   <p class="lead">This post details my approach to automating development environment setup, teaching why tools work, and reducing repetitive technical friction for mission-driven organizations. The program demonstrates practical systems-level understanding, kernel-level awareness, and workflow efficiency.</p>
 
   <div class="meta mb-3">
-    <span>March 3, 2026</span><span class="dot">·</span>
+   <p class="kicker">About · Mar 4, 2026</p>
+    <span class="dot">·</span>
     <span>Agentic Terminal · Python · Linux/WSL2 · Node.js · TypeScript</span>
   </div>
 
@@ -145,17 +156,17 @@
 
 <footer class="footer">
   <div class="footer-inner">
-    <span class="footer-brand">Full curriculum and project portfolio at this site.</span>
+    <span>Full curriculum and project portfolio at this site.</span>
     <nav class="footer-nav">
-      <a href="../index.html">About</a>
-      <a href="../curriculum.html">Curriculum</a>
-      <a href="../calendar.html">Calendar</a>
-      <a href="../projects.html">Projects</a>
-      <a href="../books.html">Books</a>
-      <a href="../log.html">Log</a>
-      <a href="../it-resources.html">IT/IS</a>
-      <a href="../syllabus.html">Teaching</a>
-      <a href="../the-vault.html">Vault</a>
+      <a href="index.html">About</a>
+      <a href="curriculum.html">Curriculum</a>
+      <a href="calendar.html">Calendar</a>
+      <a href="projects.html">Projects</a>
+      <a href="books.html">Books</a>
+      <a href="log.html">Log</a>
+      <a href="it-resources.html">IT/IS</a>
+      <a href="syllabus.html">Teaching</a>
+      <a href="the-vault.html">Vault</a>
     </nav>
   </div>
 </footer>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fixing Broken Rows with Claude — ops → systems</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <script src="../nav.js"></script>
+<nav class="nav">
+  <a href="../index.html" class="nav-brand">ops → systems</a>
+  <button class="nav-toggle" onclick="toggleDrawer()">menu</button>
+  <div class="nav-links">
+    <a href="../index.html">About</a>
+    <a href="../curriculum.html">Curriculum</a>
+    <a href="../calendar.html">Calendar</a>
+    <a href="../projects.html">Projects</a>
+    <a href="../books.html">Books</a>
+    <a href="../log.html" class="active">Log</a>
+    <a href="../it-resources.html">IT/IS</a>
+    <a href="../syllabus.html">Teaching</a>
+  </div>
+</nav>
+<div class="nav-drawer" id="drawer">
+  <a href="../index.html">About</a>
+  <a href="../curriculum.html">Curriculum</a>
+  <a href="../calendar.html">Calendar</a>
+  <a href="../projects.html">Projects</a>
+  <a href="../books.html">Books</a>
+  <a href="../log.html" class="active">Log</a>
+  <a href="../it-resources.html">IT/IS</a>
+  <a href="../syllabus.html">Teaching</a>
+</div>
+
+<main class="page">
+
+  <p class="kicker">Build Log · AI · Tooling</p>
+  <h1>Fixing Broken Rows with Claude</h1>
+  <div class="meta">
+    <span>March 2026</span>
+    <span class="dot">·</span>
+    <span>HTML · CSS · debugging · workflow</span>
+  </div>
+
+  <p>The calendar page on this site has 30 expandable week rows across three phases. Click a row header and the domain grid drops down — five columns covering CS fundamentals, systems depth, language and tooling, commerce and backend, and teaching. It's the most structurally complex page on the site. It was also completely broken.</p>
+
+  <p>Clicking certain rows would cause other rows to resize. The month label column — a thin vertical strip with rotated text — would shift width unpredictably. Some rows expanded cleanly. Others caused the entire table geometry to lurch. I knew enough about CSS and HTML to understand that something about the table structure was wrong, but I had 800 lines of hand-written markup and no clear starting point for the audit.</p>
+
+  <p>I gave Claude this prompt:</p>
+
+  <div class="callout">
+    <strong>The prompt, polished:</strong><br><br>
+    The calendar page accordion rows are behaving inconsistently on expand — some rows resize correctly while others cause surrounding rows and the month label column to shift width. The content should not change at all. Please audit the HTML structure and CSS, identify what's causing the instability, and fix it. Revise the stylesheet if necessary.
+  </div>
+
+  <p>What I actually typed was closer to: <em>"can you fix the calendar page? the rows keep breaking... revise the css if you need to... i'm not sure what's going wrong. don't change any of the content - the rows just resize randomly when you click on some of them"</em></p>
+
+  <p>Both prompts got the same result. That's the part worth noting.</p>
+
+
+  <h2 class="section-subtitle">What was wrong</h2>
+
+  <p>The calendar was built using HTML <code>&lt;table&gt;</code> elements for the month blocks, with <code>rowspan</code> on the month label cell and <code>display: table-row</code> toggled by JavaScript to show and hide each week's content. The problem is that <code>display: table-row</code> is controlled by the browser's table layout engine, which recalculates every column width in the table every time a row appears or disappears. And because some week header rows had <code>colspan="2"</code> and others didn't, the engine was receiving contradictory column count signals on every toggle. The table geometry lurched to reconcile them.</p>
+
+  <p>The fix was to stop using a table for the accordion structure entirely. Each month became a <code>flex</code> container — a fixed-width label column on the left, a weeks column on the right. Each week became a self-contained <code>div</code>. The body panel toggles between <code>display: none</code> and <code>display: block</code>, which has no effect on any surrounding geometry. One row expanding cannot affect another row's dimensions. The month label column doesn't move because it isn't part of a table that's being recalculated.</p>
+
+  <p>Claude audited the markup, identified the <code>colspan</code> inconsistency as the root cause, explained why <code>display: table-row</code> toggling creates this class of problem, and rebuilt the structure — all 800 lines of it — without changing a word of content.</p>
+
+
+  <h2 class="section-subtitle">What this actually saved</h2>
+
+  <p>I know how CSS and HTML interact. I've written enough of both to understand the box model, the table layout algorithm, and why flexbox is generally the right answer for anything that needs to expand and collapse. That knowledge wasn't the bottleneck. The bottleneck was time: finding the exact lines causing the issue across 800 lines of markup I wrote myself, weeks ago, while also tracking the <code>rowspan</code> arithmetic across four separate month tables and three phases.</p>
+
+  <p>A manual audit of that problem would have taken the better part of an afternoon — reading the markup, forming a hypothesis about the <code>colspan</code> inconsistency, testing the fix on one month, propagating the structural change across the rest, updating the CSS to remove the old table rules and add the new flex rules, verifying the toggle behavior, and checking the mobile breakpoints. The fix Claude produced took about four minutes and required one review pass on my end to confirm nothing had changed in the content.</p>
+
+  <p>That gap — between knowing what the problem is in principle and actually resolving it across a large hand-written file — is where AI tooling pays off most clearly. Not as a replacement for understanding the system, but as a force multiplier for applying that understanding efficiently.</p>
+
+
+  <h2 class="section-subtitle">The static site problem</h2>
+
+  <p>This post exists partly because the calendar fix was a turning point in how I was thinking about the site. Before it, I was close to stopping updates to the static HTML version altogether. Not because the content wasn't worth maintaining, but because the maintenance loop was becoming untenable.</p>
+
+  <p>The navbar was the clearest symptom. The hamburger menu worked on index, books, and calendar — but only because those three pages happened to have the right JavaScript. The other five pages had a static nav with no mobile drawer, no toggle button, no working menu on small screens. Fixing that meant opening eight files, finding each nav block, pasting in the corrected markup, verifying the active link was right for each page, adding the script tag, and saving. Mechanical work. The kind that accumulates until you stop doing it.</p>
+
+  <p>Without a component system — without React, without even a templating layer — every change to a shared element means touching every file that contains it. That's the core argument for migrating to Next.js, and the migration is already on the calendar. But the static site is what recruiters and students see now, and it needed to work now.</p>
+
+  <p>Claude fixed the navbar in the same session as the calendar: one snippet per page, pre-labeled, with the correct active class already set and the drawer markup included. Fifteen minutes of copy-paste instead of an afternoon of careful manual editing. The site works on mobile. The calendar rows expand cleanly. The nav is consistent across all eight pages.</p>
+
+  <p>None of that required delegating understanding. It required delegating the mechanical application of understanding I already had — and that's a distinction worth being precise about, because the alternative framing ("AI wrote my website") is both wrong and uninteresting.</p>
+
+
+  <h2 class="section-subtitle">On prompting precisely</h2>
+
+  <p>The polished version of my prompt at the top of this post is not what I actually typed. What I typed was a rough description of symptoms with no technical detail. Claude audited the markup, found the root cause, explained it, and fixed it — from the rough description.</p>
+
+  <p>That's a reasonably good argument for not over-engineering your prompts before you know what the problem is. Describe the behavior, not your theory about the cause. Let the tool do the audit. Verify the explanation before accepting the fix. That sequence — describe symptom, receive diagnosis, verify reasoning, accept output — is faster and more reliable than spending time constructing a technically precise prompt for a problem you haven't fully characterized yet.</p>
+
+  <p>The calendar page works. The next post will be about something more interesting than broken tables.</p>
+
+  <div class="callout">
+    The calendar is being migrated to Next.js in Phase 2 of the plan — at that point the accordion becomes a proper React component and this class of structural problem goes away permanently. The static fix is a bridge, not a destination.
+  </div>
+
+  <div class="essay-section">
+    <a href="../log.html" class="forward">
+      <span class="forward-label">Back to</span>
+      <span class="forward-title">← Writing</span>
+    </a>
+  </div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <span>Full curriculum and project portfolio at this site.</span>
+    <nav class="footer-nav">
+      <a href="../index.html">About</a>
+      <a href="../curriculum.html">Curriculum</a>
+      <a href="../calendar.html">Calendar</a>
+      <a href="../projects.html">Projects</a>
+      <a href="../books.html">Books</a>
+      <a href="../log.html">Log</a>
+      <a href="../it-resources.html">IT/IS</a>
+      <a href="../syllabus.html">Teaching</a>
+      <a href="../the-vault.html">Vault</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+function toggleDrawer() {
+  document.getElementById('drawer').classList.toggle('open');
+}
+</script>
+
+</body>
+</html>

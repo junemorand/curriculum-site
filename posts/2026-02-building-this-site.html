@@ -7,40 +7,41 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="../style.css">
 </head>
 <body>
+  <script src="../nav.js"></script>
 
 <nav class="nav">
-  <a href="index.html" class="nav-brand">ops → systems</a>
-  <button class="nav-toggle" onclick="document.getElementById('drawer').classList.toggle('open')">menu</button>
+  <a href="../index.html" class="nav-brand">ops → systems</a>
+  <button class="nav-toggle" onclick="toggleDrawer()">menu</button>
   <div class="nav-links">
-    <a href="index.html">About</a>
-    <a href="curriculum.html">Curriculum</a>
-    <a href="calendar.html">Calendar</a>
-    <a href="projects.html">Projects</a>
-    <a href="books.html">Books</a>
-    <a href="log.html" class="active">Log</a>
-    <a href="it-resources.html">IT/IS</a>
-    <a href="syllabus.html">Teaching</a>
+    <a href="../index.html">About</a>
+    <a href="../curriculum.html">Curriculum</a>
+    <a href="../calendar.html">Calendar</a>
+    <a href="../projects.html">Projects</a>
+    <a href="../books.html">Books</a>
+    <a href="../log.html" class="active">Log</a>
+    <a href="../it-resources.html">IT/IS</a>
+    <a href="../syllabus.html">Teaching</a>
   </div>
 </nav>
 <div class="nav-drawer" id="drawer">
-  <a href="index.html">About</a>
-  <a href="curriculum.html">Curriculum</a>
-  <a href="calendar.html">Calendar</a>
-  <a href="projects.html">Projects</a>
-  <a href="books.html">Books</a>
-  <a href="log.html" class="active">Log</a>
-  <a href="it-resources.html">IT/IS</a>
-  <a href="syllabus.html">Teaching</a>
+  <a href="../index.html">About</a>
+  <a href="../curriculum.html">Curriculum</a>
+  <a href="../calendar.html">Calendar</a>
+  <a href="../projects.html">Projects</a>
+  <a href="../books.html">Books</a>
+  <a href="../log.html" class="active">Log</a>
+  <a href="../it-resources.html">IT/IS</a>
+  <a href="../syllabus.html">Teaching</a>
 </div>
 
 <main>
 <div class="page">
 
   <div class="mb-2">
-    <a href="log.html" class="back-link">← Log</a>
+    <a href="/log.html" class="back-link">← Log</a>
   </div>
 
   <p class="kicker">Build log · site-2</p>
@@ -175,6 +176,13 @@ describe('slugify', () => {
   </div>
 
 </div>
+
+  <div class="essay-section">
+    <a href="../log.html" class="forward">
+      <span class="forward-label">Back to</span>
+      <span class="forward-title">← Writing</span>
+    </a>
+  </div>
 </main>
 
 <footer class="footer">

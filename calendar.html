@@ -10,10 +10,10 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
+<script src="nav.js"></script>
 <nav class="nav">
   <a href="index.html" class="nav-brand">ops → systems</a>
-  <button class="nav-toggle" onclick="document.getElementById('drawer').classList.toggle('open')">menu</button>
+  <button class="nav-toggle" onclick="toggleDrawer()">menu</button>
   <div class="nav-links">
     <a href="index.html">About</a>
     <a href="curriculum.html">Curriculum</a>
@@ -55,12 +55,10 @@
     <span class="tag">Teaching &amp; Comms</span>
   </div>
 
-  <!-- NEETCODE OVERVIEW -->
   <div class="callout">
     <strong>NeetCode roadmap runs in parallel throughout all three phases.</strong> Arrays &amp; Hashing (weeks 1–4) → Two Pointers (weeks 5–8) → Stack, Binary Search, Linked Lists, Trees (Phase 2) → Tries, Heap, Backtracking, Graphs (Phase 3). 2–3 problems per session alongside coursework. Pattern fluency before CLRS depth.
   </div>
 
-  <!-- SHOPIFY CERTIFICATION CALLOUT -->
   <div class="callout mt-1">
     <strong>2026 Goal — Shopify Developer Certification.</strong> A concrete milestone that tracks naturally against Phase 1–2 work already sequenced here: OAuth flows, Admin REST API, webhooks with HMAC verification, Liquid templating. REST is the API model through Phase 3. GraphQL is the Phase 4 upgrade once REST has been used in Node, Next.js, and C# contexts and the mental model is solid. Target: weeks 17–20.
   </div>
@@ -85,23 +83,19 @@
     </div>
   </div>
 
-  <!-- MONTH: January -->
-  <table class="month-table">
-    <tbody>
-      <!-- Week 1 -->
-      <tr>
-        <td class="month-label-cell" rowspan="4"><span class="month-label-text">January</span></td>
-        <td class="week-hd-cell">
-          <div class="week-hd" onclick="toggleWeek('w1')">
-            <span class="week-num">W1</span>
-            <span class="week-title">Setup · Git · Async JS foundations</span>
-            <span class="week-date">Jan 5</span>
-            <span class="week-toggle" id="w1-toggle">▼</span>
-          </div>
-        </td>
-      </tr>
-      <tr class="week-body-row" id="w1">
-        <td class="week-body-cell">
+  <!-- JANUARY -->
+  <div class="month-block">
+    <div class="month-label-col"><span class="month-label-text">January</span></div>
+    <div class="month-weeks-col">
+
+      <div class="week-row">
+        <div class="week-hd" onclick="toggleWeek('w1')">
+          <span class="week-num">W1</span>
+          <span class="week-title">Setup · Git · Async JS foundations</span>
+          <span class="week-date">Jan 5</span>
+          <span class="week-toggle" id="w1-toggle">▼</span>
+        </div>
+        <div class="week-body" id="w1">
           <div class="domain-grid">
             <div class="domain-cell"><div class="domain-label">CS Fundamentals</div>NeetCode: Arrays &amp; Hashing — two sum, contains duplicate, valid anagram</div>
             <div class="domain-cell"><div class="domain-label">Systems Depth</div>WSL2 setup, terminal basics, How Linux Works ch. 1–3</div>
@@ -113,21 +107,17 @@
             <span class="notes-label">Notes</span>
             <textarea class="notes-field" rows="2" placeholder="Week 1 notes..."></textarea>
           </div>
-        </td>
-      </tr>
-      <!-- Week 2 -->
-      <tr>
-        <td class="week-hd-cell">
-          <div class="week-hd" onclick="toggleWeek('w2')">
-            <span class="week-num">W2</span>
-            <span class="week-title">Promises · async/await · Git branching</span>
-            <span class="week-date">Jan 12</span>
-            <span class="week-toggle" id="w2-toggle">▼</span>
-          </div>
-        </td>
-      </tr>
-      <tr class="week-body-row" id="w2">
-        <td class="week-body-cell">
+        </div>
+      </div>
+
+      <div class="week-row">
+        <div class="week-hd" onclick="toggleWeek('w2')">
+          <span class="week-num">W2</span>
+          <span class="week-title">Promises · async/await · Git branching</span>
+          <span class="week-date">Jan 12</span>
+          <span class="week-toggle" id="w2-toggle">▼</span>
+        </div>
+        <div class="week-body" id="w2">
           <div class="domain-grid">
             <div class="domain-cell"><div class="domain-label">CS Fundamentals</div>NeetCode: Arrays &amp; Hashing continued — group anagrams, top K frequent</div>
             <div class="domain-cell"><div class="domain-label">Systems Depth</div>How Linux Works ch. 4–6: processes, devices, filesystems</div>
@@ -139,21 +129,17 @@
             <span class="notes-label">Notes</span>
             <textarea class="notes-field" rows="2" placeholder="Week 2 notes..."></textarea>
           </div>
-        </td>
-      </tr>
-      <!-- Week 3 -->
-      <tr>
-        <td class="week-hd-cell" colspan="2">
-          <div class="week-hd" onclick="toggleWeek('w3')">
-            <span class="week-num">W3</span>
-            <span class="week-title">TypeScript basics · interfaces · type inference</span>
-            <span class="week-date">Jan 19</span>
-            <span class="week-toggle" id="w3-toggle">▼</span>
-          </div>
-        </td>
-      </tr>
-      <tr class="week-body-row" id="w3">
-        <td class="week-body-cell" colspan="2">
+        </div>
+      </div>
+
+      <div class="week-row">
+        <div class="week-hd" onclick="toggleWeek('w3')">
+          <span class="week-num">W3</span>
+          <span class="week-title">TypeScript basics · interfaces · type inference</span>
+          <span class="week-date">Jan 19</span>
+          <span class="week-toggle" id="w3-toggle">▼</span>
+        </div>
+        <div class="week-body" id="w3">
           <div class="domain-grid">
             <div class="domain-cell"><div class="domain-label">CS Fundamentals</div>NeetCode: Arrays &amp; Hashing — product of array except self, valid sudoku</div>
             <div class="domain-cell"><div class="domain-label">Systems Depth</div>How Linux Works ch. 7–9: shell scripts, networking basics, moving files around</div>
@@ -165,21 +151,17 @@
             <span class="notes-label">Notes</span>
             <textarea class="notes-field" rows="2" placeholder="Week 3 notes..."></textarea>
           </div>
-        </td>
-      </tr>
-      <!-- Week 4 -->
-      <tr>
-        <td class="week-hd-cell" colspan="2">
-          <div class="week-hd" onclick="toggleWeek('w4')">
-            <span class="week-num">W4</span>
-            <span class="week-title">TypeScript generics · Express intro</span>
-            <span class="week-date">Jan 26</span>
-            <span class="week-toggle" id="w4-toggle">▼</span>
-          </div>
-        </td>
-      </tr>
-      <tr class="week-body-row" id="w4">
-        <td class="week-body-cell" colspan="2">
+        </div>
+      </div>
+
+      <div class="week-row">
+        <div class="week-hd" onclick="toggleWeek('w4')">
+          <span class="week-num">W4</span>
+          <span class="week-title">TypeScript generics · Express intro</span>
+          <span class="week-date">Jan 26</span>
+          <span class="week-toggle" id="w4-toggle">▼</span>
+        </div>
+        <div class="week-body" id="w4">
           <div class="domain-grid">
             <div class="domain-cell"><div class="domain-label">CS Fundamentals</div>NeetCode: Two Pointers intro — valid palindrome, two sum II</div>
             <div class="domain-cell"><div class="domain-label">Systems Depth</div>How Linux Works ch. 10–12: shell environment, processes in depth, network config</div>
@@ -191,29 +173,26 @@
             <span class="notes-label">Notes</span>
             <textarea class="notes-field" rows="2" placeholder="Week 4 notes..."></textarea>
           </div>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+        </div>
+      </div>
+
+    </div><!-- /month-weeks-col -->
+  </div><!-- /month-block -->
   <div class="month-arrow">↓</div>
 
-  <!-- MONTH: February -->
-  <table class="month-table">
-    <tbody>
-      <!-- Week 5 -->
-      <tr>
-        <td class="month-label-cell" rowspan="4"><span class="month-label-text">February</span></td>
-        <td class="week-hd-cell">
-          <div class="week-hd" onclick="toggleWeek('w5')">
-            <span class="week-num">W5</span>
-            <span class="week-title">HTTP deep dive · middleware · env vars</span>
-            <span class="week-date">Feb 2</span>
-            <span class="week-toggle" id="w5-toggle">▼</span>
-          </div>
-        </td>
-      </tr>
-      <tr class="week-body-row" id="w5">
-        <td class="week-body-cell">
+  <!-- FEBRUARY -->
+  <div class="month-block">
+    <div class="month-label-col"><span class="month-label-text">February</span></div>
+    <div class="month-weeks-col">
+
+      <div class="week-row">
+        <div class="week-hd" onclick="toggleWeek('w5')">
+          <span class="week-num">W5</span>
+          <span class="week-title">HTTP deep dive · middleware · env vars</span>
+          <span class="week-date">Feb 2</span>
+          <span class="week-toggle" id="w5-toggle">▼</span>
+        </div>
+        <div class="week-body" id="w5">
           <div class="domain-grid">
             <div class="domain-cell"><div class="domain-label">CS Fundamentals</div>NeetCode: Two Pointers — 3sum, container with most water</div>
             <div class="domain-cell"><div class="domain-label">Systems Depth</div>Networking for Sys Admins: DNS, TCP basics. curl for manual API testing</div>
@@ -225,21 +204,17 @@
             <span class="notes-label">Notes</span>
             <textarea class="notes-field" rows="2" placeholder="Week 5 notes..."></textarea>
           </div>
-        </td>
-      </tr>
-      <!-- Week 6 -->
-      <tr>
-        <td class="week-hd-cell">
-          <div class="week-hd" onclick="toggleWeek('w6')">
-            <span class="week-num">W6</span>
-            <span class="week-title">Shopify OAuth implementation</span>
-            <span class="week-date">Feb 9</span>
-            <span class="week-toggle" id="w6-toggle">▼</span>
-          </div>
-        </td>
-      </tr>
-      <tr class="week-body-row" id="w6">
-        <td class="week-body-cell">
+        </div>
+      </div>
+
+      <div class="week-row">
+        <div class="week-hd" onclick="toggleWeek('w6')">
+          <span class="week-num">W6</span>
+          <span class="week-title">Shopify OAuth implementation</span>
+          <span class="week-date">Feb 9</span>
+          <span class="week-toggle" id="w6-toggle">▼</span>
+        </div>
+        <div class="week-body" id="w6">
           <div class="domain-grid">
             <div class="domain-cell"><div class="domain-label">CS Fundamentals</div>NeetCode: Two Pointers — trapping rain water, review Arrays &amp; Hashing patterns</div>
             <div class="domain-cell"><div class="domain-label">Systems Depth</div>HTTPS, TLS handshake conceptually. Why OAuth tokens must travel over HTTPS</div>
@@ -251,21 +226,17 @@
             <span class="notes-label">Notes</span>
             <textarea class="notes-field" rows="2" placeholder="Week 6 notes..."></textarea>
           </div>
-        </td>
-      </tr>
-      <!-- Week 7 -->
-      <tr>
-        <td class="week-hd-cell">
-          <div class="week-hd" onclick="toggleWeek('w7')">
-            <span class="week-num">W7</span>
-            <span class="week-title">Webhooks · HMAC verification</span>
-            <span class="week-date">Feb 16</span>
-            <span class="week-toggle" id="w7-toggle">▼</span>
-          </div>
-        </td>
-      </tr>
-      <tr class="week-body-row" id="w7">
-        <td class="week-body-cell">
+        </div>
+      </div>
+
+      <div class="week-row">
+        <div class="week-hd" onclick="toggleWeek('w7')">
+          <span class="week-num">W7</span>
+          <span class="week-title">Webhooks · HMAC verification</span>
+          <span class="week-date">Feb 16</span>
+          <span class="week-toggle" id="w7-toggle">▼</span>
+        </div>
+        <div class="week-body" id="w7">
           <div class="domain-grid">
             <div class="domain-cell"><div class="domain-label">CS Fundamentals</div>NeetCode: Sliding Window intro — best time to buy/sell stock, longest substring without repeat</div>
             <div class="domain-cell"><div class="domain-label">Systems Depth</div>Hash functions: SHA-256, HMAC. Why HMAC verification prevents spoofed webhooks</div>
@@ -277,21 +248,17 @@
             <span class="notes-label">Notes</span>
             <textarea class="notes-field" rows="2" placeholder="Week 7 notes..."></textarea>
           </div>
-        </td>
-      </tr>
-      <!-- Week 8 -->
-      <tr>
-        <td class="week-hd-cell" colspan="2">
-          <div class="week-hd" onclick="toggleWeek('w8')">
-            <span class="week-num">W8</span>
-            <span class="week-title">PostgreSQL · raw SQL · idempotency</span>
-            <span class="week-date">Feb 23</span>
-            <span class="week-toggle" id="w8-toggle">▼</span>
-          </div>
-        </td>
-      </tr>
-      <tr class="week-body-row" id="w8">
-        <td class="week-body-cell" colspan="2">
+        </div>
+      </div>
+
+      <div class="week-row">
+        <div class="week-hd" onclick="toggleWeek('w8')">
+          <span class="week-num">W8</span>
+          <span class="week-title">PostgreSQL · raw SQL · idempotency</span>
+          <span class="week-date">Feb 23</span>
+          <span class="week-toggle" id="w8-toggle">▼</span>
+        </div>
+        <div class="week-body" id="w8">
           <div class="domain-grid">
             <div class="domain-cell"><div class="domain-label">CS Fundamentals</div>NeetCode: Sliding Window — longest repeating char replacement, minimum window substring</div>
             <div class="domain-cell"><div class="domain-label">Systems Depth</div>Head First SQL ch. 1–5: SELECT, WHERE, INSERT, UPDATE, DELETE. PostgreSQL local setup</div>
@@ -303,29 +270,26 @@
             <span class="notes-label">Notes</span>
             <textarea class="notes-field" rows="2" placeholder="Week 8 notes..."></textarea>
           </div>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
   <div class="month-arrow">↓</div>
 
-  <!-- MONTH: March -->
-  <table class="month-table">
-    <tbody>
-      <!-- Week 9 -->
-      <tr>
-        <td class="month-label-cell" rowspan="4"><span class="month-label-text">March</span></td>
-        <td class="week-hd-cell">
-          <div class="week-hd" onclick="toggleWeek('w9')">
-            <span class="week-num">W9</span>
-            <span class="week-title">SQL joins · schema design · Fly.io deploy</span>
-            <span class="week-date">Mar 2</span>
-            <span class="week-toggle" id="w9-toggle">▼</span>
-          </div>
-        </td>
-      </tr>
-      <tr class="week-body-row" id="w9">
-        <td class="week-body-cell">
+  <!-- MARCH -->
+  <div class="month-block">
+    <div class="month-label-col"><span class="month-label-text">March</span></div>
+    <div class="month-weeks-col">
+
+      <div class="week-row">
+        <div class="week-hd" onclick="toggleWeek('w9')">
+          <span class="week-num">W9</span>
+          <span class="week-title">SQL joins · schema design · Fly.io deploy</span>
+          <span class="week-date">Mar 2</span>
+          <span class="week-toggle" id="w9-toggle">▼</span>
+        </div>
+        <div class="week-body" id="w9">
           <div class="domain-grid">
             <div class="domain-cell"><div class="domain-label">CS Fundamentals</div>NeetCode: Stack intro — valid parentheses, min stack, evaluate reverse polish notation</div>
             <div class="domain-cell"><div class="domain-label">Systems Depth</div>Head First SQL ch. 6–10: JOINs, subqueries, constraints. Schema design for orders + line items</div>
@@ -337,21 +301,17 @@
             <span class="notes-label">Notes</span>
             <textarea class="notes-field" rows="2" placeholder="Week 9 notes..."></textarea>
           </div>
-        </td>
-      </tr>
-      <!-- Week 10 -->
-      <tr>
-        <td class="week-hd-cell">
-          <div class="week-hd" onclick="toggleWeek('w10')">
-            <span class="week-num">W10</span>
-            <span class="week-title">Vitest · Supertest · test patterns</span>
-            <span class="week-date">Mar 9</span>
-            <span class="week-toggle" id="w10-toggle">▼</span>
-          </div>
-        </td>
-      </tr>
-      <tr class="week-body-row" id="w10">
-        <td class="week-body-cell">
+        </div>
+      </div>
+
+      <div class="week-row">
+        <div class="week-hd" onclick="toggleWeek('w10')">
+          <span class="week-num">W10</span>
+          <span class="week-title">Vitest · Supertest · test patterns</span>
+          <span class="week-date">Mar 9</span>
+          <span class="week-toggle" id="w10-toggle">▼</span>
+        </div>
+        <div class="week-body" id="w10">
           <div class="domain-grid">
             <div class="domain-cell"><div class="domain-label">CS Fundamentals</div>NeetCode: Stack continued — daily temperatures, car fleet</div>
             <div class="domain-cell"><div class="domain-label">Systems Depth</div>Practical SQL ch. 1–5: aggregates, window functions, real datasets</div>
@@ -363,21 +323,17 @@
             <span class="notes-label">Notes</span>
             <textarea class="notes-field" rows="2" placeholder="Week 10 notes..."></textarea>
           </div>
-        </td>
-      </tr>
-      <!-- Week 11 -->
-      <tr>
-        <td class="week-hd-cell">
-          <div class="week-hd" onclick="toggleWeek('w11')">
-            <span class="week-num">W11</span>
-            <span class="week-title">Portfolio site: React scaffold · Nav component</span>
-            <span class="week-date">Mar 16</span>
-            <span class="week-toggle" id="w11-toggle">▼</span>
-          </div>
-        </td>
-      </tr>
-      <tr class="week-body-row" id="w11">
-        <td class="week-body-cell">
+        </div>
+      </div>
+
+      <div class="week-row">
+        <div class="week-hd" onclick="toggleWeek('w11')">
+          <span class="week-num">W11</span>
+          <span class="week-title">Portfolio site: React scaffold · Nav component</span>
+          <span class="week-date">Mar 16</span>
+          <span class="week-toggle" id="w11-toggle">▼</span>
+        </div>
+        <div class="week-body" id="w11">
           <div class="domain-grid">
             <div class="domain-cell"><div class="domain-label">CS Fundamentals</div>NeetCode: Binary Search intro — binary search, search 2D matrix</div>
             <div class="domain-cell"><div class="domain-label">Systems Depth</div>Practical SQL ch. 6–9: advanced queries, indexes, performance basics</div>
@@ -389,21 +345,17 @@
             <span class="notes-label">Notes</span>
             <textarea class="notes-field" rows="2" placeholder="Week 11 notes..."></textarea>
           </div>
-        </td>
-      </tr>
-      <!-- Week 12 -->
-      <tr>
-        <td class="week-hd-cell" colspan="2">
-          <div class="week-hd" onclick="toggleWeek('w12')">
-            <span class="week-num">W12</span>
-            <span class="week-title">Phase 1 review · buffer · catch-up</span>
-            <span class="week-date">Mar 23</span>
-            <span class="week-toggle" id="w12-toggle">▼</span>
-          </div>
-        </td>
-      </tr>
-      <tr class="week-body-row" id="w12">
-        <td class="week-body-cell" colspan="2">
+        </div>
+      </div>
+
+      <div class="week-row">
+        <div class="week-hd" onclick="toggleWeek('w12')">
+          <span class="week-num">W12</span>
+          <span class="week-title">Phase 1 review · buffer · catch-up</span>
+          <span class="week-date">Mar 23</span>
+          <span class="week-toggle" id="w12-toggle">▼</span>
+        </div>
+        <div class="week-body" id="w12">
           <div class="domain-grid">
             <div class="domain-cell"><div class="domain-label">CS Fundamentals</div>NeetCode: Binary Search — Koko eating bananas, find min in rotated sorted array. Review all patterns to date</div>
             <div class="domain-cell"><div class="domain-label">Systems Depth</div>Review: Linux, networking, SQL. Identify any gaps before Phase 2</div>
@@ -415,10 +367,11 @@
             <span class="notes-label">Notes</span>
             <textarea class="notes-field" rows="2" placeholder="Week 12 notes..."></textarea>
           </div>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
   <div class="month-arrow">↓</div>
 
 
@@ -441,23 +394,19 @@
     </div>
   </div>
 
-  <!-- MONTH: April -->
-  <table class="month-table">
-    <tbody>
-      <!-- Week 13 -->
-      <tr>
-        <td class="month-label-cell" rowspan="4"><span class="month-label-text">April</span></td>
-        <td class="week-hd-cell">
-          <div class="week-hd" onclick="toggleWeek('w13')">
-            <span class="week-num">W13</span>
-            <span class="week-title">Next.js pages · React components · props</span>
-            <span class="week-date">Apr 6</span>
-            <span class="week-toggle" id="w13-toggle">▼</span>
-          </div>
-        </td>
-      </tr>
-      <tr class="week-body-row" id="w13">
-        <td class="week-body-cell">
+  <!-- APRIL -->
+  <div class="month-block">
+    <div class="month-label-col"><span class="month-label-text">April</span></div>
+    <div class="month-weeks-col">
+
+      <div class="week-row">
+        <div class="week-hd" onclick="toggleWeek('w13')">
+          <span class="week-num">W13</span>
+          <span class="week-title">Next.js pages · React components · props</span>
+          <span class="week-date">Apr 6</span>
+          <span class="week-toggle" id="w13-toggle">▼</span>
+        </div>
+        <div class="week-body" id="w13">
           <div class="domain-grid">
             <div class="domain-cell"><div class="domain-label">CS Fundamentals</div>NeetCode: Linked Lists — reverse linked list, merge two sorted lists</div>
             <div class="domain-cell"><div class="domain-label">Systems Depth</div>How Next.js SSR vs. SSG vs. ISR differ. When to use each</div>
@@ -469,21 +418,17 @@
             <span class="notes-label">Notes</span>
             <textarea class="notes-field" rows="2" placeholder="Week 13 notes..."></textarea>
           </div>
-        </td>
-      </tr>
-      <!-- Week 14 -->
-      <tr>
-        <td class="week-hd-cell">
-          <div class="week-hd" onclick="toggleWeek('w14')">
-            <span class="week-num">W14</span>
-            <span class="week-title">React state · hooks · portfolio pages migrated</span>
-            <span class="week-date">Apr 13</span>
-            <span class="week-toggle" id="w14-toggle">▼</span>
-          </div>
-        </td>
-      </tr>
-      <tr class="week-body-row" id="w14">
-        <td class="week-body-cell">
+        </div>
+      </div>
+
+      <div class="week-row">
+        <div class="week-hd" onclick="toggleWeek('w14')">
+          <span class="week-num">W14</span>
+          <span class="week-title">React state · hooks · portfolio pages migrated</span>
+          <span class="week-date">Apr 13</span>
+          <span class="week-toggle" id="w14-toggle">▼</span>
+        </div>
+        <div class="week-body" id="w14">
           <div class="domain-grid">
             <div class="domain-cell"><div class="domain-label">CS Fundamentals</div>NeetCode: Linked Lists — reorder list, remove nth node from end</div>
             <div class="domain-cell"><div class="domain-label">Systems Depth</div>useState, useEffect mental model. React rendering lifecycle</div>
@@ -495,21 +440,17 @@
             <span class="notes-label">Notes</span>
             <textarea class="notes-field" rows="2" placeholder="Week 14 notes..."></textarea>
           </div>
-        </td>
-      </tr>
-      <!-- Week 15 -->
-      <tr>
-        <td class="week-hd-cell">
-          <div class="week-hd" onclick="toggleWeek('w15')">
-            <span class="week-num">W15</span>
-            <span class="week-title">Portfolio deployed · Vercel · all pages migrated</span>
-            <span class="week-date">Apr 20</span>
-            <span class="week-toggle" id="w15-toggle">▼</span>
-          </div>
-        </td>
-      </tr>
-      <tr class="week-body-row" id="w15">
-        <td class="week-body-cell">
+        </div>
+      </div>
+
+      <div class="week-row">
+        <div class="week-hd" onclick="toggleWeek('w15')">
+          <span class="week-num">W15</span>
+          <span class="week-title">Portfolio deployed · Vercel · all pages migrated</span>
+          <span class="week-date">Apr 20</span>
+          <span class="week-toggle" id="w15-toggle">▼</span>
+        </div>
+        <div class="week-body" id="w15">
           <div class="domain-grid">
             <div class="domain-cell"><div class="domain-label">CS Fundamentals</div>NeetCode: Trees intro — invert binary tree, max depth of binary tree</div>
             <div class="domain-cell"><div class="domain-label">Systems Depth</div>Vercel deployment model: serverless functions, preview deploys, env vars</div>
@@ -521,21 +462,17 @@
             <span class="notes-label">Certification</span>
             <textarea class="notes-field" rows="2" placeholder="Shopify certification status..."></textarea>
           </div>
-        </td>
-      </tr>
-      <!-- Week 16 -->
-      <tr>
-        <td class="week-hd-cell" colspan="2">
-          <div class="week-hd" onclick="toggleWeek('w16')">
-            <span class="week-num">W16</span>
-            <span class="week-title">Webhook suite expansion · inventory + fulfillment</span>
-            <span class="week-date">Apr 27</span>
-            <span class="week-toggle" id="w16-toggle">▼</span>
-          </div>
-        </td>
-      </tr>
-      <tr class="week-body-row" id="w16">
-        <td class="week-body-cell" colspan="2">
+        </div>
+      </div>
+
+      <div class="week-row">
+        <div class="week-hd" onclick="toggleWeek('w16')">
+          <span class="week-num">W16</span>
+          <span class="week-title">Webhook suite expansion · inventory + fulfillment</span>
+          <span class="week-date">Apr 27</span>
+          <span class="week-toggle" id="w16-toggle">▼</span>
+        </div>
+        <div class="week-body" id="w16">
           <div class="domain-grid">
             <div class="domain-cell"><div class="domain-label">CS Fundamentals</div>NeetCode: Trees — same tree, subtree of another tree, lowest common ancestor</div>
             <div class="domain-cell"><div class="domain-label">Systems Depth</div>Event-driven architecture: webhook fan-out, ordering guarantees, at-least-once delivery</div>
@@ -547,29 +484,26 @@
             <span class="notes-label">Notes</span>
             <textarea class="notes-field" rows="2" placeholder="Week 16 notes..."></textarea>
           </div>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
   <div class="month-arrow">↓</div>
 
-  <!-- MONTH: May -->
-  <table class="month-table">
-    <tbody>
-      <!-- Week 17 -->
-      <tr>
-        <td class="month-label-cell" rowspan="4"><span class="month-label-text">May</span></td>
-        <td class="week-hd-cell">
-          <div class="week-hd" onclick="toggleWeek('w17')">
-            <span class="week-num">W17</span>
-            <span class="week-title">Shopify certification · Liquid theming</span>
-            <span class="week-date">May 4</span>
-            <span class="week-toggle" id="w17-toggle">▼</span>
-          </div>
-        </td>
-      </tr>
-      <tr class="week-body-row" id="w17">
-        <td class="week-body-cell">
+  <!-- MAY -->
+  <div class="month-block">
+    <div class="month-label-col"><span class="month-label-text">May</span></div>
+    <div class="month-weeks-col">
+
+      <div class="week-row">
+        <div class="week-hd" onclick="toggleWeek('w17')">
+          <span class="week-num">W17</span>
+          <span class="week-title">Shopify certification · Liquid theming</span>
+          <span class="week-date">May 4</span>
+          <span class="week-toggle" id="w17-toggle">▼</span>
+        </div>
+        <div class="week-body" id="w17">
           <div class="domain-grid">
             <div class="domain-cell"><div class="domain-label">CS Fundamentals</div>NeetCode: Trees — level order traversal, right side view, count good nodes</div>
             <div class="domain-cell"><div class="domain-label">Systems Depth</div>Liquid template engine: objects, tags, filters. Theme architecture</div>
@@ -581,21 +515,17 @@
             <span class="notes-label">Certification</span>
             <textarea class="notes-field" rows="2" placeholder="Passed / scheduled / deferred..."></textarea>
           </div>
-        </td>
-      </tr>
-      <!-- Week 18 -->
-      <tr>
-        <td class="week-hd-cell">
-          <div class="week-hd" onclick="toggleWeek('w18')">
-            <span class="week-num">W18</span>
-            <span class="week-title">Klaviyo email triggers · customer webhooks</span>
-            <span class="week-date">May 11</span>
-            <span class="week-toggle" id="w18-toggle">▼</span>
-          </div>
-        </td>
-      </tr>
-      <tr class="week-body-row" id="w18">
-        <td class="week-body-cell">
+        </div>
+      </div>
+
+      <div class="week-row">
+        <div class="week-hd" onclick="toggleWeek('w18')">
+          <span class="week-num">W18</span>
+          <span class="week-title">Klaviyo email triggers · customer webhooks</span>
+          <span class="week-date">May 11</span>
+          <span class="week-toggle" id="w18-toggle">▼</span>
+        </div>
+        <div class="week-body" id="w18">
           <div class="domain-grid">
             <div class="domain-cell"><div class="domain-label">CS Fundamentals</div>NeetCode: Trees — validate BST, kth smallest in BST, construct tree from preorder/inorder</div>
             <div class="domain-cell"><div class="domain-label">Systems Depth</div>Klaviyo API: profiles, events, lists. Webhook-to-email trigger architecture</div>
@@ -607,21 +537,17 @@
             <span class="notes-label">Notes</span>
             <textarea class="notes-field" rows="2" placeholder="Week 18 notes..."></textarea>
           </div>
-        </td>
-      </tr>
-      <!-- Week 19 -->
-      <tr>
-        <td class="week-hd-cell">
-          <div class="week-hd" onclick="toggleWeek('w19')">
-            <span class="week-num">W19</span>
-            <span class="week-title">ShipStation mock · fulfillment routing</span>
-            <span class="week-date">May 18</span>
-            <span class="week-toggle" id="w19-toggle">▼</span>
-          </div>
-        </td>
-      </tr>
-      <tr class="week-body-row" id="w19">
-        <td class="week-body-cell">
+        </div>
+      </div>
+
+      <div class="week-row">
+        <div class="week-hd" onclick="toggleWeek('w19')">
+          <span class="week-num">W19</span>
+          <span class="week-title">ShipStation mock · fulfillment routing</span>
+          <span class="week-date">May 18</span>
+          <span class="week-toggle" id="w19-toggle">▼</span>
+        </div>
+        <div class="week-body" id="w19">
           <div class="domain-grid">
             <div class="domain-cell"><div class="domain-label">CS Fundamentals</div>NeetCode: Trees review + Heap intro — kth largest element</div>
             <div class="domain-cell"><div class="domain-label">Systems Depth</div>ShipStation REST API docs. Mocking external services with MSW in tests</div>
@@ -633,21 +559,17 @@
             <span class="notes-label">Notes</span>
             <textarea class="notes-field" rows="2" placeholder="Week 19 notes..."></textarea>
           </div>
-        </td>
-      </tr>
-      <!-- Week 20 -->
-      <tr>
-        <td class="week-hd-cell" colspan="2">
-          <div class="week-hd" onclick="toggleWeek('w20')">
-            <span class="week-num">W20</span>
-            <span class="week-title">Phase 2 review · buffer · WGU wrap-up</span>
-            <span class="week-date">May 25</span>
-            <span class="week-toggle" id="w20-toggle">▼</span>
-          </div>
-        </td>
-      </tr>
-      <tr class="week-body-row" id="w20">
-        <td class="week-body-cell" colspan="2">
+        </div>
+      </div>
+
+      <div class="week-row">
+        <div class="week-hd" onclick="toggleWeek('w20')">
+          <span class="week-num">W20</span>
+          <span class="week-title">Phase 2 review · buffer · WGU wrap-up</span>
+          <span class="week-date">May 25</span>
+          <span class="week-toggle" id="w20-toggle">▼</span>
+        </div>
+        <div class="week-body" id="w20">
           <div class="domain-grid">
             <div class="domain-cell"><div class="domain-label">CS Fundamentals</div>NeetCode: Heap — task scheduler, find median from data stream. Review all patterns</div>
             <div class="domain-cell"><div class="domain-label">Systems Depth</div>Buffer: any remaining D276/D277/D280 coursework</div>
@@ -659,10 +581,11 @@
             <span class="notes-label">Notes</span>
             <textarea class="notes-field" rows="2" placeholder="Week 20 notes..."></textarea>
           </div>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
   <div class="month-arrow">↓</div>
 
 
@@ -685,23 +608,19 @@
     </div>
   </div>
 
-  <!-- Weeks 21–30 summary rows -->
-  <table class="month-table">
-    <tbody>
-      <!-- Week 21 -->
-      <tr>
-        <td class="month-label-cell" rowspan="6"><span class="month-label-text">Jun – Jul</span></td>
-        <td class="week-hd-cell">
-          <div class="week-hd" onclick="toggleWeek('w21')">
-            <span class="week-num">W21</span>
-            <span class="week-title">Tries · Prisma intro · C949 start</span>
-            <span class="week-date">Jun 1</span>
-            <span class="week-toggle" id="w21-toggle">▼</span>
-          </div>
-        </td>
-      </tr>
-      <tr class="week-body-row" id="w21">
-        <td class="week-body-cell">
+  <!-- JUN–JUL -->
+  <div class="month-block">
+    <div class="month-label-col"><span class="month-label-text">Jun – Jul</span></div>
+    <div class="month-weeks-col">
+
+      <div class="week-row">
+        <div class="week-hd" onclick="toggleWeek('w21')">
+          <span class="week-num">W21</span>
+          <span class="week-title">Tries · Prisma intro · C949 start</span>
+          <span class="week-date">Jun 1</span>
+          <span class="week-toggle" id="w21-toggle">▼</span>
+        </div>
+        <div class="week-body" id="w21">
           <div class="domain-grid">
             <div class="domain-cell"><div class="domain-label">CS Fundamentals</div>NeetCode: Tries — implement trie, design add/search words data structure</div>
             <div class="domain-cell"><div class="domain-label">Systems Depth</div>Prisma schema, migrations, generated client. Compare raw SQL vs. ORM trade-offs</div>
@@ -713,21 +632,17 @@
             <span class="notes-label">Notes</span>
             <textarea class="notes-field" rows="2" placeholder="Week 21 notes..."></textarea>
           </div>
-        </td>
-      </tr>
-      <!-- Week 22 -->
-      <tr>
-        <td class="week-hd-cell">
-          <div class="week-hd" onclick="toggleWeek('w22')">
-            <span class="week-num">W22–24</span>
-            <span class="week-title">Real ShipStation · SMS drops · Backtracking</span>
-            <span class="week-date">Jun 8</span>
-            <span class="week-toggle" id="w22-toggle">▼</span>
-          </div>
-        </td>
-      </tr>
-      <tr class="week-body-row" id="w22">
-        <td class="week-body-cell">
+        </div>
+      </div>
+
+      <div class="week-row">
+        <div class="week-hd" onclick="toggleWeek('w22')">
+          <span class="week-num">W22–24</span>
+          <span class="week-title">Real ShipStation · SMS drops · Backtracking</span>
+          <span class="week-date">Jun 8</span>
+          <span class="week-toggle" id="w22-toggle">▼</span>
+        </div>
+        <div class="week-body" id="w22">
           <div class="domain-grid">
             <div class="domain-cell"><div class="domain-label">CS Fundamentals</div>NeetCode: Backtracking — subsets, combination sum, permutations, word search</div>
             <div class="domain-cell"><div class="domain-label">Systems Depth</div>ShipStation REST API: live integration, rate limiting, error handling. Retry with exponential backoff</div>
@@ -739,21 +654,17 @@
             <span class="notes-label">Notes</span>
             <textarea class="notes-field" rows="2" placeholder="Weeks 22–24 notes..."></textarea>
           </div>
-        </td>
-      </tr>
-      <!-- Week 25–30 -->
-      <tr>
-        <td class="week-hd-cell">
-          <div class="week-hd" onclick="toggleWeek('w25')">
-            <span class="week-num">W25–30</span>
-            <span class="week-title">Graphs · C949 / D426 / D427 completion · Phase 3 close</span>
-            <span class="week-date">Jul +</span>
-            <span class="week-toggle" id="w25-toggle">▼</span>
-          </div>
-        </td>
-      </tr>
-      <tr class="week-body-row" id="w25">
-        <td class="week-body-cell">
+        </div>
+      </div>
+
+      <div class="week-row">
+        <div class="week-hd" onclick="toggleWeek('w25')">
+          <span class="week-num">W25–30</span>
+          <span class="week-title">Graphs · C949 / D426 / D427 completion · Phase 3 close</span>
+          <span class="week-date">Jul +</span>
+          <span class="week-toggle" id="w25-toggle">▼</span>
+        </div>
+        <div class="week-body" id="w25">
           <div class="domain-grid">
             <div class="domain-cell"><div class="domain-label">CS Fundamentals</div>NeetCode: Graphs — number of islands, clone graph, pacific atlantic water flow, course schedule</div>
             <div class="domain-cell"><div class="domain-label">Systems Depth</div>D427 Data Management Applications: transactions, stored procedures, advanced SQL</div>
@@ -765,11 +676,11 @@
             <span class="notes-label">Notes</span>
             <textarea class="notes-field" rows="2" placeholder="Weeks 25–30 notes..."></textarea>
           </div>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+        </div>
+      </div>
 
+    </div>
+  </div>
 
   <!-- PHASE 4 FOOTER -->
   <div class="phase-note mt-3">
@@ -781,7 +692,7 @@
 
 <footer class="footer">
   <div class="footer-inner">
-    <span class="footer-brand">Full curriculum and project portfolio at this site.</span>
+    <span>Full curriculum and project portfolio at this site.</span>
     <nav class="footer-nav">
       <a href="index.html">About</a>
       <a href="curriculum.html">Curriculum</a>
@@ -797,11 +708,14 @@
 </footer>
 
 <script>
+function toggleDrawer() {
+  document.getElementById('drawer').classList.toggle('open');
+}
 function toggleWeek(id) {
-  const row = document.getElementById(id);
+  const body = document.getElementById(id);
   const toggle = document.getElementById(id + '-toggle');
-  if (!row) return;
-  row.classList.toggle('open');
+  if (!body) return;
+  body.classList.toggle('open');
   if (toggle) toggle.classList.toggle('open');
 }
 </script>

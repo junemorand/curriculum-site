@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
+<script src="nav.js"></script>
 <nav class="nav">
   <a href="index.html" class="nav-brand">ops → systems</a>
   <button class="nav-toggle" onclick="document.getElementById('drawer').classList.toggle('open')">menu</button>
@@ -36,8 +36,7 @@
   <a href="syllabus.html">Teaching</a>
 </div>
 
-<main>
-<div class="page">
+<main class="page">
 
   <p class="kicker">A living curriculum</p>
   <h1 class="page-title">From Operations<br>to Systems Thinking</h1>
@@ -51,42 +50,173 @@
     2026 Focus: Shopify developer certification + first production app — documented live so students can trace real requirements through architecture, endpoints, background jobs, and deployment.
   </div>
 
+  <!-- ================= EXPLORATORY PHASE ================= -->
+  <section id="exploratory-phase" class="section">
+    <h2 class="section-subtitle">Exploratory Phase</h2>
 
-  <!-- ESSAYS -->
-  <div class="essay-section mt-3">
-    <h2>Background</h2>
-    <p>My entry into technology came through operations and hardware. Years of field work across retail and service environments — POS systems, inventory workflows, vendor coordination — meant regular contact with the software that runs physical commerce: where it worked, where it failed, and why the failure modes were usually invisible to the engineers who built it. That operational context became a reference point for abstraction that most CS curriculum paths don't provide.</p>
-    <p>The hardware side followed from device repair work: multimeter diagnostics, board-level fault tracing, OSI layer troubleshooting, DHCP and DNS at the configuration level. Once networking and operating systems made sense mechanically, the jump to production infrastructure — load balancing, virtualization, containerization — was extension rather than introduction. The development environment followed the same logic: production runs Linux, so the dev environment should too. WSL2, local LLM inference for private AI workflows, modal editing, remote development as a default.</p>
-    <p>The tooling philosophy is deliberate. Understanding why a tool is built the way it is — what problem it solves at the system level — is more durable than knowing how to use it. That's the frame this curriculum tries to maintain throughout.</p>
-  </div>
+    <p>Software development is easy to approach abstractly. Syntax can be learned from documentation, concepts from textbooks, and architecture from diagrams. What those sources rarely convey is systems context — how code behaves at runtime, what performance sequencing means, or why architectural decisions matter in practice.</p>
 
-  <div class="essay-section">
-    <h2>Why Abstraction Requires Concrete Grounding</h2>
-    <p>A consistent pattern across students: difficulty with abstract concepts is rarely a capability problem. It's a grounding problem. Distributed systems, concurrency, memory management — these remain theoretical without a concrete reference to attach to. A student who has never seen a process scheduler has no frame for why lock contention matters. A student who has never traced a network packet has no frame for why latency is a distribution, not a number.</p>
-    <p>The approach that works moves deliberately from concrete to abstract. Single machine before network. Process before thread. Synchronous I/O before async. Each abstraction layer is introduced as a compressed description of something already understood at the layer below — not as a new vocabulary item to memorize.</p>
-    <p>The 2026 Shopify app is the live case study for this curriculum. A real merchant requirement becomes a schema decision, which becomes an API endpoint, which becomes a webhook handler with failure modes, which becomes a deployment concern. The full chain is traceable in the build logs. Abstractions have addresses in the codebase.</p>
-  </div>
+    <p>
+      I had prior exposure to HTML and CSS years earlier, but that abstraction gap remained. Analysis paralysis, perfectionism, and an over-emphasis on theory slowed progress early on. Rewriting notes is not the same as building. Watching tutorials is not the same as debugging.
+    </p>
 
-  <div class="essay-section">
-    <h2>What Teaching Adds</h2>
-    <p>Working through this material with students added constraints that solo study doesn't. Students pushed past generality and demanded specificity: not "here is how recursion works" but "what is the base case for this recurrence relation and how does it affect the asymptotic bound." That pressure clarified which parts of the curriculum were genuinely load-bearing versus decorative — which mathematical depth mattered for the work and which was pattern-matching dressed as rigor.</p>
-    <p>It also produced better projects. Rebuilding a broken Java applet from a museum archive in a modern stack — with parallel student implementations in C and C++ running concurrently — is a better learning frame than any synthetic exercise. The requirement to explain why the original broke, what the modern equivalent does differently, and what trade-offs the new stack introduces forces a level of analysis that assigned problems don't.</p>
-    <p>This curriculum is not one-directional. Students who go deep into ML, formal methods, or research-adjacent theory know things this curriculum doesn't cover. The goal is that students who work through this material eventually surpass it — and the gaps they identify when they do are the next version of the curriculum.</p>
-    <p>Topics currently covered in tutoring: CS and programming fundamentals, computational mathematics, data structures and algorithms, design patterns, Linux-first development environments, Python automation, TypeScript, remote project workflows, and privacy-first local AI tooling.</p>
-  </div>
+    <p>
+     The turning point came when learning moved into real development environments — version control, deployment realities, broken builds, unclear requirements. The question shifted from “Can I learn syntax?” to “What is the job actually?”
+    </p>
 
-  <div class="essay-section">
-    <h2>The Systems Advantage</h2>
-    <p>Students from CS, cybersecurity, and math backgrounds who understood computation models, memory, and architecture at a mechanical level advanced quickly in applied contexts — even when they had written less application code initially. The pattern held consistently enough to reshape this curriculum's sequencing: start from the machine, not the framework. Understand what the runtime is doing before optimizing for developer experience.</p>
-    <p>The same principle applies to the WGU degree structure. The competency-based model moves fast when the underlying material is already present. Prior background in hardware, networking, operating systems, and full-stack development means Phases 1 and 2 should compress significantly. The time recovered goes into the BSCS depth supplements and the Shopify production app — the parts of the curriculum where the degree alone leaves gaps.</p>
-  </div>
+    <p>
+      That shift in perspective was the catalyst for everything that followed.
+    </p>
+  </section>
 
-  <div class="essay-section">
-    <h2>Theory and Practice as One Track</h2>
-    <p>The books on this curriculum are not background reading. Discrete math and algorithms are compression tools: a small number of concepts (recurrence relations, asymptotic analysis, graph invariants) that explain the behavior of systems too large to reason about directly. Probability is the language of distributed systems. Linear algebra is the substrate of everything in ML. These are not adjacent to the engineering work — they are the engineering work at a different resolution.</p>
-    <p>The practical side runs in parallel, not in sequence. The Shopify app, the student code jams, the build logs — these make the theory concrete in the same way that hardware work made networking concrete. A proof about worst-case complexity is more legible when you've watched a poorly indexed query degrade under load. A formal definition of consistency is more legible when you've had to reason about webhook delivery guarantees in a production system.</p>
-    <p>Read the curriculum as a student if you are working through this material. Read it as a proof of work if you are evaluating someone who took an unconventional path into systems engineering.</p>
-  </div>
+
+  <!-- ================= THEORY & PRACTICE ================= -->
+  <section id="theory-practice" class="section">
+    <h2 class="section-subtitle">Theory and Practice</h2>
+
+    <p>
+      The bibliography below includes both required texts and deeper computer science material. I have not completed every optional theory text — that is intentional.
+    </p>
+
+    <p>
+      My priority has been applied systems fluency: frameworks, databases, deployment, distributed systems concepts, and reliability. Theory is studied where it clarifies performance, limits, and architectural trade-offs.
+    </p>
+
+    <p>
+      Teaching reshaped this sequencing.
+    </p>
+
+    <p>
+      Students from CS, cybersecurity, and mathematics backgrounds who understood computation models, memory, and architecture at a mechanical level advanced quickly in applied contexts — even when they had written less application code initially.
+    </p>
+
+    <p>
+      Conversely, strong coders who could scaffold websites quickly often became blocked when systems failed — unclear about what the runtime was doing, how memory was being used, or why sequencing mattered.
+    </p>
+
+    <p>
+      The pattern held consistently enough to reshape this curriculum:
+      <strong>start from the machine, not the framework.</strong>
+      Understand what the runtime is doing before optimizing for developer experience.
+    </p>
+
+    <p>
+      My students were never incapable of abstraction. They lacked context. Once grounded in systems thinking, they learned faster — and with more confidence.
+    </p>
+
+    <p class="muted">
+      Teaching others forced me to refine my own mental models. In that process, I began teaching myself more effectively.
+    </p>
+  </section>
+
+
+  <!-- ================= TEACHING & APPLICATION ================= -->
+  <section id="teaching" class="section">
+    <h2 class="section-subtitle">Teaching as Reinforcement</h2>
+
+    <p>
+      I tutor students in software engineering and computer science while drawing insights from cybersecurity and game development communities — particularly in security, performance, and robust C++ design patterns.
+    </p>
+
+    <p>
+      My applied mathematics explorations (including Unity-based visualization projects) exist primarily to prevent conceptual atrophy — both for myself and my students. Abstract ideas retain meaning when manipulated directly.
+    </p>
+
+    <p>
+      Students who once struggled to write a simple loop have gone on to build full programs. That growth reshaped my understanding of what consistent systems thinking can do.
+    </p>
+
+    <p>
+      For non-technical professionals curious about programming, this curriculum is also an invitation. Systems literacy is not reserved for those pursuing formal computer science degrees.
+    </p>
+  </section>
+
+
+  <!-- ================= OPERATIONS & TOOLING ================= -->
+  <section id="operations" class="section">
+    <h2 class="section-subtitle">Operations and Applied Tooling</h2>
+
+    <p>
+      My interests increasingly lean toward operational leverage — building internal tools that reduce unnecessary friction and free time for deeper learning and higher-impact work.
+    </p>
+
+    <p>
+      The current scripting challenge (see <a href="log.html#2026-03-scripting-challenge">2026-03-scripting-challenge.html</a>) reflects this transition: developing instinctive fluency in Python to implement ideas more quickly rather than over-planning them.
+    </p>
+
+    <p>
+      Planning once consumed more time than execution. The goal now is balanced iteration — build, measure, refine.
+    </p>
+  </section>
+
+
+  <!-- ================= AI AS INSTRUMENTATION ================= -->
+  <section id="ai-toolkit" class="section">
+    <h2 class="section-subtitle">AI as Instrumentation</h2>
+
+    <p>
+      I experiment with local and hosted models (DeepSeek, Mistral/Mixtral, Llama 3 via Ollama) to compare reasoning patterns, hallucination tendencies, and contextual limits.
+    </p>
+
+    <p>
+      AI functions as instrumentation — generating edge cases, stress-testing understanding, and accelerating iteration — not as a replacement for systems knowledge.
+    </p>
+
+    <p>
+      Discernment determines return on investment. There are many tools available; judgment determines which ones compound. That includes knowing which uses of AI are worth resisting entirely.
+    </p>
+
+    <div class="callout">
+      In February 2026, Anthropic lost a $200 million Pentagon contract rather than remove two restrictions from its usage policy: no use of Claude for mass domestic surveillance of Americans, and no use in fully autonomous weapons systems. The Trump administration responded by directing every federal agency to cease use of Anthropic's technology and designating the company a supply chain risk — a designation previously reserved for foreign adversaries. Anthropic's public position: current frontier models are not reliable enough for autonomous weapons, and mass surveillance of citizens is a violation of fundamental rights regardless of whether current law has caught up to that reality. The contract terms were known to the Pentagon when it signed in July 2025. The restrictions had never blocked a single military mission. The dispute was about who gets to set the boundary — not whether the boundary was causing harm. That distinction matters.
+    </div>
+  </section>
+
+
+  <!-- ================= SECURITY-FIRST MINDSET ================= -->
+  <section id="security" class="section">
+    <h2 class="section-subtitle">Security-First Mindset</h2>
+
+    <p>
+      A recurring finding across developer surveys: roughly 85% of engineers do not actively account for known vulnerability classes during development. Security gets treated as a post-launch concern, a separate team's problem, or an afterthought patched in before release. The attack surface doesn't wait for the launch date.
+    </p>
+
+    <p>
+      I build with the attack surface in mind from the start — auth flows, input handling, dependency choices, and supply chain exposure considered before implementation begins. This is the same reasoning behind writing a salted PBKDF2 hash function before touching the login form, or reading CVE disclosures the way other people read release notes.
+    </p>
+
+    <p>
+      Two incidents in particular shaped how I think about this. The Next.js middleware auth bypass (CVE-2025-29927) demonstrated how a framework-level trust assumption — affecting a significant share of production web infrastructure — can be exploited silently across thousands of applications before a patch exists. The XZ Utils supply chain attack (2024) is the deeper case: a compression library embedded throughout Linux infrastructure, nearly compromised by a contributor who spent two years building trust in the open source community before inserting a backdoor into the build system. It was caught almost by accident. The systems at risk included government, financial, and healthcare infrastructure. The attack surface was not a misconfigured server — it was patient human trust, exploited methodically over time.
+    </p>
+
+    <p>
+      These are not exotic edge cases. They are the shape of how serious compromises actually happen. Staying current on them is part of the work.
+    </p>
+
+    <p class="muted">
+      A dedicated post on building with a security-first mindset — including practical exposure through Python-based security testing — is in progress. <a href="log.html">See the log.</a>
+    </p>
+  </section>
+
+
+  <!-- ================= PRIOR PROFESSIONAL FOUNDATION ================= -->
+  <section id="professional-foundation" class="section">
+    <h2 class="section-subtitle">Professional Foundation</h2>
+
+    <p>
+      Prior to entering technology full-time, I built expertise in specialty coffee — studying processing methods, varietals, roasting science, extraction theory, and sensory evaluation under Specialty Coffee Association guidelines.
+    </p>
+
+    <p>I placed second nationally in a specialty coffee equipment manufacturer's competition and led workshops at the brand's flagship NYC retail location — calibrating technical depth without overwhelming a general audience.</p>
+
+    <p>
+      Teaching extraction theory, weighted flow control, and regional tasting characteristics refined my public speaking and audience calibration skills — gauging how technical to be without overwhelming.
+    </p>
+
+    <p>
+      That period ended on a professional high note and marked the point at which independence and discipline became transferable assets. Systems thinking did not begin in software — it matured there.
+    </p>
+  </section>
+  
 
   <div class="essay-section">
     <p>What follows is the 30-month plan. The courses are real WGU courses. The books are the ones that actually matter for the work. The projects are built around things that broke in the real world and needed fixing.</p>
@@ -205,7 +335,7 @@
 
 <footer class="footer">
   <div class="footer-inner">
-    <span class="footer-brand">Full curriculum and project portfolio at this site.</span>
+    <span>Full curriculum and project portfolio at this site.</span>
     <nav class="footer-nav">
       <a href="index.html">About</a>
       <a href="curriculum.html">Curriculum</a>
